@@ -108,3 +108,6 @@ let menuData=[
         ingredients: ["Olive oil", "garlic", "breadcrumbs", "Parmesan cheese", "basil", "black pepper", "chicken breast"]
     }
 ];
+
+// ----------------------------- Sort Function for Customer View --------------------------
+const meat = document.querySelectorAll('')
