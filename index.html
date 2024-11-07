@@ -13,15 +13,19 @@
             <div class="icon">
                 <img src="https://cdn.discordapp.com/attachments/1297895204690329630/1303379444311920731/FlavorfirstLogo.png?ex=672c32f3&is=672ae173&hm=a771dca1002c79b9720ffdfb1317b4529edc171e951f4f2968e405f328967ba9&" alt="logo">
             </div>
-
+            <button onclick="clearInfo()"></button>
+            <button onclick="createMenuItems(menuData)">Menu</button>
         </div>
 
         <div class="right-section">
             <button class="buttons" id="guest">Guest View</button>
-            <button class="buttons" id="sign-up">Sign Up</button>
-            <button class="buttons" id="log-in">Log In</button>
+            <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
+            <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
         </div>
     </div>
+    <div id="menu-container"></div>
+
+<div id="content">
 
     <section class="NavBar">
         <div class="navitem"><a href="#">Order History</a></div>
@@ -54,6 +58,7 @@
           </div>
     </section>
 
+
     <footer>
     
     <div class="row1">
@@ -69,6 +74,44 @@
         
 
     </footer>
+
+</div>
+
+<section class="info-page" id="login-page">
+    <div>
+        <label for="email1">Email</label>
+        <input type="text" id="email1">
+        <label for="pass1">Passoword</label>
+        <input type="password" id="pass1">
+        <button class="buttons" onclick="Submit_Login()">Submit</button>
+        <button onclick="GoBack()"></button>
+    </div>
+</section>
+
+
+<section class="info-page" id="signup-page">
+    <div>
+        <label for="email2">Email</label>
+        <input type="text" id="email2">
+        <label for="pass2">Passoword</label>
+        <input type="password" id="pass2">
+        <button class="buttons" onclick="Submit_SignUp()">Submit</button>
+        <button onclick="GoBack()"></button>
+    </div>
+</section>
+
+    <section class="footer">
+
+    <div class="about"><h2>About Us:</h2>
+        <div>Lorem Epsium divim num</div>
+    </div>
+        <div class="contact"></div>
+        <div class="copyright"></div>
+        <div class="logo"></div>
+        <div class="logo"></div>
+        <div class="logo"></div>
+
+    </section>
 
 
 

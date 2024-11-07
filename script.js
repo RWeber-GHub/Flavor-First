@@ -1,34 +1,39 @@
-function login(){
-    
+let Manager_Email="manager@hotmail.com";
+let Manager_Password="password";
+localStorage.setItem(Manager_Email, Manager_Password);
+function Display_Login(){
+    document.getElementById("signup-page").style.display="none";
+    document.getElementById("content").style.display="none";
+    document.getElementById("login-page").style.display="block";
 }
-function signup(){
-    document.getElementById("").style.display="none";
-
+function Display_SignUp(){
+    document.getElementById("login-page").style.display="none";
+    document.getElementById("content").style.display="none";
+    document.getElementById("signup-page").style.display="block";
 }
-function Customer_Login(){
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("pass").value;
+function Submit_Login(){
+    let email=document.getElementById("email1").value;
+    let pass=document.getElementById("pass1").value;
     if(localStorage.getItem(email)){
-        if(pass === localStorage.getItem(email)){
-            document.getElementById("page").style.display="none";
-            
+        if(pass===localStorage.getItem(email)){
+            if(email===Manager_Email){
+                location.replace("userview.html");
+                Account_Type=1;
+            } else{
+                location.replace("userview.html");
+            }
+        } else{
+            alert("wrong password")
         }
-        else
-            alert("wrong passward")
+    } else{
+        alert("user not found");
     }
-    else
-        alert("user not found")
 }
-function Customer_SignUp(){
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("pass").value;
-    localStorage.setItem(email, pass)
-}
-function Manager_Login(){
-
-}
-function Manager_SignUp(){
-
+function Submit_SignUp(){
+    let email = document.getElementById("email2").value;
+    let pass = document.getElementById("pass2").value;
+    localStorage.setItem(email, pass);
+    location.replace("userview.html");
 }
 let Menu_Images=["/Resources/Asian-Glazed-Chicken-Thighs.webp",
     "/Resources/Baked-Denver-Omelet.webp",
@@ -60,6 +65,46 @@ function CreateMenu(){
         document.body.appendChild(x);
     }
 }
-function clearInfo(){
-    localStorage.clear();
+
+let Account_Type=2;
+function createMenuItems(menuData) {
+    let menuContainer = document.getElementById('menu-container');
+    menuData.forEach(item=>{
+        let menuDiv=document.createElement('div');
+        menuDiv.classList.add('menu-item');
+
+        let img=document.createElement('img');
+        img.src=item.image;
+
+        let name=document.createElement('h3');
+        name.textContent=item.name;
+
+        let ingredient=document.createElement('p');
+        ingredient.classList.add('ingredients');
+        ingredient.textContent=item.ingredients.join(', ');
+
+        menuDiv.appendChild(img);
+        menuDiv.appendChild(name);
+        menuDiv.appendChild(ingredient);
+        menuContainer.appendChild(menuDiv);
+    });
 }
+
+
+let menuData=[
+    {
+        name: "Asian Glazed Chicken Thighs",
+        image: "/Resources/Asian-Glazed-Chicken-Thighs.webp",
+        ingredients: ["rice vinegar", "soy sauce", "honey", "Asian sesame oil", "Asian chili garlic sauce", "garlic", "salt", "chicken thigh", "green onion" ]
+    },
+    {
+        name: "Baked Denver Omelet",
+        image: "/Resources/Baked-Denver-Omelet.webp",
+        ingredients: ["butter", "onion", "green bell pepper", "ham", "egg", "milk", "Cheddar cheese", "salt", "black pepper"]
+    },
+    {
+        name: "Baked Garlic Parmesan Chicken",
+        image: "/Resources/Baked-Garlic-Parmesan-Chicken.webp",
+        ingredients: ["Olive oil", "garlic", "breadcrumbs", "Parmesan cheese", "basil", "black pepper", "chicken breast"]
+    }
+];
