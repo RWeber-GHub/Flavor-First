@@ -128,9 +128,172 @@ background-color: white;
     opacity: 1;
     transform: scale(.9);
 }
-.footer{
-    
+
+footer{
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    height: 150px;
+    background-color: rgb(53, 68, 71);
 }
+.footercontent{
+    display: flex;
+    background-color: rgb(53, 68, 71);
+}
+.email{
+    background-color: rgb(53, 68, 71);
+    color: rgb(30, 241, 170)
+}
+.footercontent ion-icon{
+    font-size: 30px;
+    color: black;
+    background-color: rgb(53, 68, 71);
+}
+#copyright{
+    font-size: 20px;
+}
+.row1{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(53, 68, 71);
+}
+.row2{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    background-color: rgb(53, 68, 71);
+}
+
+/* beginning of styles for user views */
+
+.dropbtn {
+    background-color: #467672;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #314545;
+  }
+
+
+
+.shop-item {
+    margin: 30px;
+}
+
+.shop-item-title {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.shop-item-image {
+    height: 250px;
+}
+
+.shop-item-details {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.shop-item-price {
+    flex-grow: 1;
+    color: #333;
+}
+.shop-item-cooktime{
+    flex-grow: 1;
+    color: #333;
+}
+
+.shop-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.btn {
+    text-align: center;
+    vertical-align: middle;
+    padding: .67em .67em;
+    cursor: pointer;
+}
+
+.btn-header {
+    margin: .5em 15% 2em 15%;
+    color: white;
+    border: 2px solid #2D9CDB;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 0;
+    font-size: 1.5em;
+    font-weight: lighter;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.btn-header:hover {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.btn-play {
+    display: block;
+    margin: 0 auto;
+    color: #2D9CDB;
+    font-size: 4em;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    text-align: center;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #56CCF2;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #2D9CDB;
+}
+
 /*---Login and Sign Up---*/
 .info-page{
     display: none;
