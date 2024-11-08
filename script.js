@@ -19,8 +19,10 @@ function Submit_Login(){
         if(loginPass==localStorage.getItem(loginEmail)){
             if(loginEmail==Manager_Email){
                 Account_Type="manager";
-                
+
                 location.replace("userview.html");
+                ManagerButton();
+
             }else{
                 Account_Type="customer"
                 location.replace("userview.html");
@@ -32,6 +34,7 @@ function Submit_Login(){
         alert("user not found");
     }
 }
+
 function Submit_SignUp(){
     let signUpEmail = document.getElementById("signUpEmail").value;
     let signUpPass = document.getElementById("signUpPass").value;
@@ -49,6 +52,7 @@ function createMenuItems(menuData){
         let itemTitle=document.createElement('span');
         itemTitle.innerText=item.name
         itemTitle.classList.add('shop-item-title');
+
 
         let itemImg=document.createElement('img');
         itemImg.classList.add('shop-item-image');
@@ -98,10 +102,77 @@ function createMenuItems(menuData){
             itemDetails.appendChild(itemPrice);
             itemDetails.appendChild(itemCooktime);
             itemDetails.appendChild(cartBtn);
-            itemDetails.appendChild(deleteBtn)
-
+            itemDetails.appendChild(deleteBtn);
         }  
     });
+}
+let deleteBtn=document.createElement('button');
+function ManagerButton(){
+    deleteBtn.innerText="DELETE";
+    deleteBtn.classList.add('btn','btn-primary','shop-item-button','delete-btn');
+    let itemDetails=document.getElementsByClassName('manager-btns');
+    for (let i = 0; i < itemDetails.length; i++) {
+        itemDetails[i].appendChild(deleteBtn);
+    }
+}
+
+function createMenuCard(title, imageUrl, price, cookTime){
+    let menuContainer=document.getElementById("shop-items");
+
+    let menuDiv=document.createElement("div");
+    menuDiv.classList.add("shop-item");
+
+    let itemTitle=document.createElement("span");
+    itemTitle.classList.add("shop-item-title");
+    itemTitle.textContent=title;
+
+    let itemImage=document.createElement("img");
+    itemImage.classList.add("shop-item-image");
+    itemImage.src=imageUrl;
+
+    let itemDetails=document.createElement("div");
+    itemDetails.classList.add("shop-item-details");
+
+    let itemPrice=document.createElement("span");
+    itemPrice.classList.add("shop-item-price");
+    itemPrice.textContent=`$${price}`;
+
+    let itemCookTime=document.createElement("span");
+    itemCookTime.classList.add("shop-item-cooktime");
+    itemCookTime.textContent = `${cookTime} min`;
+
+    let addToCartButton=document.createElement("button");
+    addToCartButton.classList.add("btn","btn-primary","shop-item-button");
+    addToCartButton.textContent="ADD TO CART";
+    addToCartButton.type="button";
+
+    
+    let manageBtn=document.createElement('div');
+    manageBtn.classList.add("manager-btns")
+
+    let deleteBtn=document.createElement('button');
+    deleteBtn.innerText="DELETE";
+    deleteBtn.classList.add('btn','btn-primary','shop-item-button','delete-btn');
+
+    menuContainer.appendChild(menuDiv);
+    menuDiv.appendChild(itemTitle);
+    menuDiv.appendChild(itemImage);
+    menuDiv.appendChild(itemDetails);
+    itemDetails.appendChild(itemPrice);
+    itemDetails.appendChild(itemCookTime);
+    itemDetails.appendChild(addToCartButton);
+    menuDiv.appendChild(manageBtn);
+    manageBtn.appendChild(deleteBtn)
+
+function submitForm(event){
+    event.preventDefault();
+    let title=document.getElementById("title").value;
+    let imageUrl=document.getElementById("image-url").value;
+    let price=document.getElementById("price").value;
+    let cookTime=document.getElementById("cook-time").value;
+    createMenuCard(title, imageUrl, price, cookTime);
+    let menuForm=document.getElementById("menu-form");
+    menuForm.reset();
 }
 
 let menuData=[
@@ -246,6 +317,7 @@ let menuData=[
         "time": "45 min"
     }
 ];
+    
 
 // ----------------------------- Sort Function for Customer View --------------------------
 
