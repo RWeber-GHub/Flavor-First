@@ -19,8 +19,10 @@ function Submit_Login(){
         if(loginPass==localStorage.getItem(loginEmail)){
             if(loginEmail==Manager_Email){
                 Account_Type="manager";
+
                 location.replace("userview.html");
                 ManagerButton();
+
             }else{
                 Account_Type="customer"
                 location.replace("userview.html");
@@ -50,6 +52,7 @@ function createMenuItems(menuData){
         let itemTitle=document.createElement('span');
         itemTitle.innerText=item.name
         itemTitle.classList.add('shop-item-title');
+
 
         let itemImg=document.createElement('img');
         itemImg.classList.add('shop-item-image');
@@ -159,9 +162,7 @@ function createMenuCard(title, imageUrl, price, cookTime){
     itemDetails.appendChild(itemCookTime);
     itemDetails.appendChild(addToCartButton);
     menuDiv.appendChild(manageBtn);
-    manageBtn.appendChild(deleteBtn);
-}
-
+    manageBtn.appendChild(deleteBtn)
 
 function submitForm(event){
     event.preventDefault();
@@ -316,3 +317,103 @@ let menuData=[
         "time": "45 min"
     }
 ];
+    
+
+// ----------------------------- Sort Function for Customer View --------------------------
+
+function displayAll(){
+    document.getElementById("MP1").style.display = "block"
+    document.getElementById("MP2").style.display = "block"
+    document.getElementById("MP3").style.display = "block"
+    document.getElementById("MP4").style.display = "block"
+    document.getElementById("MP5").style.display = "block"
+    document.getElementById("MP6").style.display = "block"
+    document.getElementById("MP7").style.display = "block"
+    document.getElementById("MP8").style.display = "block"
+    document.getElementById("MP9").style.display = "block"
+    document.getElementById("MP10").style.display = "block"
+    document.getElementById("MP11").style.display = "block"
+    document.getElementById("MP12").style.display = "block"
+    document.getElementById("Noodle1").style.display = "block"
+    document.getElementById("Noodle2").style.display = "block"
+    document.getElementById("Noodle3").style.display = "block"
+    document.getElementById("Noodle4").style.display = "block"
+    document.getElementById("Vegan1").style.display = "block"
+    document.getElementById("Vegan2").style.display = "block"
+    document.getElementById("Vegan3").style.display = "block"
+    document.getElementById("Vegan4").style.display = "block"
+
+}
+
+function displayMeat(){
+    document.getElementById("MP1").style.display = "block"
+    document.getElementById("MP2").style.display = "block"
+    document.getElementById("MP3").style.display = "block"
+    document.getElementById("MP4").style.display = "block"
+    document.getElementById("MP5").style.display = "block"
+    document.getElementById("MP6").style.display = "block"
+    document.getElementById("MP7").style.display = "block"
+    document.getElementById("MP8").style.display = "block"
+    document.getElementById("MP9").style.display = "block"
+    document.getElementById("MP10").style.display = "block"
+    document.getElementById("MP11").style.display = "block"
+    document.getElementById("MP12").style.display = "block"
+    document.getElementById("Noodle1").style.display = "none"
+    document.getElementById("Noodle2").style.display = "none"
+    document.getElementById("Noodle3").style.display = "none"
+    document.getElementById("Noodle4").style.display = "none"
+    document.getElementById("Vegan1").style.display = "none"
+    document.getElementById("Vegan2").style.display = "none"
+    document.getElementById("Vegan3").style.display = "none"
+    document.getElementById("Vegan4").style.display = "none"
+
+}
+
+function displayVegan(){
+    document.getElementById("MP1").style.display = "none"
+    document.getElementById("MP2").style.display = "none"
+    document.getElementById("MP3").style.display = "none"
+    document.getElementById("MP4").style.display = "none"
+    document.getElementById("MP5").style.display = "none"
+    document.getElementById("MP6").style.display = "none"
+    document.getElementById("MP7").style.display = "none"
+    document.getElementById("MP8").style.display = "none"
+    document.getElementById("MP9").style.display = "none"
+    document.getElementById("MP10").style.display = "none"
+    document.getElementById("MP11").style.display = "none"
+    document.getElementById("MP12").style.display = "none"
+    document.getElementById("Noodle1").style.display = "none"
+    document.getElementById("Noodle2").style.display = "none"
+    document.getElementById("Noodle3").style.display = "none"
+    document.getElementById("Noodle4").style.display = "none"
+    document.getElementById("Vegan1").style.display = "block"
+    document.getElementById("Vegan2").style.display = "block"
+    document.getElementById("Vegan3").style.display = "block"
+    document.getElementById("Vegan4").style.display = "block"
+
+}
+
+
+function displayNoodle(){
+    document.getElementById("MP1").style.display = "none"
+    document.getElementById("MP2").style.display = "none"
+    document.getElementById("MP3").style.display = "none"
+    document.getElementById("MP4").style.display = "none"
+    document.getElementById("MP5").style.display = "none"
+    document.getElementById("MP6").style.display = "none"
+    document.getElementById("MP7").style.display = "none"
+    document.getElementById("MP8").style.display = "none"
+    document.getElementById("MP9").style.display = "none"
+    document.getElementById("MP10").style.display = "none"
+    document.getElementById("MP11").style.display = "none"
+    document.getElementById("MP12").style.display = "none"
+    document.getElementById("Noodle1").style.display = "block"
+    document.getElementById("Noodle2").style.display = "block"
+    document.getElementById("Noodle3").style.display = "block"
+    document.getElementById("Noodle4").style.display = "block"
+    document.getElementById("Vegan1").style.display = "none"
+    document.getElementById("Vegan2").style.display = "none"
+    document.getElementById("Vegan3").style.display = "none"
+    document.getElementById("Vegan4").style.display = "none"
+
+}
