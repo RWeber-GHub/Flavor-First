@@ -16,27 +16,28 @@
         </div>
 
         <div class="right-section">
-            <button class="buttons" id="guest">Guest View</button>
+            
+            <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
             <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
             <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
         </div>
+    </div>
+    <div id="account-create-notice">
+        <div class="notice-head">Account Notice:</div><br>
+        <div class="notice-text">If you would like to add items to your cart you must first create an account above</div>
     </div>
     <div id="menu-container"></div>
 
 <div id="content">
 
-    <section class="NavBar">
-        <div class="navitem"><a href="#">Order History</a></div>
-        <div class="navitem"><a href="#">Cart</a></div>
-        <div class="navitem"><a href="#">Contact Restaurant</a></div>
-    </section>
+
     
     <section id="itembox">
         <div class="image-grid">
             <img class="meal-photo" src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp" alt="Image 1">
             <img class="meal-photo" src="Resources/resized_Baked-Denver-Omelet.webp" alt="Image 2">
             <img class="meal-photo" src="Resources/resized_Baked-Garlic-Parmesan-Chicken.webp" alt="Image 3">
-            <img class="meal-photo" src="Resources/resized_Beef-Bourguigno.webp" alt="Image 4">
+            <img class="meal-photo" src="Resources/resized_White-Chili.webp" alt="Image 4">
             <img class="meal-photo" src="Resources/resized_Beef-Stir-Fry.webp" alt="Image 5">
             <img class="meal-photo" src="Resources/resized_Chicken-and-Stuffing-Bake.webp" alt="Image 6">
             <img class="meal-photo" src="Resources/resized_Chicken-Pesto-Pizza.webp" alt="Image 7">
@@ -52,26 +53,9 @@
             <img class="meal-photo" src="Resources/resized_Spinach-Tomato-Tortellini.webp" alt="Image 18">
             <img class="meal-photo" src="Resources/resized_Garden-Stuffed-Baked-Potato.webp" alt="Image 9">
             <img class="meal-photo" src="Resources/resized_Sausage-and-Peppers.webp" alt="Image 14">
-            <img class="meal-photo" src="Resources/resized_White-Chili.webp" alt="Image 20">
+            <img class="meal-photo" src="Resources/resized_Beef-Bourguigno.webp" alt="Image 20">
           </div>
     </section>
-
-
-    <footer>
-    
-    <div class="row1">
-        <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
-        <div class="footercontent">Contact us: <div class="email">example@gmail.com</div></div>
-    </div>
-        
-    <div class="row2">
-        <div class="footercontent" id="github"><ion-icon name="logo-github"></ion-icon></div>
-        <div class="footercontent" id="instagram"><ion-icon name="logo-instagram"></ion-icon></div>
-        <div class="footercontent" id="twitter"><ion-icon name="logo-twitter"></ion-icon></div>
-    </div>
-        
-
-    </footer>
 
 </div>
 
@@ -79,7 +63,7 @@
     <div>
         <label for="loginEmail">Email</label>
         <input type="text" id="loginEmail">
-        <label for="loginPass">Passoword</label>
+        <label for="loginPass">Password</label>
         <input type="password" id="loginPass">
         <button class="buttons" onclick="Submit_Login()">Submit</button>
         <button onclick="GoBack()"></button>
@@ -91,25 +75,35 @@
     <div>
         <label for="signUpEmail">Email</label>
         <input type="text" id="signUpEmail">
-        <label for="signUpPass">Passoword</label>
+        <label for="signUpPass">Password</label>
         <input type="password" id="signUpPass">
         <button class="buttons" onclick="Submit_SignUp()">Submit</button>
         
     </div>
 </section>
 
-    <section class="footer">
 
-    <div class="about"><h2>About Us:</h2>
-        <div>Lorem Epsium divim num</div>
+<footer>
+    
+    <div class="row1">
+        <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+        <div class="footercontent">Contact us: <div class="email">example@gmail.com</div></div>
     </div>
-        <div class="contact"></div>
-        <div class="copyright"></div>
-        <div class="logo"></div>
-        <div class="logo"></div>
-        <div class="logo"></div>
 
-    </section>
+    <div class="row2">
+        <div class="footercontent">
+            <div class="abouthead">About Us: </div>
+            <div class="abouttext">Lorem Epsium divim num</div>
+        </div>
+    </div>
+        
+    <div class="row3">
+        <div class="footercontent" id="github"><ion-icon name="logo-github"></ion-icon></div>
+        <div class="footercontent" id="instagram"><ion-icon name="logo-instagram"></ion-icon></div>
+        <div class="footercontent" id="twitter"><ion-icon name="logo-twitter"></ion-icon></div>
+    </div>
+        
+</footer>
 
 
 
