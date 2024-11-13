@@ -81,16 +81,22 @@
 <h1>Checkout</h1><br>
 <div class="headline"></div>
 
-    <div id="total-price-notax">0$</div>
-    <div id="total-price-Tax">0$</div>
-    <div id="prep-time-calc">0 Min</div>
+    <div class="pricenotax">Price Pre Tax:<div id="total-price-notax">0$</div></div>
+    <div class="pricetax">Total Price:<div id="total-price-Tax">0$</div></div>
+    <div class="time">Prep Time:<div id="prep-time-calc">0 Min</div></div>
+
     <div class="Tip-adder">
         <div class="tiphead">Would you like to add a tip?</div><br>
-        <button class="tip" onclick="tipCalc()">5%<br><div class="tipbutton" id="tip5"></div></button>
-        <button class="tip" onclick="tipCalc()">10%<br><div class="tipbutton" id="tip10"></div></button>
-        <button class="tip" onclick="tipCalc()">15%<br><div class="tipbutton" id="tip15"></div></button>
-        <div class="OR">Or : </div>
-        <div class="tip"><input type="form" name="tipcustom">=</div>
+        <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
+        <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
+        <button class="tip" onclick="tipCalc10()">10%<br><div class="tipbutton" id="tip10"></div></button>
+        <button class="tip" onclick="tipCalc15()">15%<br><div class="tipbutton" id="tip15"></div></button>
+            <div class="OR">Custom Tip:</div>
+    <div class="tip">
+        <input type="number" name="tipcustom" oninput="updateCustomTip()" placeholder="Custom %">
+        <button onclick="addCustomTip()">Apply</button>
+        <div class="tipbutton custom"></div>
+    </div>
         
     </div>
     <div class="calculator" onclick="displayCalc()"></div>
@@ -346,6 +352,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
