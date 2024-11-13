@@ -46,7 +46,6 @@ function Submit_SignUp(){
     localStorage.setItem("Account_Type", "customer");
     location.replace("userview.html");
 }
-
 function GuestView(){
     localStorage.setItem("Account_Type" , "guest");
     location.replace("/userview.html");
@@ -62,7 +61,7 @@ function AccountCreationPrompt() {
 function editItem(id){
     let divId=id.substring(0,id.length-3);
     document.getElementById(divId+"VIEW").style.display='none';
-    document.getElementById('constant').remove();
+    document.getElementById('constant').style.display='none';
 
     let conatinerDiv=document.getElementById(divId);
 
@@ -136,55 +135,78 @@ function deleteItem(id){
 }
 
 function createMenuCard(title, imageUrl, price, cookTime, id){
-    console.log(id);
+    let divId=id.substring(0,id.length-3);
     if(id=="menu-form"){
         let menuContainer=document.getElementById('shop-items');
-        let menuDiv=document.createElement("div");
-        menuDiv.classList.add("shop-item");
 
-        let itemTitle=document.createElement("span");
-        itemTitle.classList.add("shop-item-title");
+        let menuItem=document.createElement('div');
+        menuItem.classList.add('shop-item');
+        // menuItem.id=divId
+
+        let editView=document.createElement('div');
+        editView.classList.add('edit-view');
+        // editView.id=divId.id+"VIEW";
+
+        let itemTitle=document.createElement('span');
+        itemTitle.classList.add('shop-item-title');
         itemTitle.textContent=title;
 
-        let itemImage=document.createElement("img");
-        itemImage.classList.add("shop-item-image");
+        let itemImage=document.createElement('img');
+        itemImage.classList.add('shop-item-image');
         itemImage.src=imageUrl;
+        itemImage.alt=title;
 
-        let itemDetails=document.createElement("div");
-        itemDetails.classList.add("shop-item-details");
+        let itemDetails=document.createElement('div');
+        itemDetails.classList.add('shop-item-details');
 
-        let itemPrice=document.createElement("span");
-        itemPrice.classList.add("shop-item-price");
-        itemPrice.textContent=`$${price}`;
+        let itemPrice=document.createElement('span');
+        itemPrice.classList.add('shop-item-price');
+        itemPrice.textContent='$${price}`;
 
-        let itemCookTime=document.createElement("span");
-        itemCookTime.classList.add("shop-item-cooktime");
-        itemCookTime.textContent = `${cookTime} min`;
+        let itemCookTime=document.createElement('span');
+        itemCookTime.classList.add('shop-item-cooktime');
+        itemCookTime.textContent=`${cookTime} min`;
 
-        let addToCartButton=document.createElement("button");
-        addToCartButton.classList.add("btn","btn-primary","shop-item-button");
-        addToCartButton.textContent="ADD TO CART";
-        addToCartButton.type="button";
+        let addToCartButton=document.createElement('button');
+        addToCartButton.classList.add('btn', 'btn-primary', 'shop-item-button');
+        addToCartButton.type='button';
+        addToCartButton.textContent='ADD TO CART';
+        addToCartButton.onclick= function(event) {addToCartClicked(event)};
 
+        let managerBtns=document.createElement('div');
+        managerBtns.classList.add('manager-btns');
+        managerBtns.style.display='block'
+
+        let deleteButton=document.createElement('button');
+        deleteButton.classList.add('btn','btn-primary','delete-btn');
+        deleteButton.textContent='DELETE';
+        // deleteButton.id=divId.id+"DEL";
+        deleteButton.onclick = function() {deleteItem(deleteButton.id)};
+        deleteButton.style.display='block'
+        
+        let editButton=document.createElement('button');
+        editButton.classList.add('btn', 'btn-primary', 'edit-btn');
+        editButton.textContent='EDIT';
+        // editButton.id=divId.id+"EDT";
+        editButton.onclick = function() {editItem(editButton.id)};
+        editButton.style.display='block';
+
+        menuContainer.appendChild(menuItem);
+
+        menuItem.appendChild(editView);
+        editView.appendChild(itemTitle);
+        editView.appendChild(itemImage);
+        editView.appendChild(itemDetails);
     
-        let manageBtn=document.createElement('div');
-        manageBtn.classList.add("manager-btns")
-
-        let deleteBtn=document.createElement('button');
-        deleteBtn.innerText="DELETE";
-        deleteBtn.classList.add('btn','btn-primary','shop-item-button','delete-btn');
-
-        menuContainer.appendChild(menuDiv);
-        menuDiv.appendChild(itemTitle);
-        menuDiv.appendChild(itemImage);
-        menuDiv.appendChild(itemDetails);
         itemDetails.appendChild(itemPrice);
         itemDetails.appendChild(itemCookTime);
         itemDetails.appendChild(addToCartButton);
-        menuDiv.appendChild(manageBtn);
-        manageBtn.appendChild(deleteBtn);
+
+        editView.appendChild(managerBtns);
+
+        managerBtns.appendChild(deleteButton);
+        managerBtns.appendChild(editButton);
     }else{
-        let divId=id.substring(0,id.length-3);
         let itemDiv=document.getElementById(divId);
         let conatinerDiv=document.createElement('div');
         conatinerDiv.id=divId+"VIEW";
@@ -258,7 +280,9 @@ function goBack(id){
     document.getElementById(id+"FORM").style.display='none';
     document.getElementById('constant').style.display='block';
 }
-
+function other(){
+    document.getElementById('other').style.display='block'
+}
 
 let menuData=[
     {

@@ -47,6 +47,11 @@
                     <input type="number" id="price" class="price" placeholder="Price" required>
                     <input type="number" id="cook-time" class="cook-time" placeholder="Cook Time (min)" required>
                     <button type="submit" class="btn btn-primary">Add Menu Item</button>
+                    <select name="ID" id="tags" required>
+                       <option value="MP">Majority Protein</option>
+                       <option value="Noodle">Pasta/Noodle</option>
+                       <option value="Vegan">Vegan</option>
+                    </select>
                 </form>
                 </div>
             </div>
@@ -73,15 +78,19 @@
 </section>
     
 <section id="checkout">
+<h1>Checkout</h1><br>
+<div class="headline"></div>
 
     <div id="total-price-notax">0$</div>
     <div id="total-price-Tax">0$</div>
     <div id="prep-time-calc">0 Min</div>
     <div class="Tip-adder">
+        <div class="tiphead">Would you like to add a tip?</div><br>
         <button class="tip" onclick="tipCalc()">5%<br><div class="tipbutton" id="tip5"></div></button>
         <button class="tip" onclick="tipCalc()">10%<br><div class="tipbutton" id="tip10"></div></button>
         <button class="tip" onclick="tipCalc()">15%<br><div class="tipbutton" id="tip15"></div></button>
-        <div class="tip"><input type="form" name="tipcustom">Custom Tip</div>
+        <div class="OR">Or : </div>
+        <div class="tip"><input type="form" name="tipcustom">=</div>
         
     </div>
     <div class="calculator" onclick="displayCalc()"></div>
