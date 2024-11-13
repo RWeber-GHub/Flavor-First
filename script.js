@@ -161,7 +161,7 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
 
         let itemPrice=document.createElement('span');
         itemPrice.classList.add('shop-item-price');
-        itemPrice.textContent='$${price}`;
+        itemPrice.textContent= '$' + price;
 
         let itemCookTime=document.createElement('span');
         itemCookTime.classList.add('shop-item-cooktime');
@@ -722,86 +722,117 @@ function addItemToCart(title, price, imageSrc) {
         cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }
 
-function updateCartTotal() {
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    var total = 0
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace('$', ''))
-        var quantity = quantityElement.value
-        total = total + (price * quantity)
+let currentTotalWithTax = 0; 
+
+function displayCheckout() {
+    let totalBeforeTax = updateCartTotal();
+    if (totalBeforeTax !== 0) {
+        document.getElementById('checkout').style.display = 'block';
+        document.getElementById('customer').style.display = 'none';
+
+        
+        document.getElementById('total-price-notax').innerText = `$${totalBeforeTax}`;
+
+        
+        currentTotalWithTax = Math.round(totalBeforeTax * 1.06 * 100) / 100;
+        document.getElementById('total-price-Tax').innerText = `$${currentTotalWithTax}`;
+
+      
+        document.getElementById('tip5').innerText = `+ $${(currentTotalWithTax * 0.05).toFixed(2)}`;
+        document.getElementById('tip10').innerText = `+ $${(currentTotalWithTax * 0.10).toFixed(2)}`;
+        document.getElementById('tip15').innerText = `+ $${(currentTotalWithTax * 0.15).toFixed(2)}`;
+    } else {
+        alert('There are no items in your cart');
     }
-    total = Math.round(total * 100) / 100
-    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+}
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('$', ''));
+        var quantity = quantityElement.value;
+        total += price * quantity;
+    }
+    total = Math.round(total * 100) / 100;
+    document.getElementsByClassName('cart-total-price')[0].innerText = `$${total}`;
     return total;
 }
 
-// --------------------------------------------------------Checkout functions --------------------------------------
+function noTip() {
+    document.getElementsByClassName('finalprice')[0].innerText = `Total: $${currentTotalWithTax.toFixed(2)}`;
+}
 
-function displayCheckout(){
-    if (total !== 0){
-    document.getElementById('checkout').style.display = 'block';
-    document.getElementById('customer').style.display = 'none';
-    pricecalc()
-    pricecalcwithtax()
-    timechanger()
-    tipCalc()
-    }else{
-        alert('There is no items in your cart')
+
+function tipCalc5() {
+    let totalWithTip = currentTotalWithTax * 1.05;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 5% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc10() {
+    let totalWithTip = currentTotalWithTax * 1.10;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 10% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc15() {
+    let totalWithTip = currentTotalWithTax * 1.15;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 15% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function updateCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let customTipAmount = (currentTotalWithTax * customTip / 100).toFixed(2);
+        document.querySelector('.tipbutton.custom').innerText = `+ $${customTipAmount}`;
+    } else {
+        document.querySelector('.tipbutton.custom').innerText = "+ $0.00";
     }
 }
 
-function pricecalc(){
-    updateCartTotal()
-    var total = document.getElementById('cart-total-price').value
-    var checkoutTotal = document.getElementById('total-price-Tax')
-    return total
+
+function addCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let totalWithCustomTip = currentTotalWithTax * (1 + customTip / 100);
+        document.getElementsByClassName('finalprice')[0].innerText = `Total with ${customTip}% tip: $${totalWithCustomTip.toFixed(2)}`;
+    } else {
+        alert('Please enter a valid tip percentage');
+    }
 }
 
-function pricecalcwithtax(){
-    pricecalc()
-    total = (total * 1.06)
-    document.getElementById('total-price-Tax')
-    return total
-}
 
-function timechanger() {
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    var totaltime = 0
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
-        var quantity = quantityElement.value
+
+// function timechanger() {
+//     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+//     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+//     var totaltime = 0
+//     for (var i = 0; i < cartRows.length; i++) {
+//         var cartRow = cartRows[i]
+//         var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+//         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+//         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
+//         var quantity = quantityElement.value
         
-    }
-    totaltime = Math.round(totaltime * 100) / 100
-    document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
-    return totaltime;
-}
+//     }
+//     totaltime = Math.round(totaltime * 100) / 100
+//     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
+//     return totaltime;
+// }
 
-function tipCalc(){
-    pricecalcwithtax()
-    var tip5 = document.getElementById('tip5');
-    var tip10 = document.getElementById('tip10');
-    var tip15 = document.getElementById('tip15');
 
-    tip5.innerText("+ $" + total* 0.05);
-    tip10.innerText("+ $" + total* 0.10);
-    tip15.innerText("+ $" + total* 0.15);
 
-    
-
-}
-
-function displayCalc(){
-    document.getElementById('calcform').style.display = "block";
-}
+// function displayCalc(){
+//     document.getElementById('calcform').style.display = "block";
+// }
 
 function displayCardform1(){
     document.getElementById('Visa').style.display = "block";
