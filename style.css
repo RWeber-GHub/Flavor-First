@@ -454,22 +454,6 @@ footer{
   display:none;
 }
 
-#account-create-notice{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-bottom: 10px;
-    display: none;
-}
-.notice-head{
-    font-size: 30px;
-    color: red;
-}
-.notice-text{
-    font-size: 20px;
-}
-
 #content{
     display: block;
 }
