@@ -758,7 +758,16 @@ function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0];
     var cartRows = cartItemContainer.getElementsByClassName('cart-row');
     var total = 0;
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
     for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('$', ''));
+        var quantity = quantityElement.value;
+        total += price * quantity;
         var cartRow = cartRows[i];
         var priceElement = cartRow.getElementsByClassName('cart-price')[0];
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
@@ -834,7 +843,76 @@ function addCustomTip() {
 //         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
 //         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
 //         var quantity = quantityElement.value
+function noTip() {
+    document.getElementsByClassName('finalprice')[0].innerText = `Total: $${currentTotalWithTax.toFixed(2)}`;
+}
+
+
+function tipCalc5() {
+    let totalWithTip = currentTotalWithTax * 1.05;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 5% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc10() {
+    let totalWithTip = currentTotalWithTax * 1.10;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 10% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc15() {
+    let totalWithTip = currentTotalWithTax * 1.15;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 15% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function updateCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let customTipAmount = (currentTotalWithTax * customTip / 100).toFixed(2);
+        document.querySelector('.tipbutton.custom').innerText = `+ $${customTipAmount}`;
+    } else {
+        document.querySelector('.tipbutton.custom').innerText = "+ $0.00";
+    }
+}
+
+
+function addCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let totalWithCustomTip = currentTotalWithTax * (1 + customTip / 100);
+        document.getElementsByClassName('finalprice')[0].innerText = `Total with ${customTip}% tip: $${totalWithCustomTip.toFixed(2)}`;
+    } else {
+        alert('Please enter a valid tip percentage');
+    }
+}
+
+
+
+// function timechanger() {
+//     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+//     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+//     var totaltime = 0
+//     for (var i = 0; i < cartRows.length; i++) {
+//         var cartRow = cartRows[i]
+//         var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+//         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+//         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
+//         var quantity = quantityElement.value
         
+//     }
+//     totaltime = Math.round(totaltime * 100) / 100
+//     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
+//     return totaltime;
+// }
+
+
+
+// function displayCalc(){
+//     document.getElementById('calcform').style.display = "block";
+// }
 //     }
 //     totaltime = Math.round(totaltime * 100) / 100
 //     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
