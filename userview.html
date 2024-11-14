@@ -11,7 +11,7 @@
     <div class="header">
         <div class="left-section">
             <div class="icon">
-                <img src="https://cdn.discordapp.com/attachments/1297895204690329630/1303379444311920731/FlavorfirstLogo.png?ex=672c32f3&is=672ae173&hm=a771dca1002c79b9720ffdfb1317b4529edc171e951f4f2968e405f328967ba9&" alt="logo">
+                <a href="/index.html"><img src="/Resources/Flavorfirstlogo.png" alt="logo"></a>
             </div>
         </div>
 
@@ -38,15 +38,14 @@
         <section class="container content-section">
             <h2 class="section-header">food</h2>
         <div id="shop-items">
-            <div class="shop-item">
-                <div class="edit-form" id="constant">
-                    <span class="shop-item-title create-title">Create Your Own Menu Card</span>
+            <div class="shop-item" id="constant">
+                <div class="edit-form">
                 <form id="menu-form" onsubmit="submitForm(event,this.id)">
                     <input type="text" id="title" class="title" placeholder="Dish Title" required>
-                    <input type="text" id="image-url" class="image-url" placeholder='Image URL' required>
-                    <input type="number" id="price" class="price" placeholder="Price" required>
-                    <input type="number" id="cook-time" class="cook-time" placeholder="Cook Time (min)" required>
-                    <button type="submit" class="btn btn-primary">Add Menu Item</button>
+                    <textarea  id="image-url" class="image-url" placeholder='Image URL' required></textarea>
+                    <input type="number" id="price" class="price" placeholder="Price" required min="0" max="100" step="0.01">
+                    <input type="number" id="cook-time" class="cook-time" placeholder="Time" required>
+                    <button type="submit" class="btn btn-primary submit-btn">Add Item</button>
                     <select name="ID" id="tags" required>
                        <option value="MP">Majority Protein</option>
                        <option value="Noodle">Pasta/Noodle</option>
@@ -65,7 +64,7 @@
                 <span class="cart-quantity cart-header cart-column">QUANTITY</span>
             </div>
             <div class="cart-items">
-                
+                <div id="emptycart">There are currently no items in your cart</div>
             </div>
             <div class="cart-total">
                 <strong class="cart-total-title">Total</strong>
@@ -77,33 +76,96 @@
 
 </section>
     
-<section id="checkout">
-<h1>Checkout</h1><br>
-<div class="headline"></div>
+<section id="checkcontainer">
+    <section id="checkout">
 
-    <div id="total-price-notax">0$</div>
-    <div id="total-price-Tax">0$</div>
-    <div id="prep-time-calc">0 Min</div>
-    <div class="Tip-adder">
-        <div class="tiphead">Would you like to add a tip?</div><br>
-        <button class="tip" onclick="tipCalc()">5%<br><div class="tipbutton" id="tip5"></div></button>
-        <button class="tip" onclick="tipCalc()">10%<br><div class="tipbutton" id="tip10"></div></button>
-        <button class="tip" onclick="tipCalc()">15%<br><div class="tipbutton" id="tip15"></div></button>
-        <div class="OR">Or : </div>
-        <div class="tip"><input type="form" name="tipcustom">=</div>
+        <div id="checkout-box">
+                <h1 class="checkhead">Checkout</h1><br>
+            <div class="headline"></div>
+            <div class="row"><div class="pricenotax">Price Pre Tax:<div id="total-price-notax">0$</div></div></div><br>
+            <div class="row"><div class="pricetax">Total Price:<div id="total-price-Tax">0$</div></div></div><br>
+            <div class="row"><div class="time">Prep Time:<div id="prep-time-calc">0 Min</div></div></div>
+        </div>
         
-    </div>
-    <div class="calculator" onclick="displayCalc()"></div>
-    <div class="paymentoption">
-        <button class="payment" id="card1" onclick="displayCardform1()"><img src="Resources/visalogo.webp" alt="visalogo"></button>
-        <button class="payment" id="card2" onclick="displayCardform2()"><img src="Resources/masterlogo.webp" alt="masterlogo"></button>
-        <button class="payment" id="cash" onclick="displayCashForm()"><img src="Resources/cashlogo.webp" alt="cash"></button>
-        <button class="payment" id="giftcard" onclick="displayGiftCardForm()"><img src="Resources/giftcardlogo.webp" alt="giftcard"></button>
-    </div>
-    <div class="finalprice"></div>
-    <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        
+           
+        
+        <div class="Tip-adder">
+                <div class="tiphead">Would you like to add a tip?</div><br>
+        
+            <div class="tipPercents">
+                <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
+                <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
+                <button class="tip" onclick="tipCalc10()">10%<br><div class="tipbutton" id="tip10"></div></button>
+                <button class="tip" onclick="tipCalc15()">15%<br><div class="tipbutton" id="tip15"></div></button>
+            </div>
+                
+                    <div class="OR">Custom Tip:</div>
+            <div class="tip">
+                <input type="number" name="tipcustom" oninput="updateCustomTip()" placeholder="Custom %">
+                <button onclick="addCustomTip()">Apply</button>
+                <div class="tipbutton custom"></div>
+            </div>
+             
+        </div>
+            
+        
+            
+            
+    </section>
+            <section id="payment">
+                <div class="payhead">Payment: </div><br>
+                <div class="paymentoption">
+                    <button class="payment" id="card1" onclick="displayCardform1()"><img src="Resources/VisaLogo.png" alt="visalogo"></button>
+                    <button class="payment" id="card2" onclick="displayCardform2()"><img src="Resources/Mastercardlogo.png" alt="masterlogo"></button>
+                    <button class="payment" id="cash" onclick="displayCashForm()"><img src="Resources/cashlogo.png" alt="cash"></button>
+            </div>
 
+                <div id="Visa">
+                    <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
+                    <input type="text" class="cardinput" id="cardnumber"><br><br>
+                    <div class="infoFormat">Format: MM/YY</div>
+                    <input type="text" class="cardinput" id="expdate"><br><br>
+                    <div class="infoFormat">Format: XXX</div>
+                    <input type="text" class="cardinput" id="CVV"><br><br>
+                    <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+                </div>
+
+                <div id="MasterCard">
+                    <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
+                    <input type="text" class="cardinput" id="cardnumber"><br><br>
+                    <div class="infoFormat">Format: MM/YY</div>
+                    <input type="text" class="cardinput" id="expdate"><br><br>
+                    <div class="infoFormat">Format: XXX</div>
+                    <input type="text" class="cardinput" id="CVV"><br><br>
+                    <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+                </div>
+
+                <div id="Cash">
+                    <div class="orderNumber">Your Order Number is: </div>
+                    <div class="cashnotice">
+                        Please bring proof of your order and any giftcards or discount codes to the restaurant and present them to the cashier
+                    </div>
+                    <div class="thankyoumessage">Thank you for your order!</div>
+                </div>
+
+                <div id="giftcard">
+                    <div class="infoFormat">Please enter your giftcard Code: </div>
+                    <input type="text" class="cardinput" id="cardnumber">
+                    <input type="text" class="cardinput" id="expdate">
+                </div> <br>
+                <div class="finalprice"></div>
+
+                
+
+
+
+                <button class="btn btn-primary btn-purchase" type="button" id="orderbutton">Place Order</button>
+            </section>
 </section>
+        
+    
+    
 
 
 
@@ -326,6 +388,7 @@
         let x=localStorage.getItem("Account_Type");
         window.onload = function() {
             console.log(x);
+            console.log(menuData)
             if(x=="manager") {
                 createMenuCards(menuData);
                 ManagerBtn();
@@ -335,6 +398,7 @@
             if(x=="customer"){
                 createMenuCards(menuData);
                 document.getElementById('guest').style.display = 'none';
+                document.getElementById('constant').style.display = 'none';
             }
             if(x=="guest"){
                 document.getElementById('customer').style.display = 'none';

@@ -87,31 +87,24 @@ background-color: white;
 
 /* --------------------------------------------image grid for home page----------------------------------------- */
 .image-grid {
+    justify-content: center;
+    align-content: center;
     margin: 0;
     background-color: #000;
     overflow: hidden; 
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    width: 100%;
-    max-width: 100%; 
+    width: 100%; 
 }
 
-.image-grid img {
+.meal-photo{ 
+    height: 400px;
     width: 100%;
-    height: auto; 
-    object-fit: cover; 
     display: block;
     opacity: 0.7;
     transform: scale(1);
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
-
-.image-grid img:hover {
-    width: 100%;
-    opacity: 1;
-    transform: scale(0.9);
-}
-
 footer{
     width: 100%;
     padding-top: 20px;
@@ -141,10 +134,14 @@ footer{
     flex-direction: column;
     background-color: rgb(53, 68, 71);
 }
-.row2 .footercontent{
+.row2 .footercontent .abouthead .abouttext{
     display: flex;
     justify-content: flex-end;
     padding-right: 20px;
+    background-color: rgb(53, 68, 71);
+}
+
+.row2 .footercontent .abouthead .abouttext{
     background-color: rgb(53, 68, 71);
 }
 
@@ -198,26 +195,33 @@ footer{
     font-weight: bold;
     font-size: 1.5em;
     color: #333;
-    height: 50px;
-    padding-bottom: 15px;
+    min-height: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .shop-item-details {
     display: flex;
     align-items: center;
     padding: 5px;
-    background-color: #fff;
+    background-color: rgb(42, 42, 53);
+    height: 35px;
 }
 
 .shop-item-price {
     flex-grow: 1;
     color: #333;
     font-size: 1.5em;
+    width: fit-content;
 }
 .shop-item-cooktime{
     flex-grow: 1;
     color: #333;
     font-size: 1.5em;
+    width: fit-content;
+}
+.manager-btns{
+    background-color: rgb(42, 42, 53);
 }
 .btn {
     text-align: center;
@@ -271,6 +275,7 @@ footer{
     display: none;
 }
 /*Menu Test*/
+
 .shop-item{
     position: relative;
     margin: 30px;
@@ -278,69 +283,84 @@ footer{
     overflow: hidden;
     text-align: center;
     height: auto;
+    background-color: #25252e;
+    padding: 25px;
+    height: 450px;
+    border-radius: 15px;
 }
-.shop-item-image{
-    background-color: #000;
-    width: 300px;
-    height: 300px;
-    display: block;
+.meal-container:hover .shop-item-ingredients {
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
 }
-.shop-item-image:hover{
-    opacity: 0.5
+.meal-container{
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    margin: 15px;
 }
-
 
 .shop-item-ingredients{
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    display: none;
     position: absolute;
-    top: 90px;
-    bottom: 67px;
-    width: 280px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 25px;
-    flex-direction: column;
-
-}
-.shop-item:hover .shop-item-ingredients{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    background-color: rgb(0, 0, 0,0.8);
+    color: white;
     display: flex;
-}
-.shop-item-ingredients p{
+    flex-direction: column;
+    list-style: none;
     margin: 0;
-    padding: 5px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow: scroll;
+    overflow-x: hidden;
 }
+#itembox{
+    background-color: black;
+    padding: 15px;
+}
+
+.shop-item-ingredients li{
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.0);
+    text-transform: uppercase;
+    font-size: 20px;
+    list-style-type: none;
+    text-align: center;
+}
+.shop-item-ingredients ul{
+    background-color: rgba(255, 255, 255, 0.2);
+    padding-inline-start: 0px;
+}
+
 #shop-items{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-}
-.shop-item{
-    background-color: #25252e;
-    padding: 25px;
-    height: 475px;
-    border-radius: 15px;
 }
 .shop-item span{
     background-color: rgb(42, 42, 53);
     color: white;
 }
 
-#menu-container{
-    display: none;
+.shop-item-image{
+    width: 300px;
+    height: 300px;
+    display: block;
+    transition: opacity 0.3s ease-in-out;
 }
+
 .delete-btn{
     display: none;
-    margin: auto;
+    float: right;
 }
 .edit-btn{
     display: none;
-    margin: auto;
+    float: left;
+}
+.back-btn{
+    float: left;
 }
 #createCard{
     display: none;
@@ -474,33 +494,169 @@ footer{
     display: block;
 }
 /* FORM */
-.edit-form{
-    display: none;
-}
+
 #constant{
     display: block;
+}
+#menu-form{
+    background-color: rgb(42, 42, 53);
 }
 .image-url::-webkit-file-upload-button{
     visibility: hidden;
 }
 .title{
-    width: 200px;
+    width: 300px;
+    min-height: 30px;
+    font-size: 1.5em;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: rgb(42, 42, 53);
+    color: white;
+    border: none;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
-.id{
-    display: none;
+.image-url{
+    width: 300px;
+    height: 300px;
+    font-size: 1.5em;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: rgb(42, 42, 53);
+    color: white;
+    border: none;
+    word-break: break-all;
+}
+input[type="text" i] {
+    padding-block: 0px;
+    padding-inline: 0px;
 }
 .price{
-    width: 200px;
+    width: 90px;
+    height: 40px;
+    float: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: rgb(42, 42, 53);
+    color: white;
+    border: none;
+    font-size: 1.5em;
 }
 .cook-time{
-    width: 200px;
+    width: 90px;
+    height: 40px;
+    float: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: rgb(42, 42, 53);
+    color: white;
+    border: none;
+    font-size: 1.5em;
 }
-#menu-form label{
-    font-size: 50px;
+.submit-btn{
+    float: right;
+    width: 100px;
+    height: 55px;
 }
-.edit-form label{
-    font-size: 50px;
+form{
+    background-color: rgb(42, 42, 53);
 }
-#checkout{
+#checkout {
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%;
+}
+
+
+#checkout-box, .Tip-adder, #payment {
+    flex: 1; 
+    border: 2px solid black;
+    margin: 0; 
+    text-align: center;
+}
+
+
+.checkhead, .tiphead, .payhead {
+    font-size: 40px;
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+
+.pricenotax, .pricetax, .time {
+    display: flex;
+}
+
+#total-price-notax, #total-price-Tax, #prep-time-calc {
+    padding-left: 20px;
+    font-size: 30px;
+}
+
+
+.tipPercents {
+    display: flex;
+    width: 100%;
+}
+
+.paymentoption {
+    display: flex;
+    justify-content: space-around;
+}
+
+.payment {
+    gap: 10px;
+    display: flex;
+    width: 100px;
+    height: 40px;
+}
+.payment:hover{
+    opacity: .5;
+    transition: 0.5s;
+}
+
+.payment img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: white;
+}
+#emptycart{
+    display: block;
+    margin-left: 40px;
+    max-width: 75%;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 25px;
+    padding: 20px;
+    color: rgb(171, 147, 43);
+    border: 2px solid rgb(171, 147, 43);
+    background-color: rgba(171, 147, 43, 0.3);
+}
+#checkcontainer{
+    display: none;
+}
+#orderbutton{
+    display: none;
+}
+
+.infoFormat{
+    font-size: 10px;
+    color: rgb(166, 166, 166);
+}
+
+#Visa{
+    display: none;
+}
+
+#MasterCard{
+    display: none;
+}
+
+#Cash{
+    display: none;
+}
+
+#giftcard{
     display: none;
 }

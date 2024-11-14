@@ -1,3 +1,13 @@
+// ------------------------ Hardcoded Variables ----------------------------------------
+const giftcardcode10 = "A9bC3dE4F5gH6iJ7";
+const giftcardcode20 = "K8lM9nO1P2qR3sT4";
+const giftcardcode50 = "U5vW6xY7zA1bB3C2";
+
+const discountcode5 = "FlavorFirstSaver5"
+const discountcode10 = "FlavorFirstSaver10"
+const discountcode20 =  "FlavorFirstSaver20"
+
+
 const Manager_Email="manager@hotmail.com";
 const Manager_Password="password";
 
@@ -61,18 +71,14 @@ function AccountCreationPrompt() {
 function editItem(id){
     let divId=id.substring(0,id.length-3);
     document.getElementById(divId+"VIEW").style.display='none';
-    document.getElementById('constant').style.display='none';
 
     let conatinerDiv=document.getElementById(divId);
 
     let editDiv=document.createElement('div');
     editDiv.classList.add('edit-form');
-    editDiv.id=divId+"FORM";
+    editDiv.id=divId+"FORM"
+    
     editDiv.style.display='block';
-
-    let formTitle=document.createElement('span');
-    formTitle.classList.add('shop-item-title','create-title');
-    formTitle.textContent='Create Your Own Menu Card';
 
     let form=document.createElement('form');
     form.onsubmit = function(event) {submitForm(event,id)};
@@ -81,44 +87,46 @@ function editItem(id){
     inputTitle.setAttribute('type','text');
     inputTitle.setAttribute('placeholder','Dish Title');
     inputTitle.setAttribute('required', '');
-    inputTitle.id='title'
+    inputTitle.id='title1'
     inputTitle.classList.add('title');
         
-    let inputImage=document.createElement('input');
-    inputImage.setAttribute('type','text');
+    let inputImage=document.createElement('textarea');
     inputImage.setAttribute('placeholder','Image URL');
     inputImage.setAttribute('required', '');
-    inputImage.id='image-url'
+    inputImage.id='image-url1'
     inputImage.classList.add('image-url');
 
     let inputPrice=document.createElement('input');
     inputPrice.setAttribute('type','number');
     inputPrice.setAttribute('placeholder','Price');
     inputPrice.setAttribute('required', '');
-    inputPrice.id='price'
+    inputPrice.setAttribute('min','0');
+    inputPrice.setAttribute('max','100');
+    inputPrice.setAttribute('step','0.01')
+    inputPrice.id='price1'
     inputPrice.classList.add('price');
+
 
     let inputCookTime=document.createElement('input');
     inputCookTime.setAttribute('type','number');
-    inputCookTime.setAttribute('placeholder','Cook Time (min)');
+    inputCookTime.setAttribute('placeholder','Time');
     inputCookTime.setAttribute('required','');
-    inputCookTime.id='cook-time'
+    inputCookTime.id='cook-time1'
     inputCookTime.classList.add('cook-time');
 
     let submitBtn=document.createElement('button');
     submitBtn.setAttribute('type','submit')
-    submitBtn.classList.add('btn','btn-primary');
-    submitBtn.innerText='Add Menu Item';
+    submitBtn.classList.add('btn','btn-primary','submit-btn');
+    submitBtn.innerText='Add Item';
     submitBtn.id=divId;
     
     let backBtn=document.createElement('button');
-    backBtn.classList.add('btn','btn-primary');
-    backBtn.onclick= function() {goBack(backBtn.id)};
-    backBtn.id=divId.id;
+    backBtn.classList.add('btn','btn-primary','back-btn');
+    backBtn.onclick= function() {goBack(id)};
+    backBtn.id=divId;
     backBtn.innerText='Go Back';
 
     conatinerDiv.appendChild(editDiv);
-    editDiv.appendChild(formTitle);
     editDiv.appendChild(form);
     editDiv.appendChild(backBtn);
     form.appendChild(inputTitle);
@@ -126,26 +134,25 @@ function editItem(id){
     form.appendChild(inputPrice);
     form.appendChild(inputCookTime);
     form.appendChild(submitBtn);
-
-
+    
 }
 function deleteItem(id){
     let divId=id.substring(0,id.length-3);
     document.getElementById(divId).remove(); 
 }
-
 function createMenuCard(title, imageUrl, price, cookTime, id){
     let divId=id.substring(0,id.length-3);
     if(id=="menu-form"){
+        
         let menuContainer=document.getElementById('shop-items');
 
         let menuItem=document.createElement('div');
         menuItem.classList.add('shop-item');
-        // menuItem.id=divId
+        menuItem.id=divId
 
         let editView=document.createElement('div');
         editView.classList.add('edit-view');
-        // editView.id=divId.id+"VIEW";
+        editView.id=divId.id+"VIEW";
 
         let itemTitle=document.createElement('span');
         itemTitle.classList.add('shop-item-title');
@@ -161,7 +168,7 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
 
         let itemPrice=document.createElement('span');
         itemPrice.classList.add('shop-item-price');
-        itemPrice.textContent='$${price}`;
+        itemPrice.textContent=`$${price}`;
 
         let itemCookTime=document.createElement('span');
         itemCookTime.classList.add('shop-item-cooktime');
@@ -180,16 +187,16 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         let deleteButton=document.createElement('button');
         deleteButton.classList.add('btn','btn-primary','delete-btn');
         deleteButton.textContent='DELETE';
-        // deleteButton.id=divId.id+"DEL";
+        deleteButton.id=divId.id+"DEL";
         deleteButton.onclick = function() {deleteItem(deleteButton.id)};
         deleteButton.style.display='block'
         
-        let editButton=document.createElement('button');
-        editButton.classList.add('btn', 'btn-primary', 'edit-btn');
-        editButton.textContent='EDIT';
-        // editButton.id=divId.id+"EDT";
-        editButton.onclick = function() {editItem(editButton.id)};
-        editButton.style.display='block';
+        let editBtn=document.createElement('button');
+        editBtn.classList.add('btn', 'btn-primary', 'edit-btn');
+        editBtn.textContent='EDIT';
+        editBtn.id=divId.id+"EDT";
+        editBtn.onclick = function() {editItem(editBtn.id)};
+        editBtn.style.display='block';
 
         menuContainer.appendChild(menuItem);
 
@@ -205,11 +212,13 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         editView.appendChild(managerBtns);
 
         managerBtns.appendChild(deleteButton);
-        managerBtns.appendChild(editButton);
+        managerBtns.appendChild(editBtn);
     }else{
+        
         let itemDiv=document.getElementById(divId);
         let conatinerDiv=document.createElement('div');
         conatinerDiv.id=divId+"VIEW";
+        conatinerDiv.classList.add('edit-view');
 
         let itemTitle=document.createElement("span");
         itemTitle.classList.add("shop-item-title");
@@ -241,8 +250,15 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
 
         let deleteBtn=document.createElement('button');
         deleteBtn.innerText="DELETE";
-        deleteBtn.classList.add('btn','btn-primary','shop-item-button','delete-btn');
+        deleteBtn.classList.add('btn','btn-primary','delete-btn');
         deleteBtn.style.display='block'
+
+        let editBtn=document.createElement('button');
+        editBtn.classList.add('btn', 'btn-primary', 'edit-btn');
+        editBtn.textContent='EDIT';
+        editBtn.id=divId+"EDT";
+        editBtn.onclick = function() {editItem(editBtn.id)};
+        editBtn.style.display='block';
         
         itemDiv.appendChild(conatinerDiv);
         conatinerDiv.appendChild(itemTitle);
@@ -253,42 +269,51 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         itemDetails.appendChild(addToCartButton);
         conatinerDiv.appendChild(manageBtn);
         manageBtn.appendChild(deleteBtn);
+        manageBtn.appendChild(editBtn);
     }
     
 }
 function submitForm(event,id){
     event.preventDefault();
     let divId=id.substring(0,id.length-3);
-    let title=document.getElementById("title").value;
-    let imageUrl=document.getElementById("image-url").value;
-    let price=document.getElementById("price").value;
-    let cookTime=document.getElementById("cook-time").value;
+    document.getElementById('constant').style.display='block';
     if(id=='menu-form'){
+        let title=document.getElementById("title").value;
+        let imageUrl=document.getElementById("image-url").value;
+        let price=document.getElementById("price").value;
+        let cookTime=document.getElementById("cook-time").value;
+        let itemNum=1
+        let itemDetails=[{
+            "name": title,
+            "image": imageUrl,
+            "price": price,
+            "time": cookTime,
+            "id": "Item"+itemNum
+        }];
+        itemNum++;
+        menuData=menuData.concat(itemDetails);
         createMenuCard(title, imageUrl, price, cookTime, id);
         let menuForm=document.getElementById("menu-form");
         menuForm.reset(); 
     }else{
+        let title=document.getElementById("title1").value;
+        let imageUrl=document.getElementById("image-url1").value;
+        let price=document.getElementById("price1").value;
+        let cookTime=document.getElementById("cook-time1").value;
         document.getElementById(divId+"FORM").remove();
         document.getElementById(divId+"VIEW").remove();
         createMenuCard(title, imageUrl, price, cookTime, id);
     }
-    
-    
 }
 function goBack(id){
-    document.getElementById(id+"VIEW").style.display='block';
-    document.getElementById(id+"FORM").style.display='none';
-    document.getElementById('constant').style.display='block';
+    let divId=id.substring(0,id.length-3);
+    document.getElementById(divId+"VIEW").style.display='block';
+    document.getElementById(divId+"FORM").remove();
 }
-function other(){
-    document.getElementById('other').style.display='block'
-}
-
 let menuData=[
     {
         "name": "Asian Glazed Chicken Thighs",
         "image": "Resources/resized_Asian-Glazed-Chicken-Thighs.webp",
-        "ingredients": ["rice vinegar", "soy sauce", "honey", "Asian sesame oil", "Asian chili garlic sauce", "garlic", "salt", "chicken thigh", "green onion"],
         "price": "$24.95",
         "time": "23 min",
         "id": "MP6"
@@ -296,7 +321,6 @@ let menuData=[
     {
         "name": "Baked Denver Omelet",
         "image": "Resources/resized_Baked-Denver-Omelet.webp",
-        "ingredients": ["butter", "onion", "green bell pepper", "ham", "egg", "milk", "Cheddar cheese", "salt", "black pepper"],
         "price": "$10.45",
         "time": "12 min",
         "id": "MP7"
@@ -304,7 +328,6 @@ let menuData=[
     {
         "name": "Baked Garlic Parmesan Chicken",
         "image": "Resources/resized_Baked-Garlic-Parmesan-Chicken.webp",
-        "ingredients": ["olive oil", "garlic", "breadcrumbs", "Parmesan cheese", "basil", "black pepper", "chicken breast"],
         "price": "$19.75",
         "time": "20 min",
         "id": "MP4"
@@ -312,7 +335,6 @@ let menuData=[
     {
         "name": "Beef Bourguignon",
         "image": "Resources/resized_Beef-Bourguigno.webp",
-        "ingredients": ["beef chuck", "kosher salt", "black pepper", "hickory smoked bacon", "white onion", "garlic", "portobello mushroom", "tomato paste", "beef broth", "dry red wine", "carrots", "all-purpose flour", "parsley"],
         "price": "$49.99",
         "time": "2 hours",
         "id": "MP3"
@@ -320,7 +342,6 @@ let menuData=[
     {
         "name": "Beef Stir-Fry",
         "image": "Resources/resized_Beef-Stir-Fry.webp",
-        "ingredients": ["vegetable oil", "beef sirloin", "broccoli florets", "red bell pepper", "carrots", "green onion", "garlic", "soy sauce", "sesame seeds"],
         "price": "$27.50",
         "time": "27 min",
         "id": "MP8"
@@ -328,7 +349,6 @@ let menuData=[
     {
         "name": "Chicken and Stuffing Bake",
         "image": "Resources/resized_Chicken-and-Stuffing-Bake.webp",
-        "ingredients": ["chicken breast", "cream of chicken", "sour cream", "French onion soup mix", "black pepper", "dry stuffing mix", "chicken broth", "butter", "parsley"],
         "price": "$18.99",
         "time": "40 min",
         "id": "MP1"
@@ -336,7 +356,6 @@ let menuData=[
     {
         "name": "Chicken Pesto Pizza",
         "image": "Resources/resized_Chicken-Pesto-Pizza.webp",
-        "ingredients": ["pesto basil sauce", "pizza crust", "chicken breast strips", "artichoke hearts", "shredded fontina cheese"],
         "price": "$15.50",
         "time": "21 min",
         "id": "MP11"
@@ -344,7 +363,6 @@ let menuData=[
     {
         "name": "Creamy Chicken Ramen",
         "image": "Resources/resized_Creamy-Chicken-Ramen.webp",
-        "ingredients": ["unsalted butter", "garlic", "chicken broth", "whipping cream", "ramen noodles", "soy sauce", "chicken breast", "everything bagel seasoning"],
         "price": "$15.49",
         "time": "10 min",
         "id": "Noodle1"
@@ -352,7 +370,6 @@ let menuData=[
     {
         "name": "Garden Stuffed Baked Potato",
         "image": "Resources/resized_Garden-Stuffed-Baked-Potato.webp",
-        "ingredients": ["potatoes", "butter", "onion", "broccoli", "ranch-style salad dressing", "vegetable oil", "parsley", "salt", "pepper"],
         "price": "$9.95",
         "time": "10 min",
         "id": "Vegan4"
@@ -360,7 +377,6 @@ let menuData=[
     {
         "name": "Homemade Black Bean Veggie Burger",
         "image": "Resources/resized_Homemade-Black-Bean-Veggie-Burger.webp",
-        "ingredients": ["black beans", "green bell pepper", "onion", "garlic", "egg", "chili powder", "cumin", "Thai chili sauce", "breadcrumbs"],
         "price": "$16.50",
         "time": "11 min",
         "id": "Vegan3"
@@ -368,7 +384,6 @@ let menuData=[
     {
         "name": "Mexican Casserole",
         "image": "Resources/resized_Mexican-Casserole.webp",
-        "ingredients": ["lean ground beef", "salsa", "chili beans", "tortilla chips", "sour cream", "black olives", "green onion", "tomato", "Cheddar cheese"],
         "price": "$14.50",
         "time": "12 min",
         "id": "MP10"
@@ -376,7 +391,6 @@ let menuData=[
     {
         "name": "Pork Fried Rice",
         "image": "Resources/resized_Pork-Fried-Rice.webp",
-        "ingredients": ["butter", "boneless pork loin chop", "green onion", "carrot", "broccoli", "egg", "rice", "peas", "soy sauce", "garlic powder", "ginger"],
         "price": "$11.95",
         "time": "12 min",
         "id": "MP12"
@@ -384,7 +398,6 @@ let menuData=[
     {
         "name": "Pork Tenderloin Diablo",
         "image": "Resources/resized_Pork-Tenderloin-Diablo.webp",
-        "ingredients": ["pork tenderloin", "salt", "black pepper", "vegetable oil", "chicken broth", "heavy cream", "extra-hot prepared horseradish", "Dijon mustard", "cayenne pepper", "unsalted butter", "chives"],
         "price": "$26.50",
         "time": "27 min",
         "id": "MP9"
@@ -392,7 +405,6 @@ let menuData=[
     {
         "name": "Sausage and Peppers",
         "image": "Resources/resized_Sausage-and-Peppers.webp",
-        "ingredients": ["white rice", "chicken broth", "tomatoes", "garlic", "Creole seasoning", "black pepper", "cayenne pepper", "green bell pepper", "white onion", "andouille sausage", "scallions"],
         "price": "$21.45",
         "time": "22 min",
         "id": "MP2"
@@ -400,7 +412,6 @@ let menuData=[
     {
         "name": "Shrimp Scampi with Pasta",
         "image": "Resources/resized_Shrimp-Scampi-with-Pasta.webp",
-        "ingredients": ["linguine pasta", "butter", "extra-virgin olive oil", "shallots", "garlic", "red pepper", "shrimp", "kosher salt", "ground pepper", "dry white wine", "lemon", "parsley"],
         "price": "$20.95",
         "time": "20 min",
         "id": "Noodle2"
@@ -408,7 +419,6 @@ let menuData=[
     {
         "name": "Soy-Honey Glazed Salmon with Asparagus",
         "image": "Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp",
-        "ingredients": ["asparagus", "soy sauce", "honey", "olive oil", "salmon fillet", "sea salt", "black pepper"],
         "price": "$27.45",
         "time": "25 min",
         "id": "MP5"
@@ -416,7 +426,6 @@ let menuData=[
     {
         "name": "Spicy Asian Ramen Noodles",
         "image": "Resources/resized_Spicy-Asian-Ramen-Noodles.webp",
-        "ingredients": ["soy sauce", "sesame oil", "brown sugar", "rice vinegar", "chili-garlic sauce", "ginger", "creamy peanut butter", "ramen noodles", "peanuts", "green onions"],
         "price": "$17.95",
         "time": "20 min",
         "id": "Noodle3"
@@ -424,7 +433,6 @@ let menuData=[
     {
         "name": "Spinach Tomato Tortellini",
         "image": "Resources/resized_Spinach-Tomato-Tortellini.webp",
-        "ingredients": ["cheese tortellini", "tomatoes", "garlic", "onion", "spinach", "basil", "garlic", "salt", "pepper", "milk", "heavy cream", "all-purpose flour", "Parmesan cheese"],
         "price": "$21.75",
         "time": "22 min",
         "id": "Noodle4"
@@ -432,21 +440,18 @@ let menuData=[
     {
         "name": "Vegan Sweet Potato Chickpea Curry",
         "image": "Resources/resized_Vegan-Sweet-Potato-Chickpea-Curry.webp",
-        "ingredients": ["olive oil", "onion", "garlic", "ginger root", "chickpeas", "tomatoes", "coconut milk", "sweet potato", "garam masala", "cumin", "turmeric", "salt", "red chile flakes", "baby spinach"],
-        "price": "17.45",
+        "price":  "$17.45",
         "time": "25 min",
         "id": "Vegan1"
     },
     {
         "name": "White Chili",
         "image": "Resources/resized_White-Chili.webp",
-        "ingredients": ["ground turkey", "medium salsa", "corn kernels", "water", "Great Northern beans", "Pepper Jack cheese"],
         "price": "$13.45",
         "time": "15 min",
         "id": "Vegan2"
     }
 ];
-
 function createMenuCards(menuData) {
 
     let menuContainer=document.getElementById("shop-items");
@@ -686,6 +691,7 @@ function quantityChanged(event) {
 }
 
 function addToCartClicked(event) {
+    document.getElementById('emptycart').style.display = 'none';
     var button = event.target
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
@@ -722,99 +728,155 @@ function addItemToCart(title, price, imageSrc) {
         cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }
 
-function updateCartTotal() {
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    var total = 0
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace('$', ''))
-        var quantity = quantityElement.value
-        total = total + (price * quantity)
+let currentTotalWithTax = 0; 
+
+function displayCheckout() {
+    let totalBeforeTax = updateCartTotal();
+    if (totalBeforeTax !== 0) {
+        document.getElementById('checkcontainer').style.display = 'block';
+        document.getElementById('checkout').style.display = 'flex';
+        document.getElementById('payment').style.display = 'flex';
+        document.getElementById('customer').style.display = 'none';
+
+        
+        document.getElementById('total-price-notax').innerText = `$${totalBeforeTax}`;
+
+        
+        currentTotalWithTax = Math.round(totalBeforeTax * 1.06 * 100) / 100;
+        document.getElementById('total-price-Tax').innerText = `$${currentTotalWithTax}`;
+
+      
+        document.getElementById('tip5').innerText = `+ $${(currentTotalWithTax * 0.05).toFixed(2)}`;
+        document.getElementById('tip10').innerText = `+ $${(currentTotalWithTax * 0.10).toFixed(2)}`;
+        document.getElementById('tip15').innerText = `+ $${(currentTotalWithTax * 0.15).toFixed(2)}`;
+    } else {
+        alert('There are no items in your cart');
     }
-    total = Math.round(total * 100) / 100
-    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+}
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('$', ''));
+        var quantity = quantityElement.value;
+        total += price * quantity;
+    }
+    total = Math.round(total * 100) / 100;
+    document.getElementsByClassName('cart-total-price')[0].innerText = `$${total}`;
+    if (total === 0){
+        document.getElementById('emptycart').style.display = 'block';
+    }else{
+        document.getElementById('emptycart').style.display = 'none';
+    }
     return total;
 }
 
-// --------------------------------------------------------Checkout functions --------------------------------------
+function noTip() {
+    document.getElementsByClassName('finalprice')[0].innerText = `Total: $${currentTotalWithTax.toFixed(2)}`;
+}
 
-function displayCheckout(){
-    if (total !== 0){
-    document.getElementById('checkout').style.display = 'block';
-    document.getElementById('customer').style.display = 'none';
-    pricecalc()
-    pricecalcwithtax()
-    timechanger()
-    tipCalc()
-    }else{
-        alert('There is no items in your cart')
+
+function tipCalc5() {
+    let totalWithTip = currentTotalWithTax * 1.05;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 5% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc10() {
+    let totalWithTip = currentTotalWithTax * 1.10;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 10% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function tipCalc15() {
+    let totalWithTip = currentTotalWithTax * 1.15;
+    document.getElementsByClassName('finalprice')[0].innerText = `Total with 15% tip: $${totalWithTip.toFixed(2)}`;
+}
+
+
+function updateCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let customTipAmount = (currentTotalWithTax * customTip / 100).toFixed(2);
+        document.querySelector('.tipbutton.custom').innerText = `+ $${customTipAmount}`;
+    } else {
+        document.querySelector('.tipbutton.custom').innerText = "+ $0.00";
     }
 }
 
-function pricecalc(){
-    updateCartTotal()
-    var total = document.getElementById('cart-total-price').value
-    var checkoutTotal = document.getElementById('total-price-Tax')
-    return total
+
+function addCustomTip() {
+    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
+    let customTip = parseFloat(customTipInput);
+    if (!isNaN(customTip) && customTip > 0) {
+        let totalWithCustomTip = currentTotalWithTax * (1 + customTip / 100);
+        document.getElementsByClassName('finalprice')[0].innerText = `Total with ${customTip}% tip: $${totalWithCustomTip.toFixed(2)}`;
+    } else {
+        alert('Please enter a valid tip percentage');
+    }
 }
 
-function pricecalcwithtax(){
-    pricecalc()
-    total = (total * 1.06)
-    document.getElementById('total-price-Tax')
-    return total
-}
 
-function timechanger() {
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    var totaltime = 0
-    for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
-        var quantity = quantityElement.value
+
+// function timechanger() {
+//     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+//     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+//     var totaltime = 0
+//     for (var i = 0; i < cartRows.length; i++) {
+//         var cartRow = cartRows[i]
+//         var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+//         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+//         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
+//         var quantity = quantityElement.value
         
-    }
-    totaltime = Math.round(totaltime * 100) / 100
-    document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
-    return totaltime;
-}
+//     }
+//     totaltime = Math.round(totaltime * 100) / 100
+//     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
+//     return totaltime;
+// }
 
-function tipCalc(){
-    pricecalcwithtax()
-    var tip5 = document.getElementById('tip5');
-    var tip10 = document.getElementById('tip10');
-    var tip15 = document.getElementById('tip15');
 
-    tip5.innerText("+ $" + total* 0.05);
-    tip10.innerText("+ $" + total* 0.10);
-    tip15.innerText("+ $" + total* 0.15);
 
-    
-
-}
-
-function displayCalc(){
-    document.getElementById('calcform').style.display = "block";
-}
+// function displayCalc(){
+//     document.getElementById('calcform').style.display = "block";
+// }
 
 function displayCardform1(){
-    document.getElementById('Visa').style.display = "block";
+    document.getElementById('card1').style.opacity = 0.5;
+    document.getElementById('card2').style.opacity = 1;
+    document.getElementById('cash').style.opacity = 1;
+    document.getElementById('MasterCard').style.display = "none";
+    document.getElementById('Visa').style.display = "block"
+    document.getElementById('Cash').style.display = "none"
+    document.getElementById('giftcard').style.display = "none"
 }
 
 function displayCardform2(){
-    document.getElementById('Master').style.display = "block";
+    document.getElementById('card1').style.opacity = 1;
+    document.getElementById('card2').style.opacity = 0.5;
+    document.getElementById('cash').style.opacity = 1;
+    document.getElementById('MasterCard').style.display = "block";
+    document.getElementById('Visa').style.display = "none"
+    document.getElementById('Cash').style.display = "none"
+    document.getElementById('giftcard').style.display = "none"
 }
 
 function displayCashForm(){
-    document.getElementById('Cash').style.display = "block";
+    document.getElementById('card1').style.opacity = 1;
+    document.getElementById('card2').style.opacity = 1;
+    document.getElementById('cash').style.opacity = 0.5;
+    document.getElementById('MasterCard').style.display = "none";
+    document.getElementById('Visa').style.display = "none"
+    document.getElementById('Cash').style.display = "block"
+    document.getElementById('giftcard').style.display = "none"
 }
 
 function displayGiftCardForm(){
-    document.getElementById('GiftCard').style.display = "block";
+    document.getElementById('giftcard').style.display = "block";
 }
