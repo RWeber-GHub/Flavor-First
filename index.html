@@ -8,10 +8,10 @@
 </head>
 <body>
 
-    <div class="header">
+    <div class="header" id="stickyhead">
         <div class="left-section">
             <div class="icon">
-                <a href="/index.html"><img src="/Resources/Flavorfirstlogo.png" alt="logo"></a>
+                <a href="/index.html"><img src="/Resources/FlavorfirstLogo.webp" alt="logo"></a>
             </div>
         </div>
 
@@ -21,6 +21,10 @@
             <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
             <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
         </div>
+    </div>
+    <div id="account-create-notice">
+        <div class="notice-head">Account Notice:</div><br>
+        <div class="notice-text">If you would like to add items to your cart you must first create an account above</div>
     </div>
     <div id="menu-container"></div>
 
@@ -415,26 +419,29 @@
 
 
 <footer>
-    
-    <div class="row1">
-        <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
-        <div class="footercontent">Contact us: <div class="email">example@gmail.com</div></div>
-    </div>
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="footercontent" id="emailsection">
+                Contact us: <span class="email">example@gmail.com</span>
+            </div>
+            <div class="footercontent">
+                <div class="abouthead">About Us:</div>
+                <div class="abouttext">Lorem Ipsum dolor sit amet</div>
+            </div>
+        </div>
 
-    <div class="row2">
-        <div class="footercontent">
-            <div class="abouthead">About Us: </div>
-            <div class="abouttext">Lorem Epsium divim num</div>
+        <div class="center-column">
+            <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+        </div>
+
+        <div class="right-column">
+            <div class="footercontent" id="github"><a href="https://github.com/RWeber-GHub/Flavor-First"><ion-icon name="logo-github"></ion-icon></a></div>
+            <div class="footercontent" id="instagram"><a href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a></div>
+            <div class="footercontent" id="twitter"><a href="https://x.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a></div>
         </div>
     </div>
-        
-    <div class="row3">
-        <div class="footercontent" id="github"><ion-icon name="logo-github"></ion-icon></div>
-        <div class="footercontent" id="instagram"><ion-icon name="logo-instagram"></ion-icon></div>
-        <div class="footercontent" id="twitter"><ion-icon name="logo-twitter"></ion-icon></div>
-    </div>
-        
 </footer>
+
 
 
 
@@ -442,5 +449,4 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>
 </body>
-</html> 
 </html>

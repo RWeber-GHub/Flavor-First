@@ -15,6 +15,7 @@ const Guest_Email="dummyemail";
 const Guest_Password="dummypassword";
 
 var Account_Type="";
+var Form_ID='';
 localStorage.setItem(Manager_Email, Manager_Password);
 function Display_Login(){
     if(window.location.pathname=="/userview.html"){
@@ -114,6 +115,32 @@ function editItem(id){
     inputCookTime.id='cook-time1'
     inputCookTime.classList.add('cook-time');
 
+    let itemId=document.createElement('select');
+    inputCookTime.setAttribute('required','');
+    itemId.id='tag-options1';
+    itemId.classList.add('tag');
+
+    let empty=document.createElement('option');
+    empty.innerText='Select a Tag'
+    empty.setAttribute('disabled','');
+    empty.setAttribute('selected','');
+
+    let protein=document.createElement('option');
+    protein.innerText='Majority Protein'
+    protein.value='MP';
+
+    let noodle=document.createElement('option');
+    noodle.innerText='Pasta/Noodle'
+    noodle.value='Noodle';
+
+    let vegan=document.createElement('option');
+    vegan.innerText='Vegan'
+    vegan.value='Vegan';
+
+    let carb=document.createElement('option');
+    carb.innerText='Carb Classics'
+    carb.value='CC';
+
     let submitBtn=document.createElement('button');
     submitBtn.setAttribute('type','submit')
     submitBtn.classList.add('btn','btn-primary','submit-btn');
@@ -133,6 +160,12 @@ function editItem(id){
     form.appendChild(inputImage);
     form.appendChild(inputPrice);
     form.appendChild(inputCookTime);
+    form.appendChild(itemId);
+    itemId.appendChild(empty);
+    itemId.appendChild(protein);
+    itemId.appendChild(noodle);
+    itemId.appendChild(vegan);
+    itemId.appendChild(carb);
     form.appendChild(submitBtn);
     
 }
@@ -141,18 +174,18 @@ function deleteItem(id){
     document.getElementById(divId).remove(); 
 }
 function createMenuCard(title, imageUrl, price, cookTime, id){
-    let divId=id.substring(0,id.length-3);
-    if(id=="menu-form"){
+    console.log(Form_ID);
+    let menuContainer=document.getElementById('shop-items');
+    if(Form_ID=="menu-form"){
         
-        let menuContainer=document.getElementById('shop-items');
-
         let menuItem=document.createElement('div');
         menuItem.classList.add('shop-item');
-        menuItem.id=divId
+        menuItem.classList.add(Form_ID);
+        menuItem.id=id
 
         let editView=document.createElement('div');
         editView.classList.add('edit-view');
-        editView.id=divId.id+"VIEW";
+        editView.id=id+"VIEW";
 
         let itemTitle=document.createElement('span');
         itemTitle.classList.add('shop-item-title');
@@ -187,14 +220,14 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         let deleteButton=document.createElement('button');
         deleteButton.classList.add('btn','btn-primary','delete-btn');
         deleteButton.textContent='DELETE';
-        deleteButton.id=divId.id+"DEL";
+        deleteButton.id=id+"DEL";
         deleteButton.onclick = function() {deleteItem(deleteButton.id)};
         deleteButton.style.display='block'
         
         let editBtn=document.createElement('button');
         editBtn.classList.add('btn', 'btn-primary', 'edit-btn');
         editBtn.textContent='EDIT';
-        editBtn.id=divId.id+"EDT";
+        editBtn.id=id+"EDT";
         editBtn.onclick = function() {editItem(editBtn.id)};
         editBtn.style.display='block';
 
@@ -214,10 +247,9 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         managerBtns.appendChild(deleteButton);
         managerBtns.appendChild(editBtn);
     }else{
-        
-        let itemDiv=document.getElementById(divId);
+        let itemDiv=document.getElementById(Form_ID);
         let conatinerDiv=document.createElement('div');
-        conatinerDiv.id=divId+"VIEW";
+        conatinerDiv.id=Form_ID+"VIEW";
         conatinerDiv.classList.add('edit-view');
 
         let itemTitle=document.createElement("span");
@@ -244,7 +276,6 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         addToCartButton.textContent="ADD TO CART";
         addToCartButton.type="button";
 
-    
         let manageBtn=document.createElement('div');
         manageBtn.classList.add("manager-btns")
 
@@ -256,7 +287,7 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
         let editBtn=document.createElement('button');
         editBtn.classList.add('btn', 'btn-primary', 'edit-btn');
         editBtn.textContent='EDIT';
-        editBtn.id=divId+"EDT";
+        editBtn.id=Form_ID+"EDT";
         editBtn.onclick = function() {editItem(editBtn.id)};
         editBtn.style.display='block';
         
@@ -275,33 +306,47 @@ function createMenuCard(title, imageUrl, price, cookTime, id){
 }
 function submitForm(event,id){
     event.preventDefault();
-    let divId=id.substring(0,id.length-3);
     document.getElementById('constant').style.display='block';
-    if(id=='menu-form'){
+    Form_ID=id;
+    let itemNum=0;
+    console.log(id)
+    if(Form_ID=='menu-form'){
         let title=document.getElementById("title").value;
         let imageUrl=document.getElementById("image-url").value;
         let price=document.getElementById("price").value;
         let cookTime=document.getElementById("cook-time").value;
-        let itemNum=1
-        let itemDetails=[{
-            "name": title,
-            "image": imageUrl,
-            "price": price,
-            "time": cookTime,
-            "id": "Item"+itemNum
-        }];
-        itemNum++;
-        menuData=menuData.concat(itemDetails);
+        let tag=document.getElementById('tag-options').value;
+        if(tag=="MP"){
+            itemNum=9;
+        }
+        if(tag=="Noodle"){
+            itemNum=5;
+        }
+        if(tag=="Vegan"){
+            itemNum=5;
+        }
+        if(tag=="CC"){
+            itemNum=5
+        }
+        tag=tag+itemNum;
+        // let itemDetails=[{
+        //     "name": title,
+        //     "image": imageUrl,
+        //     "price": price,
+        //     "time": cookTime,
+        //     "id": tag
+        // }];
         createMenuCard(title, imageUrl, price, cookTime, id);
-        let menuForm=document.getElementById("menu-form");
-        menuForm.reset(); 
+        document.getElementById(Form_ID).reset(); 
     }else{
+        Form_ID=id.substring(0,id.length-3)
         let title=document.getElementById("title1").value;
         let imageUrl=document.getElementById("image-url1").value;
         let price=document.getElementById("price1").value;
         let cookTime=document.getElementById("cook-time1").value;
-        document.getElementById(divId+"FORM").remove();
-        document.getElementById(divId+"VIEW").remove();
+        let id=document.getElementById('tag-options1').value;
+        document.getElementById(Form_ID+"FORM").remove();
+        document.getElementById(Form_ID+"VIEW").remove();
         createMenuCard(title, imageUrl, price, cookTime, id);
     }
 }
@@ -316,49 +361,49 @@ let menuData=[
         "image": "Resources/resized_Asian-Glazed-Chicken-Thighs.webp",
         "price": "$24.95",
         "time": "23 min",
-        "id": "MP6"
+        "id": "MP1"
     },
     {
         "name": "Baked Denver Omelet",
         "image": "Resources/resized_Baked-Denver-Omelet.webp",
         "price": "$10.45",
         "time": "12 min",
-        "id": "MP7"
+        "id": "MP2"
     },
     {
         "name": "Baked Garlic Parmesan Chicken",
         "image": "Resources/resized_Baked-Garlic-Parmesan-Chicken.webp",
         "price": "$19.75",
         "time": "20 min",
-        "id": "MP4"
+        "id": "MP3"
     },
     {
         "name": "Beef Bourguignon",
         "image": "Resources/resized_Beef-Bourguigno.webp",
         "price": "$49.99",
         "time": "2 hours",
-        "id": "MP3"
+        "id": "MP4"
     },
     {
         "name": "Beef Stir-Fry",
         "image": "Resources/resized_Beef-Stir-Fry.webp",
         "price": "$27.50",
         "time": "27 min",
-        "id": "MP8"
+        "id": "MP5"
     },
     {
         "name": "Chicken and Stuffing Bake",
         "image": "Resources/resized_Chicken-and-Stuffing-Bake.webp",
         "price": "$18.99",
         "time": "40 min",
-        "id": "MP1"
+        "id": "CC1"
     },
     {
         "name": "Chicken Pesto Pizza",
         "image": "Resources/resized_Chicken-Pesto-Pizza.webp",
         "price": "$15.50",
         "time": "21 min",
-        "id": "MP11"
+        "id": "CC2"
     },
     {
         "name": "Creamy Chicken Ramen",
@@ -386,28 +431,28 @@ let menuData=[
         "image": "Resources/resized_Mexican-Casserole.webp",
         "price": "$14.50",
         "time": "12 min",
-        "id": "MP10"
+        "id": "CC3"
     },
     {
         "name": "Pork Fried Rice",
         "image": "Resources/resized_Pork-Fried-Rice.webp",
         "price": "$11.95",
         "time": "12 min",
-        "id": "MP12"
+        "id": "CC4"
     },
     {
         "name": "Pork Tenderloin Diablo",
         "image": "Resources/resized_Pork-Tenderloin-Diablo.webp",
         "price": "$26.50",
         "time": "27 min",
-        "id": "MP9"
+        "id": "MP6"
     },
     {
         "name": "Sausage and Peppers",
         "image": "Resources/resized_Sausage-and-Peppers.webp",
         "price": "$21.45",
         "time": "22 min",
-        "id": "MP2"
+        "id": "MP7"
     },
     {
         "name": "Shrimp Scampi with Pasta",
@@ -421,7 +466,7 @@ let menuData=[
         "image": "Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp",
         "price": "$27.45",
         "time": "25 min",
-        "id": "MP5"
+        "id": "MP8"
     },
     {
         "name": "Spicy Asian Ramen Noodles",
@@ -459,6 +504,11 @@ function createMenuCards(menuData) {
     menuData.forEach((item) => {
         let menuItem=document.createElement('div');
         menuItem.classList.add('shop-item');
+
+        let str=item.id
+        let firstNumber = str.match(/\M+/)[0];
+        console.log(firstNumber);
+        menuItem.classList.add();
         menuItem.id=item.id;
 
         let editView=document.createElement('div');
@@ -545,10 +595,10 @@ function displayAll(){
     document.getElementById("MP6").style.display = "block"
     document.getElementById("MP7").style.display = "block"
     document.getElementById("MP8").style.display = "block"
-    document.getElementById("MP9").style.display = "block"
-    document.getElementById("MP10").style.display = "block"
-    document.getElementById("MP11").style.display = "block"
-    document.getElementById("MP12").style.display = "block"
+    document.getElementById("CC1").style.display = "block"
+    document.getElementById("CC2").style.display = "block"
+    document.getElementById("CC3").style.display = "block"
+    document.getElementById("CC4").style.display = "block"
     document.getElementById("Noodle1").style.display = "block"
     document.getElementById("Noodle2").style.display = "block"
     document.getElementById("Noodle3").style.display = "block"
@@ -569,10 +619,10 @@ function displayMeat(){
     document.getElementById("MP6").style.display = "block"
     document.getElementById("MP7").style.display = "block"
     document.getElementById("MP8").style.display = "block"
-    document.getElementById("MP9").style.display = "block"
-    document.getElementById("MP10").style.display = "block"
-    document.getElementById("MP11").style.display = "block"
-    document.getElementById("MP12").style.display = "block"
+    document.getElementById("CC1").style.display = "none"
+    document.getElementById("CC2").style.display = "none"
+    document.getElementById("CC3").style.display = "none"
+    document.getElementById("CC4").style.display = "none"
     document.getElementById("Noodle1").style.display = "none"
     document.getElementById("Noodle2").style.display = "none"
     document.getElementById("Noodle3").style.display = "none"
@@ -593,10 +643,10 @@ function displayVegan(){
     document.getElementById("MP6").style.display = "none"
     document.getElementById("MP7").style.display = "none"
     document.getElementById("MP8").style.display = "none"
-    document.getElementById("MP9").style.display = "none"
-    document.getElementById("MP10").style.display = "none"
-    document.getElementById("MP11").style.display = "none"
-    document.getElementById("MP12").style.display = "none"
+    document.getElementById("CC1").style.display = "none"
+    document.getElementById("CC2").style.display = "none"
+    document.getElementById("CC3").style.display = "none"
+    document.getElementById("CC4").style.display = "none"
     document.getElementById("Noodle1").style.display = "none"
     document.getElementById("Noodle2").style.display = "none"
     document.getElementById("Noodle3").style.display = "none"
@@ -618,10 +668,10 @@ function displayNoodle(){
     document.getElementById("MP6").style.display = "none"
     document.getElementById("MP7").style.display = "none"
     document.getElementById("MP8").style.display = "none"
-    document.getElementById("MP9").style.display = "none"
-    document.getElementById("MP10").style.display = "none"
-    document.getElementById("MP11").style.display = "none"
-    document.getElementById("MP12").style.display = "none"
+    document.getElementById("CC1").style.display = "none"
+    document.getElementById("CC2").style.display = "none"
+    document.getElementById("CC3").style.display = "none"
+    document.getElementById("CC4").style.display = "none"
     document.getElementById("Noodle1").style.display = "block"
     document.getElementById("Noodle2").style.display = "block"
     document.getElementById("Noodle3").style.display = "block"
@@ -631,6 +681,29 @@ function displayNoodle(){
     document.getElementById("Vegan3").style.display = "none"
     document.getElementById("Vegan4").style.display = "none"
 
+}
+
+function displayCarb(){
+    document.getElementById("MP1").style.display = "none"
+    document.getElementById("MP2").style.display = "none"
+    document.getElementById("MP3").style.display = "none"
+    document.getElementById("MP4").style.display = "none"
+    document.getElementById("MP5").style.display = "none"
+    document.getElementById("MP6").style.display = "none"
+    document.getElementById("MP7").style.display = "none"
+    document.getElementById("MP8").style.display = "none"
+    document.getElementById("CC1").style.display = "block"
+    document.getElementById("CC2").style.display = "block"
+    document.getElementById("CC3").style.display = "block"
+    document.getElementById("CC4").style.display = "block"
+    document.getElementById("Noodle1").style.display = "none"
+    document.getElementById("Noodle2").style.display = "none"
+    document.getElementById("Noodle3").style.display = "none"
+    document.getElementById("Noodle4").style.display = "none"
+    document.getElementById("Vegan1").style.display = "none"
+    document.getElementById("Vegan2").style.display = "none"
+    document.getElementById("Vegan3").style.display = "none"
+    document.getElementById("Vegan4").style.display = "none"
 }
 // ---------------------------------- Cart functions ---------------------------------
 if (document.readyState == 'loading') {
@@ -758,16 +831,7 @@ function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0];
     var cartRows = cartItemContainer.getElementsByClassName('cart-row');
     var total = 0;
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
-    var total = 0;
     for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i];
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
-        var price = parseFloat(priceElement.innerText.replace('$', ''));
-        var quantity = quantityElement.value;
-        total += price * quantity;
         var cartRow = cartRows[i];
         var priceElement = cartRow.getElementsByClassName('cart-price')[0];
         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
@@ -830,100 +894,7 @@ function addCustomTip() {
         alert('Please enter a valid tip percentage');
     }
 }
-
-
-
-// function timechanger() {
-//     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-//     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-//     var totaltime = 0
-//     for (var i = 0; i < cartRows.length; i++) {
-//         var cartRow = cartRows[i]
-//         var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-//         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-//         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
-//         var quantity = quantityElement.value
-function noTip() {
-    document.getElementsByClassName('finalprice')[0].innerText = `Total: $${currentTotalWithTax.toFixed(2)}`;
-}
-
-
-function tipCalc5() {
-    let totalWithTip = currentTotalWithTax * 1.05;
-    document.getElementsByClassName('finalprice')[0].innerText = `Total with 5% tip: $${totalWithTip.toFixed(2)}`;
-}
-
-
-function tipCalc10() {
-    let totalWithTip = currentTotalWithTax * 1.10;
-    document.getElementsByClassName('finalprice')[0].innerText = `Total with 10% tip: $${totalWithTip.toFixed(2)}`;
-}
-
-
-function tipCalc15() {
-    let totalWithTip = currentTotalWithTax * 1.15;
-    document.getElementsByClassName('finalprice')[0].innerText = `Total with 15% tip: $${totalWithTip.toFixed(2)}`;
-}
-
-
-function updateCustomTip() {
-    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
-    let customTip = parseFloat(customTipInput);
-    if (!isNaN(customTip) && customTip > 0) {
-        let customTipAmount = (currentTotalWithTax * customTip / 100).toFixed(2);
-        document.querySelector('.tipbutton.custom').innerText = `+ $${customTipAmount}`;
-    } else {
-        document.querySelector('.tipbutton.custom').innerText = "+ $0.00";
-    }
-}
-
-
-function addCustomTip() {
-    let customTipInput = document.querySelector('input[name="tipcustom"]').value;
-    let customTip = parseFloat(customTipInput);
-    if (!isNaN(customTip) && customTip > 0) {
-        let totalWithCustomTip = currentTotalWithTax * (1 + customTip / 100);
-        document.getElementsByClassName('finalprice')[0].innerText = `Total with ${customTip}% tip: $${totalWithCustomTip.toFixed(2)}`;
-    } else {
-        alert('Please enter a valid tip percentage');
-    }
-}
-
-
-
-// function timechanger() {
-//     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-//     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-//     var totaltime = 0
-//     for (var i = 0; i < cartRows.length; i++) {
-//         var cartRow = cartRows[i]
-//         var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-//         var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-//         var price = parseFloat(priceElement.innerText.replace(' ', 'mins'))
-//         var quantity = quantityElement.value
-        
-//     }
-//     totaltime = Math.round(totaltime * 100) / 100
-//     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
-//     return totaltime;
-// }
-
-
-
-// function displayCalc(){
-//     document.getElementById('calcform').style.display = "block";
-// }
-//     }
-//     totaltime = Math.round(totaltime * 100) / 100
-//     document.getElementsByClassName('cart-total-time')[0].innerText = totaltime + 'mins';
-//     return totaltime;
-// }
-
-
-
-// function displayCalc(){
-//     document.getElementById('calcform').style.display = "block";
-// }
+// insert time adding function here, remember make it modular.
 
 function displayCardform1(){
     document.getElementById('card1').style.opacity = 0.5;
@@ -958,3 +929,28 @@ function displayCashForm(){
 function displayGiftCardForm(){
     document.getElementById('giftcard').style.display = "block";
 }
+// navbar cart functions--------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const cartButton = document.getElementById('toggle-cart');
+    const sideCart = document.getElementById('side-cart');
+    const closeCartButton = document.getElementById('close-cart');
+
+    // Open Cart
+    cartButton.addEventListener('click', () => {
+        sideCart.classList.add('open');
+    });
+
+    // Close Cart
+    closeCartButton.addEventListener('click', () => {
+        sideCart.classList.remove('open');
+    });
+
+    // Example Checkout Functionality
+    const checkoutButton = document.querySelector('.btn-purchase');
+    checkoutButton.addEventListener('click', () => {
+        alert('Proceeding to checkout...');
+    });
+});
+
+
+

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ServiceViewpoint</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,32 +10,63 @@
     <div class="header">
         <div class="left-section">
             <div class="icon">
-                <a href="/index.html"><img src="/Resources/Flavorfirstlogo.png" alt="logo"></a>
+                <a href="/index.html"><img src="/Resources/FlavorfirstLogo.webp" alt="logo"></a>
             </div>
         </div>
-
         <div class="right-section">
-            <button class="buttons" id="BTH" onclick="BacktoHome()">Home</button>
+            <button class="buttons" id="BTH" onclick="BacktoHome()"><ion-icon name="home" id="homeicon"></ion-icon></button>
             <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
             <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
             <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
         </div>
     </div>
+
+
+
+    
     <div id="menu-container"></div>
     <section id="customer">
-
-        <div class="dropdown">
-            <button class="dropbtn">Sort: </button>
-            <div class="dropdown-content">
-                <a href="#" onclick="displayAll()">All Items</a>
-                <a href="#" onclick="displayMeat()">Majority Protein</a>
-                <a href="#" onclick="displayVegan()">Vegan</a>
-                <a href="#" onclick="displayNoodle()">Pasta/Noodle</a>
+        <div class="sticky-nav">
+            <div class="nav-left">
+                <div class="dropdown">
+                    <button class="dropbtn">Sort:</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="displayAll()">All Items</a>
+                        <a href="#" onclick="displayMeat()">Majority Protein</a>
+                        <a href="#" onclick="displayCarb()">High-Carb Classics</a>
+                        <a href="#" onclick="displayVegan()">Vegan</a>
+                        <a href="#" onclick="displayNoodle()">Pasta/Noodle</a>
+                    </div>
+                </div>
             </div>
-          </div>
-
+            <div class="nav-right">
+                <button id="toggle-cart" class="cart-button">Cart</button>
+            </div>
+        </div>
+        <div id="side-cart" class="side-cart hidden">
+            <h2>Your Cart</h2>
+            <div class="cart-content">
+                <section class="container content-section">
+                    <h2 class="section-header">Cart</h2>
+                    <div class="cart-row">
+                        <span class="cart-item cart-header cart-column">ITEM</span>
+                        <span class="cart-price cart-header cart-column">PRICE</span>
+                        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                    </div>
+                    <div class="cart-items">
+                        <div id="emptycart">There are currently no items in your cart</div>
+                    </div>
+                    <div class="cart-total">
+                        <strong class="cart-total-title">Total</strong>
+                        <span class="cart-total-price">$0</span>
+                        <span class="cart-total-time">0</span>
+                    </div>
+                    <button class="btn btn-primary btn-purchase" type="button" onclick="displayCheckout()">Checkout</button>
+                </section>
+            </div>
+            <button id="close-cart" class="close-cart">Close</button>
+        </div>
         <section class="container content-section">
-            <h2 class="section-header">food</h2>
         <div id="shop-items">
             <div class="shop-item" id="constant">
                 <div class="edit-form">
@@ -46,133 +76,88 @@
                     <input type="number" id="price" class="price" placeholder="Price" required min="0" max="100" step="0.01">
                     <input type="number" id="cook-time" class="cook-time" placeholder="Time" required>
                     <button type="submit" class="btn btn-primary submit-btn">Add Item</button>
-                    <select name="ID" id="tags" required>
-                       <option value="MP">Majority Protein</option>
-                       <option value="Noodle">Pasta/Noodle</option>
-                       <option value="Vegan">Vegan</option>
+                    <select id="tag-options" class="tag" required>
+                        <option disabled selected>Select a Tag</option>
+                        <option value="MP">Majority Protein</option>
+                        <option value="Noodle">Pasta/Noodle</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="CC">Carb Classics</option>
                     </select>
                 </form>
                 </div>
             </div>
         </div>
         </section>
-        <section class="container content-section">
-            <h2 class="section-header">Cart</h2>
-            <div class="cart-row">
-                <span class="cart-item cart-header cart-column">ITEM</span>
-                <span class="cart-price cart-header cart-column">PRICE</span>
-                <span class="cart-quantity cart-header cart-column">QUANTITY</span>
-            </div>
-            <div class="cart-items">
-                <div id="emptycart">There are currently no items in your cart</div>
-            </div>
-            <div class="cart-total">
-                <strong class="cart-total-title">Total</strong>
-                <span class="cart-total-price">$0</span>
-                <span class="cart-total-time">0</span>
-            </div>
-            <button class="btn btn-primary btn-purchase" type="button" onclick="displayCheckout()">Checkout</button>
-        </section>
-
-</section>
-    
-<section id="checkcontainer">
-    <section id="checkout">
-
-        <div id="checkout-box">
-                <h1 class="checkhead">Checkout</h1><br>
-            <div class="headline"></div>
-            <div class="row"><div class="pricenotax">Price Pre Tax:<div id="total-price-notax">0$</div></div></div><br>
-            <div class="row"><div class="pricetax">Total Price:<div id="total-price-Tax">0$</div></div></div><br>
-            <div class="row"><div class="time">Prep Time:<div id="prep-time-calc">0 Min</div></div></div>
-        </div>
-        
-        
-           
-        
-        <div class="Tip-adder">
-                <div class="tiphead">Would you like to add a tip?</div><br>
-        
-            <div class="tipPercents">
-                <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
-                <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
-                <button class="tip" onclick="tipCalc10()">10%<br><div class="tipbutton" id="tip10"></div></button>
-                <button class="tip" onclick="tipCalc15()">15%<br><div class="tipbutton" id="tip15"></div></button>
-            </div>
-                
-                    <div class="OR">Custom Tip:</div>
-            <div class="tip">
-                <input type="number" name="tipcustom" oninput="updateCustomTip()" placeholder="Custom %">
-                <button onclick="addCustomTip()">Apply</button>
-                <div class="tipbutton custom"></div>
-            </div>
-             
-        </div>
-            
-        
-            
-            
     </section>
-            <section id="payment">
-                <div class="payhead">Payment: </div><br>
-                <div class="paymentoption">
-                    <button class="payment" id="card1" onclick="displayCardform1()"><img src="Resources/VisaLogo.png" alt="visalogo"></button>
-                    <button class="payment" id="card2" onclick="displayCardform2()"><img src="Resources/Mastercardlogo.png" alt="masterlogo"></button>
-                    <button class="payment" id="cash" onclick="displayCashForm()"><img src="Resources/cashlogo.png" alt="cash"></button>
+    
+    <section id="checkcontainer">
+        <section id="checkout">
+            <div id="checkout-box">
+                <h1 class="checkhead">Checkout</h1><br>
+                <div class="headline"></div>
+                    <div class="row"><div class="pricenotax">Price Pre Tax:<div id="total-price-notax">0$</div></div></div><br>
+                <div class="row"><div class="pricetax">Total Price:<div id="total-price-Tax">0$</div></div></div><br>
+                <div class="row"><div class="time">Prep Time:<div id="prep-time-calc">0 Min</div></div></div>
             </div>
-
-                <div id="Visa">
-                    <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
-                    <input type="text" class="cardinput" id="cardnumber"><br><br>
-                    <div class="infoFormat">Format: MM/YY</div>
-                    <input type="text" class="cardinput" id="expdate"><br><br>
-                    <div class="infoFormat">Format: XXX</div>
-                    <input type="text" class="cardinput" id="CVV"><br><br>
-                    <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+            <div class="Tip-adder">
+                <div class="tiphead">Would you like to add a tip?</div><br>
+                <div class="tipPercents">
+                    <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
+                    <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
+                    <button class="tip" onclick="tipCalc10()">10%<br><div class="tipbutton" id="tip10"></div></button>
+                    <button class="tip" onclick="tipCalc15()">15%<br><div class="tipbutton" id="tip15"></div></button>
                 </div>
-
-                <div id="MasterCard">
-                    <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
-                    <input type="text" class="cardinput" id="cardnumber"><br><br>
-                    <div class="infoFormat">Format: MM/YY</div>
-                    <input type="text" class="cardinput" id="expdate"><br><br>
-                    <div class="infoFormat">Format: XXX</div>
-                    <input type="text" class="cardinput" id="CVV"><br><br>
-                    <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+                <div class="OR">Custom Tip:</div>
+                <div class="tip">
+                    <input type="number" name="tipcustom" oninput="updateCustomTip()" placeholder="Custom %">
+                    <button onclick="addCustomTip()">Apply</button>
+                    <div class="tipbutton custom"></div>
                 </div>
-
-                <div id="Cash">
-                    <div class="orderNumber">Your Order Number is: </div>
-                    <div class="cashnotice">
-                        Please bring proof of your order and any giftcards or discount codes to the restaurant and present them to the cashier
-                    </div>
+            </div>
+            <div class="finalprice"></div>
+        </section>
+        <section id="payment">
+            <div class="payhead">Payment: </div><br>
+            <div class="paymentoption">
+                <button class="payment" id="card1" onclick="displayCardform1()"><img src="Resources/visalogo.webp" alt="visalogo"></button>
+                    <button class="payment" id="card2" onclick="displayCardform2()"><img src="Resources/masterlogo.webp" alt="masterlogo"></button>
+                    <button class="payment" id="cash" onclick="displayCashForm()"><img src="Resources/cashlogo.webp" alt="cash"></button>
+            </div>
+            <div id="Visa">
+                <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
+                <input type="text" class="cardinput" id="cardnumber"><br><br>
+                <div class="infoFormat">Format: MM/YY</div>
+                <input type="text" class="cardinput" id="expdate"><br><br>
+                <div class="infoFormat">Format: XXX</div>
+                <input type="text" class="cardinput" id="CVV"><br><br>
+                <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+            </div>
+            <div id="MasterCard">
+                <div class="infoFormat">Format: XXXX-XXXX-XXXX</div>
+                <input type="text" class="cardinput" id="cardnumber"><br><br>
+                <div class="infoFormat">Format: MM/YY</div>
+                <input type="text" class="cardinput" id="expdate"><br><br>
+                <div class="infoFormat">Format: XXX</div>
+                <input type="text" class="cardinput" id="CVV"><br><br>
+                <button class="giftcard" onclick="displayGiftCardForm()">Have a giftcard?</button>
+            </div>
+            <div id="Cash">
+                <div class="orderNumber">Your Order Number is: </div>
+                <div class="cashnotice">
+                    Please bring proof of your order and any giftcards or discount codes to the restaurant and present them to the cashier
+                </div>
                     <div class="thankyoumessage">Thank you for your order!</div>
                 </div>
-
                 <div id="giftcard">
                     <div class="infoFormat">Please enter your giftcard Code: </div>
                     <input type="text" class="cardinput" id="cardnumber">
                     <input type="text" class="cardinput" id="expdate">
-                </div> <br>
-                <div class="finalprice"></div>
-
-                
-
-
-
-                <button class="btn btn-primary btn-purchase" type="button" id="orderbutton">Place Order</button>
-            </section>
-</section>
-        
-    
-    
-
-
-
-<section id="guest">
-
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button" id="orderbutton">Place Order</button>
+        </section>
+    </section>
+    <section id="guest">
         <div id="shop-items">
-
             <div class="shop-item" id="MP1">
                 <span class="shop-item-title">Chicken and Stuffing</span>
                 <img class="shop-item-image" src="Resources/resized_Chicken-and-Stuffing-Bake.webp">
@@ -182,7 +167,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-            
             <div class="shop-item" id="MP2">
                 <span class="shop-item-title">Sausage & Peppers</span>
                 <img class="shop-item-image" src="Resources/resized_Sausage-and-Peppers.webp">
@@ -192,7 +176,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Noodle1">
                 <span class="shop-item-title">Creamy Chicken Ramen</span>
                 <img class="shop-item-image" src="Resources/resized_Creamy-Chicken-Ramen.webp">
@@ -202,7 +185,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP3">
                 <span class="shop-item-title">Beef Bourguignon</span>
                 <img class="shop-item-image" src="Resources/resized_Beef-Bourguigno.webp">
@@ -212,7 +194,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP4">
                 <span class="shop-item-title">Baked Garlic Parmesan Chicken</span>
                 <img class="shop-item-image" src="Resources/resized_Baked-Garlic-Parmesan-Chicken.webp">
@@ -222,7 +203,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP5">
                 <span class="shop-item-title">Soy-Honey Glazed Salmon with Asparagus: </span>
                 <img class="shop-item-image" src="Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp">
@@ -232,7 +212,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Noodle2">
                 <span class="shop-item-title">Shrimp Scampi with Pasta: </span>
                 <img class="shop-item-image" src="resources/resized_Shrimp-Scampi-with-Pasta.webp">
@@ -242,7 +221,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP6">
                 <span class="shop-item-title">Asian Glazed Chicken Thighs</span>
                 <img class="shop-item-image" src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp">
@@ -252,7 +230,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Vegan1">
                 <span class="shop-item-title">Vegan Sweet Potato Chickpea Curry</span>
                 <img class="shop-item-image" src="Resources/resized_Vegan-Sweet-Potato-Chickpea-Curry.webp">
@@ -262,7 +239,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP7">
                 <span class="shop-item-title">Baked Denver Omelet</span>
                 <img class="shop-item-image" src="Resources/resized_Baked-Denver-Omelet.webp">
@@ -272,7 +248,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP8">
                 <span class="shop-item-title">Beef Stir-Fry</span>
                 <img class="shop-item-image" src="Resources/resized_Beef-Stir-Fry.webp">
@@ -282,7 +257,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP9">
                 <span class="shop-item-title">Pork Tenderloin Diablo</span>
                 <img class="shop-item-image" src="Resources/resized_Pork-Tenderloin-Diablo.webp">
@@ -292,7 +266,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP10">
                 <span class="shop-item-title">Mexican Casserole</span>
                 <img class="shop-item-image" src="Resources/resized_Mexican-Casserole.webp">
@@ -302,7 +275,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Noodle3">
                 <span class="shop-item-title" >Spicy Asian Ramen Noodles</span>
                 <img class="shop-item-image" src="Resources/resized_Spicy-Asian-Ramen-Noodles.webp">
@@ -312,7 +284,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Noodle4">
                 <span class="shop-item-title">Spinach Tomato Tortellini</span>
                 <img class="shop-item-image" src="Resources/resized_Spinach-Tomato-Tortellini.webp">
@@ -322,7 +293,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Vegan2">
                 <span class="shop-item-title">White Chili</span>
                 <img class="shop-item-image" src="Resources/resized_White-Chili.webp">
@@ -332,7 +302,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Vegan3">
                 <span class="shop-item-title">Black Bean Veggie Burger</span>
                 <img class="shop-item-image" src="Resources/resized_Homemade-Black-Bean-Veggie-Burger.webp">
@@ -342,7 +311,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="Vegan4">
                 <span class="shop-item-title">Garden Stuffed Baked Potato</span>
                 <img class="shop-item-image" src="Resources/resized_Garden-Stuffed-Baked-Potato.webp">
@@ -352,7 +320,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP11">
                 <span class="shop-item-title" id="MP1">Chicken Pesto Pizza</span>
                 <img class="shop-item-image" src="Resources/resized_Chicken-Pesto-Pizza.webp">
@@ -362,7 +329,6 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-
             <div class="shop-item" id="MP12">
                 <span class="shop-item-title" >Pork Fried Rice</span>
                 <img class="shop-item-image" src="Resources/resized_Pork-Fried-Rice.webp">
@@ -372,23 +338,41 @@
                     <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
                 </div>
             </div>
-        
-        
-            </div>   
+        </div>  
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="left-column">
+                <div class="footercontent" id="emailsection">
+                    Contact us: <span class="email">example@gmail.com</span>
+                </div>
+                <div class="footercontent">
+                    <div class="abouthead">About Us:</div>
+                    <div class="abouttext">Lorem Ipsum dolor sit amet</div>
+                </div>
+            </div>
+    
+            <div class="center-column">
+                <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+            </div>
+    
+            <div class="right-column">
+                <div class="footercontent" id="github"><a href="https://github.com/RWeber-GHub/Flavor-First"><ion-icon name="logo-github"></ion-icon></a></div>
+                <div class="footercontent" id="instagram"><a href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a></div>
+                <div class="footercontent" id="twitter"><a href="https://x.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a></div>
+            </div>
         </div>
-
-</section>
-
-
+    </footer>
+    </section>
 
 
 
-
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
         let x=localStorage.getItem("Account_Type");
         window.onload = function() {
             console.log(x);
-            console.log(menuData)
             if(x=="manager") {
                 createMenuCards(menuData);
                 ManagerBtn();
@@ -405,8 +389,10 @@
                 document.getElementById('guest').style.display = 'block';
             }
         };
-    
     </script>
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
