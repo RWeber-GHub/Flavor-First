@@ -1,0 +1,60 @@
+"Asian Glazed Chicken Thighs"
+"rice vinegar", "soy sauce", "honey", "Asian sesame oil", "Asian chili garlic sauce", "garlic", "salt", "chicken thigh", "green onion"
+
+"Baked Denver Omelet"
+"butter", "onion", "green bell pepper", "ham", "egg", "milk", "Cheddar cheese", "salt", "black pepper"
+
+"Baked Garlic Parmesan Chicken"
+"olive oil", "garlic", "breadcrumbs", "Parmesan cheese", "basil", "black pepper", "chicken breast"
+
+"Beef Bourguignon"
+"beef chuck", "kosher salt", "black pepper", "hickory smoked bacon", "white onion", "garlic", "portobello mushroom", "tomato paste", "beef broth", "dry red wine", "carrots", "all-purpose flour", "parsley"
+
+"Beef Stir-Fry"
+"vegetable oil", "beef sirloin", "broccoli florets", "red bell pepper", "carrots", "green onion", "garlic", "soy sauce", "sesame seeds"
+
+"Chicken and Stuffing Bake"
+"chicken breast", "cream of chicken", "sour cream", "French onion soup mix", "black pepper", "dry stuffing mix", "chicken broth", "butter", "parsley"
+
+"Chicken Pesto Pizza"
+"pesto basil sauce", "pizza crust", "chicken breast strips", "artichoke hearts", "shredded fontina cheese"
+
+"Creamy Chicken Ramen",
+"unsalted butter", "garlic", "chicken broth", "whipping cream", "ramen noodles", "soy sauce", "chicken breast", "everything bagel seasoning"
+
+"Garden Stuffed Baked Potato"
+"potatoes", "butter", "onion", "broccoli", "ranch-style salad dressing", "vegetable oil", "parsley", "salt", "pepper"
+
+"Homemade Black Bean Veggie Burger",
+"black beans", "green bell pepper", "onion", "garlic", "egg", "chili powder", "cumin", "Thai chili sauce", "breadcrumbs"
+
+"Mexican Casserole"
+"lean ground beef", "salsa", "chili beans", "tortilla chips", "sour cream", "black olives", "green onion", "tomato", "Cheddar cheese"
+
+"Pork Fried Rice"
+"butter", "boneless pork loin chop", "green onion", "carrot", "broccoli", "egg", "rice", "peas", "soy sauce", "garlic powder", "ginger"
+
+"Pork Tenderloin Diablo"
+"pork tenderloin", "salt", "black pepper", "vegetable oil", "chicken broth", "heavy cream", "extra-hot prepared horseradish", "Dijon mustard", "cayenne pepper", "unsalted butter", "chives"
+
+"Sausage and Peppers"
+"white rice", "chicken broth", "tomatoes", "garlic", "Creole seasoning", "black pepper", "cayenne pepper", "green bell pepper", "white onion", "andouille sausage", "scallions"
+
+"Shrimp Scampi with Pasta",
+"linguine pasta", "butter", "extra-virgin olive oil", "shallots", "garlic", "red pepper", "shrimp", "kosher salt", "ground pepper", "dry white wine", "lemon", "parsley"
+
+"Soy-Honey Glazed Salmon with Asparagus"
+"asparagus", "soy sauce", "honey", "olive oil", "salmon fillet", "sea salt", "black pepper"
+
+"Spicy Asian Ramen Noodles"
+"soy sauce", "sesame oil", "brown sugar", "rice vinegar", "chili-garlic sauce", "ginger", "creamy peanut butter", "ramen noodles", "peanuts", "green onions"
+
+"Spinach Tomato Tortellini"
+"cheese tortellini", "tomatoes", "garlic", "onion", "spinach", "basil", "garlic", "salt", "pepper", "milk", "heavy cream", "all-purpose flour", "Parmesan cheese"
+
+"Vegan Sweet Potato Chickpea Curry",
+"olive oil", "onion", "garlic", "ginger root", "chickpeas", "tomatoes", "coconut milk", "sweet potato", "garam masala", "cumin", "turmeric", "salt", "red Chile flakes", "baby spinach"
+
+"White Chili"
+"ground turkey", "medium salsa", "corn kernels", "water", "Great Northern beans", "Pepper Jack cheese"
+        
