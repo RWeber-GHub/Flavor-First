@@ -17,14 +17,10 @@
         <div class="right-section">
             <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
             <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
-            <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
+            <button class="buttons" id="log-in" onclick="Display_Login()" style="display: none;">Log In</button>
             <button onclick="clearStorage()">CLEAR</button>
         </div>
     </div>
-
-
-
-    
     <div id="menu-container"></div>
     <section id="customer">
         <div class="sticky-nav">
@@ -64,8 +60,32 @@
                     </div>
                     <button class="btn btn-primary btn-purchase" type="button" onclick="displayCheckout()">Checkout</button>
                 </section>
+                <div>
+                </div>
             </div>
             <button id="close-cart" class="close-cart">Close</button>
+            <br>
+            <button class="btn btn-primary btn-scroll" id="prevBtn" onclick="scrollMenu(-1)">&#8592;</button>
+            <div class="scrolling-items">
+                <div id="scroll">
+                  <div class="menu-item">
+                    <img src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp" alt="">
+                    <span class="scroll-title">Asian Glazed Chicken Thighs</span>
+                    <span class="scroll-price">$0</span>
+                  </div>
+                  <div class="menu-item">
+                    <img src="" alt="">
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="menu-item">
+                    <img src="" alt="">
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-scroll" id="nextBtn" onclick="scrollMenu(1)">&#8594;</button>
         </div>
 
         
@@ -126,14 +146,18 @@
             <div class="invoice">
               <h2>Invoice</h2>
               <div class="card-icons">
-<button class="cardinput" onclick="displayCardform1()"><img src="Resources/visalogo.webp" alt="Visa" id="visa" /></button>
-<button class="cardinput" onclick="displayCardform2()"><img src="Resources/masterlogo.webp" alt="MasterCard" id="master" /></button>
-<button class="cardinput" onclick="displayCashForm()"><img src="Resources/cashlogo.webp" alt="Cash" id="cash" /></button>
-
+        <button class="cardinput" onclick="cardFormVisa()"><img src="Resources/visalogo.webp" alt="Visa" id="visa" /></button>
+        <button class="cardinput" onclick="cardFormMaster()"><img src="Resources/masterlogo.webp" alt="MasterCard" id="master" /></button>
+        <button class="cardinput" onclick="displayCashForm()"><img src="Resources/cashlogo.webp" alt="Cash" id="cash" /></button>
               </div>
+              
               <form id="payment-form">
+
+                <label for="order-name">Name For Order</label>
+                <input type="text" id="order-name" placeholder="Ex. John Doe" required />
+
                 <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required />
+                <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456" required />
           
                 <label for="card-name">Name On Card</label>
                 <input type="text" id="card-name" placeholder="Ex. John Doe" required />
@@ -141,202 +165,32 @@
                 <div class="card-details">
                   <div>
                     <label for="expiry-date">Expiry Date</label>
-                    <input type="text" id="expiry-date" placeholder="EX: 01/19" required />
+                    <input type="text" id="expiry-date" maxlength="5" placeholder="EX: MM/YY" required />
                   </div>
                   <div>
                     <label for="security-code">Security Code</label>
-                    <input type="text" id="security-code" placeholder="•••" required />
+                    <input type="text" id="security-code" maxlength="3" placeholder="•••" required />
                   </div>
                 </div>
-                <button type="submit" id="next-button">Place Order</button>
+                <button class="placeorder" onclick="toReciept()">Place Order</button>
               </form>
+
+              <form id="cash-input">
+                
+                <label for="order-name">Name For Order</label>
+                <input type="text" id="order-name" placeholder="Ex. John Doe" required />
+                <button onclick="sumbitName()">Submit</button>
+              </form>
+
+
+
+
             </div>
           </section>
         </section>
 
     <section id="guest">
-        <div id="shop-items">
-            <div class="shop-item" id="MP1">
-                <span class="shop-item-title">Chicken and Stuffing</span>
-                <img class="shop-item-image" src="Resources/resized_Chicken-and-Stuffing-Bake.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$19.95</span>
-                    <span class="shop-item-cooktime">15min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP2">
-                <span class="shop-item-title">Sausage & Peppers</span>
-                <img class="shop-item-image" src="Resources/resized_Sausage-and-Peppers.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$21.45</span>
-                    <span class="shop-item-cooktime">22min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Noodle1">
-                <span class="shop-item-title">Creamy Chicken Ramen</span>
-                <img class="shop-item-image" src="Resources/resized_Creamy-Chicken-Ramen.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$15.49</span>
-                    <span class="shop-item-cooktime">10min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP3">
-                <span class="shop-item-title">Beef Bourguignon</span>
-                <img class="shop-item-image" src="Resources/resized_Beef-Bourguigno.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$27.50</span>
-                    <span class="shop-item-cooktime">25min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP4">
-                <span class="shop-item-title">Baked Garlic Parmesan Chicken</span>
-                <img class="shop-item-image" src="Resources/resized_Baked-Garlic-Parmesan-Chicken.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$19.75</span>
-                    <span class="shop-item-cooktime">20min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP5">
-                <span class="shop-item-title">Soy-Honey Glazed Salmon with Asparagus: </span>
-                <img class="shop-item-image" src="Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$27.45</span>
-                    <span class="shop-item-cooktime">25min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Noodle2">
-                <span class="shop-item-title">Shrimp Scampi with Pasta: </span>
-                <img class="shop-item-image" src="resources/resized_Shrimp-Scampi-with-Pasta.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$20.95</span>
-                    <span class="shop-item-cooktime">20min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP6">
-                <span class="shop-item-title">Asian Glazed Chicken Thighs</span>
-                <img class="shop-item-image" src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$24.95</span>
-                    <span class="shop-item-cooktime">23min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Vegan1">
-                <span class="shop-item-title">Vegan Sweet Potato Chickpea Curry</span>
-                <img class="shop-item-image" src="Resources/resized_Vegan-Sweet-Potato-Chickpea-Curry.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$17.45</span>
-                    <span class="shop-item-cooktime">25min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP7">
-                <span class="shop-item-title">Baked Denver Omelet</span>
-                <img class="shop-item-image" src="Resources/resized_Baked-Denver-Omelet.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$10.45</span>
-                    <span class="shop-item-cooktime">12min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP8">
-                <span class="shop-item-title">Beef Stir-Fry</span>
-                <img class="shop-item-image" src="Resources/resized_Beef-Stir-Fry.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$27.50</span>
-                    <span class="shop-item-cooktime">27min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP9">
-                <span class="shop-item-title">Pork Tenderloin Diablo</span>
-                <img class="shop-item-image" src="Resources/resized_Pork-Tenderloin-Diablo.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$26.50</span>
-                    <span class="shop-item-cooktime">27min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP10">
-                <span class="shop-item-title">Mexican Casserole</span>
-                <img class="shop-item-image" src="Resources/resized_Mexican-Casserole.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$14.50</span>
-                    <span class="shop-item-cooktime">12min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Noodle3">
-                <span class="shop-item-title" >Spicy Asian Ramen Noodles</span>
-                <img class="shop-item-image" src="Resources/resized_Spicy-Asian-Ramen-Noodles.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$17.95</span>
-                    <span class="shop-item-cooktime">20min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Noodle4">
-                <span class="shop-item-title">Spinach Tomato Tortellini</span>
-                <img class="shop-item-image" src="Resources/resized_Spinach-Tomato-Tortellini.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$21.75</span>
-                    <span class="shop-item-cooktime">22min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Vegan2">
-                <span class="shop-item-title">White Chili</span>
-                <img class="shop-item-image" src="Resources/resized_White-Chili.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$13.45</span>
-                    <span class="shop-item-cooktime">15min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Vegan3">
-                <span class="shop-item-title">Black Bean Veggie Burger</span>
-                <img class="shop-item-image" src="Resources/resized_Homemade-Black-Bean-Veggie-Burger.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$16.50</span>
-                    <span class="shop-item-cooktime">11min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="Vegan4">
-                <span class="shop-item-title">Garden Stuffed Baked Potato</span>
-                <img class="shop-item-image" src="Resources/resized_Garden-Stuffed-Baked-Potato.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$9.95</span>
-                    <span class="shop-item-cooktime">10min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP11">
-                <span class="shop-item-title" id="MP1">Chicken Pesto Pizza</span>
-                <img class="shop-item-image" src="Resources/resized_Chicken-Pesto-Pizza.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$14.50</span>
-                    <span class="shop-item-cooktime">21min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-            <div class="shop-item" id="MP12">
-                <span class="shop-item-title" >Pork Fried Rice</span>
-                <img class="shop-item-image" src="Resources/resized_Pork-Fried-Rice.webp">
-                <div class="shop-item-details">
-                    <span class="shop-item-price">$11.95</span>
-                    <span class="shop-item-cooktime">12min</span>
-                    <button class="btn btn-primary shop-item-button" type="button" onclick="AccountCreationPrompt()">ADD TO CART</button>
-                </div>
-            </div>
-        </div>  
+        <div id="guest-shop-items">
     </div>
     </section>
 <footer>
@@ -369,8 +223,12 @@
     
     
     <script>
+
+        localStorage.setItem("Account_Type","guest")
         let x=localStorage.getItem("Account_Type");
+
         window.onload = function() {
+            extractMenuItems();
             if(x=="manager") {
                 createMenuCards();
                 ManagerBtn();
@@ -383,6 +241,7 @@
                 document.getElementById('constant').style.display = 'none';
             }
             if(x=="guest"){
+                guestCards();
                 document.getElementById('customer').style.display = 'none';
                 document.getElementById('guest').style.display = 'block';
             }

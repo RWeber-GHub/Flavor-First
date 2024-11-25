@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor First</title>
+</head>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <div class="icon">
+                <a href="/index.html"><img src="/Resources/FlavorFirstlogo.webp" alt="logo"></a>
+            </div>
+        </div>
+        <div class="right-section">
+            <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
+            <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
+            <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
+            <button onclick="clearStorage()">CLEAR</button>
+        </div>
+    </div>
+    
+    <div class="recieptBox">
+
+        <div class="recieptHead">
+            <div class="orderNameBox">
+                Thank You For Your Order <div class="orderName"></div>
+            </div>
+
+            <div class="orderNumberBox">
+                Order Number: <div class="orderNumber"></div>
+            </div>
+
+        </div>
+
+        <div class="itemsPrinted">
+
+        </div>
+        
+        <div class="recieptEnd">
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="left-column">
+                <div class="footercontent" id="emailsection">
+                    Contact us: <span class="email">example@gmail.com</span>
+                </div>
+                <div class="footercontent">
+                    <div class="abouthead">About Us:</div>
+                    <div class="abouttext">Lorem Ipsum dolor sit amet</div>
+                </div>
+            </div>
+        
+            <div class="center-column">
+                <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+            </div>
+        
+            <div class="right-column">
+                <div class="footercontent" id="github"><a href="https://github.com/RWeber-GHub/Flavor-First"><ion-icon name="logo-github"></ion-icon></a></div>
+                <div class="footercontent" id="instagram"><a href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a></div>
+                <div class="footercontent" id="twitter"><a href="https://x.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemsPrintedDiv = document.querySelector('.itemsPrinted');
+            const receiptItems = JSON.parse(localStorage.getItem('receiptItems')) || [];
+    
+            if (receiptItems.length === 0) {
+                itemsPrintedDiv.innerHTML = "<p>No items in the cart!</p>";
+                return;
+            }
+    
+            receiptItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('receipt-item');
+                itemDiv.innerHTML = `
+                    <p>Item: <strong>${item.title}</strong></p>
+                    <p>Price: <strong>${item.price}</strong></p>
+                    <p>Quantity: <strong>${item.quantity}</strong></p>
+                    <hr>
+                `;
+                itemsPrintedDiv.appendChild(itemDiv);
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
