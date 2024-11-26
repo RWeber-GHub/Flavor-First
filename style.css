@@ -1,7 +1,30 @@
 * {
     margin: 0;
     background-color: #e3f9ff;
+    font-family: "Metrophobic", sans-serif;
 }
+
+
+::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(60, 60, 73); 
+    box-shadow: inset 0 0 5px grey; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(88, 88, 107); 
+    border-radius: 7.5px;
+  }
+  
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #313140; 
+  }
 
 
 .header {
@@ -84,12 +107,7 @@ background-color: white;
 .header .right-section #log-in:hover{
     background-color: #555a68;
 }
-#homeicon ion-icon{
-    height: 40px;
-    width: 40px;
-    background-color: #444857;
-    color: white;
-}
+
 
 /* --------------------------------------------image grid for home page----------------------------------------- */
 .image-grid {
@@ -112,15 +130,21 @@ background-color: white;
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 footer {
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vh; /* 5% of the viewport height */
+    min-height: 8vh; 
+    max-height: 9vh;
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
     padding: 0 20px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    bottom: 0;
 }
 
 .content-wrapper {
@@ -203,9 +227,16 @@ footer {
     transition: transform 0.3s, color 0.3s;
 }
 
-.right-column .footercontent:hover {
-    transform: scale(1.2);
-    color: #ff9800;
+
+#instagram ion-icon:hover{
+    border-radius: 15px;
+    transition: color 0.3s ease;
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+#twitter ion-icon:hover{
+    transition: color 0.3s ease;
+    color: rgb(112, 179, 208);
 }
 
 /* beginning of styles for user views */
@@ -216,10 +247,20 @@ footer {
     padding: 16px;
     font-size: 16px;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
+
+  .dropbtn:hover{
+    background-color: #39605d;
+}
+
+  
+
   
   .dropdown {
+    border-radius: 10px;
     position: relative;
     display: inline-block;
   }
@@ -348,7 +389,7 @@ footer {
     height: auto;
     background-color: #25252e;
     padding: 25px;
-    height: 450px;
+    max-height: 450px;
     border-radius: 15px;
 }
 .meal-container:hover .shop-item-ingredients {
@@ -398,6 +439,14 @@ footer {
 }
 
 #shop-items{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 25px;
+    border-radius: 20px;
+    background-image: url('https://th.bing.com/th/id/OIP.WamM3Of6cz7VDwe2lneFqAHaEo?w=255&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+}
+#guest-shop-items{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -532,7 +581,7 @@ footer {
 
 .btn-purchase {
     display: block;
-    margin: 40px auto 80px auto;
+    margin: 40px auto 15px auto;
     font-size: 1.75em;
 }
 
@@ -559,6 +608,92 @@ footer {
 #content{
     display: block;
 }
+/**/
+#scroll{
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 300px;
+    height: 300px;
+    margin-left: 100px;
+}
+.scrolling-items{
+    height: 372px;
+    margin-bottom: 20px ;
+}
+.scrolling-items h3{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: #56CCF2;
+    color: white;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 300px;
+    margin: auto;
+    margin-bottom: 5px;
+}
+.menu-item{
+    width: 300px;
+    height: 300px;
+    flex: 0 0 100%;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+    position: relative;
+    color: white;
+}
+.scroll-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin: auto;
+}
+.scroll-title{
+    display: flex;
+    width: 275px;
+    min-height: 50px;
+    font-size: 25px;
+    background-color: rgb(0, 0,0,0.7);
+    display: flex;
+    color: white;
+    padding: 5px;
+    margin: auto;
+}
+.scroll-price{
+    display: flex;
+    width: 50px;
+    margin: auto;
+    justify-content: center;
+    font-size: 18px;
+    background-color: rgb(0, 0,0,0.7);
+    margin-bottom: 5px;
+    height: 25px;
+    color: white;
+    padding: 5px;
+}
+#invisible{
+    display: none;
+}
+.btn-scroll{
+    position: relative;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+}
+#prevBtn{
+    float: left;
+    top: 168.5px;
+}
+#nextBtn{
+    float: right;
+    bottom: 203.5px;
+}
+
+
 /* FORM */
 
 #constant{
@@ -594,7 +729,7 @@ footer {
     border: none;
     word-break: break-all;
 }
-input[type="text" i] {
+input[type="text"i]{
     padding-block: 0px;
     padding-inline: 0px;
 }
@@ -634,73 +769,18 @@ input[type="text" i] {
 .tag option{
     background-color: #000;
 }
+.tag optgroup{
+    background-color: rgb(42, 42, 53);
+}
 .submit-btn{
     float: right;
-    width: 100px;
+    width: 80px;
     height: 55px;
 }
 form{
     background-color: rgb(42, 42, 53);
 }
-#checkout {
-    display: flex; 
-    justify-content: space-between; 
-    width: 100%;
-}
 
-
-#checkout-box, .Tip-adder, #payment {
-    flex: 1; 
-    border: 2px solid black;
-    margin: 0; 
-    text-align: center;
-}
-
-
-.checkhead, .tiphead, .payhead {
-    font-size: 40px;
-    border-bottom: 1px solid black;
-    margin: 0;
-}
-
-
-.pricenotax, .pricetax, .time {
-    display: flex;
-}
-
-#total-price-notax, #total-price-Tax, #prep-time-calc {
-    padding-left: 20px;
-    font-size: 30px;
-}
-
-
-.tipPercents {
-    display: flex;
-    width: 100%;
-}
-
-.paymentoption {
-    display: flex;
-    justify-content: space-around;
-}
-
-.payment {
-    gap: 10px;
-    display: flex;
-    width: 100px;
-    height: 40px;
-}
-.payment:hover{
-    opacity: .5;
-    transition: 0.5s;
-}
-
-.payment img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: white;
-}
 #emptycart{
     display: block;
     margin-left: 40px;
@@ -714,35 +794,15 @@ form{
     background-color: rgba(171, 147, 43, 0.3);
 }
 #checkcontainer{
+    
     display: none;
 }
 #orderbutton{
     display: none;
 }
 
-.infoFormat{
-    font-size: 10px;
-    color: rgb(166, 166, 166);
-}
 
-#Visa{
-    display: none;
-}
-
-#MasterCard{
-    display: none;
-}
-
-#Cash{
-    display: none;
-}
-
-#giftcard{
-    display: none;
-}
-
-
-/* Sticky Navigation Bar */
+/* Special animations or features. Currently includes: Sticky nav, scrolling text... */
 .sticky-nav {
     display: flex;
     justify-content: space-between;
@@ -757,7 +817,7 @@ form{
 
 /* Cart Button */
 .cart-button {
-    background-color: #28a745;
+    background-color: #467672;
     color: white;
     padding: 10px 15px;
     font-size: 14px;
@@ -768,7 +828,7 @@ form{
 }
 
 .cart-button:hover {
-    background-color: #218838;
+    background-color: #39605d;
 }
 
 /* Side Cart */
@@ -776,7 +836,7 @@ form{
     position: fixed;
     right: -100%;
     top: 0;
-    width: 300px;
+    width: 500px;
     height: 100%;
     background-color: #ffffff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -784,6 +844,7 @@ form{
     overflow-y: auto;
     z-index: 1000;
     padding: 20px;
+    border: 1px solid black;
 }
 
 .side-cart.open {
@@ -794,13 +855,16 @@ form{
 .close-cart {
     background-color: #dc3545;
     color: white;
-    padding: 10px 15px;
     font-size: 14px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 65px;
+    top: 85px;
+    margin: -35px;
 }
 
 .close-cart:hover {
@@ -823,5 +887,319 @@ form{
         top: 0;
         z-index: 1000;
         border-bottom: 1px solid #ccc;
+}
+
+#scroll-container {
+    display: inline-block;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    max-width: 90vw;
+    background-color: rgb(54, 57, 89);
+    border: 3px solid rgb(54, 57, 89);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  #scroll-text {
+    color: white;
+    background-color: rgb(54, 57, 89);
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    
+    -moz-animation: my-animation 25s linear infinite;
+    -webkit-animation: my-animation 25s linear infinite;
+    animation: my-animation 25s linear infinite;
+  }
+  
+  @-moz-keyframes my-animation {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(-100%); }
+  }
+  
+  @-webkit-keyframes my-animation {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(-100%); }
+  }
+  
+  @keyframes my-animation {
+    from {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    to {
+      -moz-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+    }
+}
+
+
+/*-------------------------------------------------------------------------*/
+
+/* Payment  */
+
+/* Container alignment */
+#checkcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+/* General box styling */
+#checkout, #payment {
+    display: none;
+    background-color: #25252e;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+#checkout-box, .Tip-adder {
+    background-color: #25252e;
+    text-align: center;
+}
+
+.checkhead, .tiphead, .invoice h2 {
+    background-color: #25252e;
+    color: white;
+    font-size: 1.5em;
+    padding-bottom: 20px;
+}
+
+/* Tip section */
+.tipPercents {
+    background-color: #25252e;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.tip {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tip:hover {
+    background-color: #0056b3;
+}
+
+.custom-tip {
+    background-color: #25252e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-tip input {
+    background-color: #25252e;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Payment form */
+.card-icons {
+    background-color: #25252e;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.card-icons img {
+    width: 40px;
+    height: auto;
+}
+
+#payment-form label {
+    background-color: #25252e;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#payment-form input {
+    background-color: #25252e;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.card-details {
+    background-color: #25252e;
+    display: flex;
+    gap: 10px;
+}
+
+.card-details div {
+    background-color: #25252e;
+    flex: 1;
+}
+
+#next-button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#next-button:hover {
+    background-color: #0056b3;
+}
+
+#next-button a{
+    background-color: #007bff;
+    text-decoration: none;
+}
+
+#next-button a:hover{
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+#next-button a:visited{
+    text-decoration: none;
+}
+
+#next-button a:link{
+    text-decoration: none;
+}
+
+
+.tipbutton{
+    background-color: #007bff;
+}
+.pricetime{
+    background-color: #25252e;
+    color: white;
+}
+
+#total-price-notax{
+    background-color: #25252e;
+    color: white;
+}
+
+#total-price-Tax{
+    background-color: #25252e;
+    color: white;
+}
+
+#prep-time-calc{
+    background-color: #25252e;
+    color: white;
+    padding-bottom: 10px;
+}
+.OR{
+    background-color: #25252e;
+    color: white;
+    padding-bottom: 10px;
+}
+
+#cash-input{
+    display: none;
+}
+
+/*---- Receipt style-------------------------- */
+
+.bodybox{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.receiptBox {
+    background-color: #ffffff;
+    width: 360px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px dashed #d1d5db;
+}
+
+.receiptHead {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.receiptHead h1 {
+    font-size: 18px;
+    margin: 0;
+    color: #333333;
+}
+
+.receiptHead .orderDetails {
+    font-size: 14px;
+    color: #555555;
+}
+
+.itemsPrinted {
+    border-top: 2px solid #e5e7eb;
+    border-bottom: 2px solid #e5e7eb;
+    padding: 15px 0;
+    margin: 20px 0;
+}
+
+.receiptEnd {
+    text-align: center;
+    font-size: 14px;
+    color: #555555;
+}
+
+.receiptEnd p {
+    margin: 5px 0;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.receipt-item p {
+    margin: 0;
+}
+
+.receipt-item .item-title {
+    font-weight: bold;
+}
+
+.receipt-item .item-price {
+    color: #7b7b7b;
+}
+
+.cashMessage{
+    display: none;
 }
 
