@@ -35,7 +35,7 @@ function scrollMenu(direction){
 scrollMenu(0);
 
 function Display_Login(){
-    if(window.location.pathname=="/userview.html"){
+    if(window.location.pathname=="userview.html"){
         location.replace("index.html");
     }
     document.getElementById("signup-page").style.display="none";
@@ -44,7 +44,7 @@ function Display_Login(){
 }
 
 function Display_SignUp(){
-    if(window.location.pathname=="/userview.html"){
+    if(window.location.pathname=="userview.html"){
         location.replace("index.html");
     }
     document.getElementById("login-page").style.display="none";
@@ -59,7 +59,7 @@ function Submit_Login(){
         if(loginPass==localStorage.getItem(loginEmail)){
             if(loginEmail==Manager_Email){
                 localStorage.setItem("Account_Type", "manager");
-                location.replace("/userview.html");
+                location.replace("userview.html");
             }else{
                 localStorage.setItem("Account_Type", "customer");
                 location.replace("userview.html");
@@ -82,11 +82,11 @@ function Submit_SignUp(){
 
 function GuestView(){
     localStorage.setItem("Account_Type","guest");
-    location.replace("/userview.html");
+    location.replace("userview.html");
 }
 
 function BacktoHome(){
-    location.replace("/index.html");
+    location.replace("index.html");
     document.getElementById('account-create-notice').style.display = 'none';
 }
 
