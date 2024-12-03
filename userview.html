@@ -16,7 +16,7 @@
     <div class="header">
         <div class="left-section">
             <div class="icon">
-                <a href="/index.html"><img src="/Resources/FlavorfirstLogo.webp" alt="logo"></a>
+                <a href="/index.html"><img src="/Resources/FlavorFirstlogo.webp" alt="logo"></a>
             </div>
         </div>
         <div class="right-section">
@@ -73,10 +73,10 @@
             <div class="scrolling-items">
                 <h3>Popular Items:</h3>
                 <div id="scroll">
-                    <div class="menu-item"></div>
-                    <div class="menu-item"></div>
-                    <div class="menu-item"></div>
-                    <div class="menu-item"></div>
+                    <div class="menu-item" id="1SCR"></div>
+                    <div class="menu-item" id="2SCR"></div>
+                    <div class="menu-item" id="3SCR"></div>
+                    <div class="menu-item" id="4SCR"></div>
                 </div>
             </div>
             <button class="btn btn-primary btn-scroll" id="nextBtn" onclick="scrollMenu(1)">&#8594;</button>
@@ -102,6 +102,7 @@
                             <option value="CC">Carb Classics</option>
                         </optgroup>
                     </select>
+                    <textarea class="ingredients" id="ingredients" placeholder="i.e. rice,pasta,green-onion" required></textarea>
                 </form>
                 </div>
             </div>
@@ -119,7 +120,7 @@
                 <div class="row"><div class="pricetime">Prep Time:<div id="prep-time-calc"></div></div></div>
             </div>
             <div class="Tip-adder">
-                <div class="tiphead">Would you like to add a tip?</div><br>
+                <div id="tiphead">Would you like to add a tip?</div><br>
                 <div class="tipPercents">
                     <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
                     <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
@@ -173,7 +174,7 @@
                 
                 <label for="order-name">Name For Order</label>
                 <input type="text" id="order-name" placeholder="Ex. John Doe" required />
-                <button id="next-button" onclick="ToReceipt()">Place Order</button>
+                <button id="next-button" type="submit">Place Order</button>
               </form>
 
             </div>
@@ -188,7 +189,7 @@
     <div class="content-wrapper">
         <div class="left-column">
             <div class="footercontent" id="emailsection">
-                Contact us: <span class="email">example@gmail.com</span>
+                Contact us: <span class="email">FlavorFirstHR@gmail.com</span>
             </div>
             <div class="footercontent">
                 <div class="abouthead">About Us:</div>
@@ -222,7 +223,13 @@
                 loadSuggestions();
                 document.getElementById('guest').style.display = 'none';
                 document.getElementById('constant').style.display = 'block';
+
                 localStorage.removeItem('receiptItems');
+                localStorage.removeItem('orderName');
+                localStorage.removeItem('lastFour');
+                localStorage.removeItem('expiryDate');
+                localStorage.removeItem('securityCode');
+
                 // document.getElementById('disabled').disabled = true;
             }
             if(x=="customer"){
@@ -230,7 +237,12 @@
                 loadSuggestions();
                 document.getElementById('guest').style.display = 'none';
                 document.getElementById('constant').style.display = 'none';
+
                 localStorage.removeItem('receiptItems');
+                localStorage.removeItem('orderName');
+                localStorage.removeItem('lastFour');
+                localStorage.removeItem('expiryDate');
+                localStorage.removeItem('securityCode');
             }
             if(x=="guest"){
                 guestCards();

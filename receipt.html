@@ -31,14 +31,16 @@
     <div class="receiptBox">
 
         <div class="receiptHead">
-            <div class="orderNameBox">
-                Thank you for your order <span class="orderName"></span>
-            </div>
+            
 
             <div class="orderNumberBox">
-                Order Number: <div id="orderNumber"></div>
-            </div>
-                <div id="cardType"></div>
+                Order #: &nbsp; <div id="orderNumber"></div>
+            </div><br>
+
+            <div class="orderNameBox">
+                Thank you for your order <span class="orderName"></span>
+            </div><br>
+                <div id="cardType"></div><br>
                 <div id="lastFour"></div>
         </div>
 
@@ -62,7 +64,7 @@
         Order Number: <div id="orderNumber"></div>
     </div>
     <div class="conformation">
-        Please bring proof of your order as well as any viable giftcards or discount codes and present them to the cashier
+        Please bring your order # as well as any viable discount codes and present them to the cashier
     </div>
 </div>
 
@@ -78,7 +80,7 @@
     <div class="content-wrapper">
         <div class="left-column">
             <div class="footercontent" id="emailsection">
-                Contact us: <span class="email">example@gmail.com</span>
+                Contact us: <span class="email">FlavorFirstHR@gmail.com</span>
             </div>
             <div class="footercontent">
                 <div class="abouthead">About Us:</div>
@@ -107,7 +109,7 @@
 
     const receiptItems = JSON.parse(localStorage.getItem('receiptItems')) || [];
     let total = 0;
-    orderNumber.textContent = Math.floor(Math.random() * 1000000); 
+    orderNumber.textContent = Math.floor(Math.random() * 100000); 
     receiptItems.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('receipt-item');
@@ -132,3 +134,25 @@
 
 </body>
 </html>
+
+<!-- grabs checkout info from local storage -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const orderNameSpan = document.querySelector('.orderName');
+    const orderNumberDiv = document.getElementById('orderNumber');
+    const cardTypeDiv = document.getElementById('cardType');
+    const lastFourDiv = document.getElementById('lastFour');
+
+    
+    const orderName = localStorage.getItem('orderName') || 'Guest';
+    const cardType = localStorage.getItem('cardType') || 'Other';
+    const lastFour = localStorage.getItem('lastFour') || 'XXXX';
+
+    
+    orderNameSpan.textContent = orderName;
+    orderNumberDiv.textContent = Math.floor(Math.random() * 1000000); 
+    cardTypeDiv.textContent = `Card Type: ${cardType}`;
+    lastFourDiv.textContent = `Last Four Digits: ${lastFour}`;
+});
+
+</script>

@@ -1,3 +1,4 @@
+
 // ------------------------ Hardcoded Variables ----------------------------------------
 const giftcard10 = "A9bC3dE4F5gH6iJ7";
 const giftcard20 = "K8lM9nO1P2qR3sT4";
@@ -16,10 +17,12 @@ localStorage.setItem(Guest_Email,Guest_Password);
 
 var currentIndex=0;
 
+function printIngredients(){
+
+}
+
 function scrollMenu(direction){
     let container=document.getElementById('scroll');
-    let prevBtn=document.getElementById('prevBtn');
-    let nextBtn=document.getElementById('nextBtn');
     let totalItems=container.children.length;
     let itemWidth=container.children[0].offsetWidth;
 
@@ -28,15 +31,8 @@ function scrollMenu(direction){
     currentIndex=Math.max(0,Math.min(currentIndex,totalItems-1));
 
     container.style.transform=`translateX(-${currentIndex*itemWidth}px)`;
-
-    prevBtn.disabled=currentIndex===0;
-    nextBtn.disabled=currentIndex===totalItems-1;
-
-    }
+}
 scrollMenu(0);
-
-
-
 
 function Display_Login(){
     if(window.location.pathname=="/userview.html"){
@@ -122,17 +118,21 @@ function editItem(id){
     <textarea placeholder="Image URL" required="" id="${divId}-image-url" class="image-url"></textarea>
     <input type="number" placeholder="Price" required="" min="0" max="100" step="0.01" id="${divId}-price" class="price">
     <input type="number" placeholder="Time" required="" id="${divId}-cook-time" class="cook-time">
-    <button type="submit" class="btn btn-primary submit-btn" id="${divId}" style="float: right;">Add Item</button>
-    <select id="${divId}-tag-options" class="tag">
-        <optgroup label="Select a Tag">
-            <option value="MP">Majority Protein</option>
-            <option value="Noodle">Pasta/Noodle</option>
-            <option value="Vegan">Vegan</option>
-            <option value="CC">Carb Classics</option>
-        </optgroup>
-    </select>
+    <button type="submit" class="btn btn-primary submit-btn" id="${divId}">Add Item</button>
+    <button class="btn btn-primary back-btn" id="${divId+"BCK"}" onclick="goBack(id)">Go Back</button>
+    <div class="temp">
+        <select id="${divId}-tag-options" class="tag">
+            <optgroup label="Select a Tag">
+                <option value="MP">Majority Protein</option>
+                <option value="Noodle">Pasta/Noodle</option>
+                <option value="Vegan">Vegan</option>
+                <option value="CC">Carb Classics</option>
+            </optgroup>
+        </select>
+    </div>
+    <textarea class="ingredients" id="${divId}-ingredients" placeholder="i.e. rice,pasta,green-onion" required></textarea>
     </form>
-    <button class="btn btn-primary back-btn" id="${divId+"BCK"}" onclick="goBack(id)">Go Back</button>`
+    `
     
     containerDiv.appendChild(editDiv);
     
@@ -158,17 +158,18 @@ function deleteItem(id){
     localStorage.setItem("index",y);
 }
 
-function createMenuCard(title, imageUrl, price, cookTime, itemId, idNum, id){
+function createMenuCard(title, imageUrl, price, cookTime, itemId, idNum, id, ingredients){
     let container=document.getElementById(`${idNum}`);
     let menuContainer=document.getElementById("shop-items")
     if(id=='menu-form'){
-        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
+        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`);
         menuContainer.innerHTML+=localStorage.getItem("Item"+`${idNum}`);
         ManagerBtn();
+        // ****
     }else{
         document.getElementById(`${idNum}`+"VIEW").remove();
-        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);        
-        container.innerHTML=`<span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div></div>`;
+        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`);        
+        container.innerHTML=`<span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`;
         ManagerBtn();
     }
     
@@ -208,10 +209,11 @@ function submitForm(event,id){
         let itemPrice=document.getElementById("price").value;
         let cookTime=document.getElementById("cook-time").value;
         let itemId=document.getElementById('tag-options').value;
+        let ingredients=document.getElementById("ingredients").value;
         let idNum=Number(localStorage.getItem("index"))+1
         id=id;
         localStorage.setItem("index",idNum)
-        createMenuCard(title, imageUrl, itemPrice, cookTime, itemId, idNum, id);
+        createMenuCard(title, imageUrl, itemPrice, cookTime, itemId, idNum, id, ingredients);
         document.getElementById(id).reset();
     }else{
         divId=id.substring(0,id.length-3);
@@ -222,10 +224,11 @@ function submitForm(event,id){
         let itemPrice=document.getElementById(`${divId}-price`).value;
         let cookTime=document.getElementById(`${divId}-cook-time`).value;
         let itemId=document.getElementById(`${divId}-tag-options`).value;
+        let ingredients=document.getElementById(`${divId}-ingredients`).value;
         container.classList.add(itemId)
         let idNum=divId
         document.getElementById(divId+"FRMDIV").remove();
-        createMenuCard(title, imageUrl, itemPrice, cookTime, itemId, idNum, id);
+        createMenuCard(title, imageUrl, itemPrice, cookTime, itemId, idNum, id, ingredients);
     }
 }
 function clearStorage(){
@@ -297,8 +300,8 @@ function loadSuggestions(){
         if (items[i]){
             menu[i].innerHTML=`
                 <span class="scroll-title shop-item-title");">${items[num].title}</span>
-                <img class="scroll-img" src="${items[num].image}" alt="">
-                <span class="scroll-price shop-item-price shop-item-image">${items[num].price}</span>
+                <img class="scroll-img shop-item-image" src="${items[num].image}" alt="">
+                <span class="scroll-price shop-item-price">${items[num].price}</span>
                 <button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button>
                 <span class="shop-item-cooktime" id="invisible">${items[num].cooktime}</span>
             `;
@@ -594,21 +597,25 @@ function randomOrderNumber(){}
 
 function noTip() {
     document.getElementsByClassName('finalprice')[0].innerText = `Total: $${currentTotalWithTax.toFixed(2)}`;
+    document.getElementById('tiphead').style.display = 'none';
 }
 
 function tipCalc5() {
     let totalWithTip = currentTotalWithTax * 1.05;
     document.getElementsByClassName('finalprice')[0].innerText = `Total with 5% tip: $${totalWithTip.toFixed(2)}`;
+    document.getElementById('tiphead').style.display = 'none';
 }
 
 function tipCalc10() {
     let totalWithTip = currentTotalWithTax * 1.10;
     document.getElementsByClassName('finalprice')[0].innerText = `Total with 10% tip: $${totalWithTip.toFixed(2)}`;
+    document.getElementById('tiphead').style.display = 'none';
 }
 
 function tipCalc15() {
     let totalWithTip = currentTotalWithTax * 1.15;
     document.getElementsByClassName('finalprice')[0].innerText = `Total with 15% tip: $${totalWithTip.toFixed(2)}`;
+    document.getElementById('tiphead').style.display = 'none';
 }
 
 
@@ -630,6 +637,7 @@ function addCustomTip() {
     if (!isNaN(customTip) && customTip > 0) {
         let totalWithCustomTip = currentTotalWithTax * (1 + customTip / 100);
         document.getElementsByClassName('finalprice')[0].innerText = `Total with ${customTip}% tip: $${totalWithCustomTip.toFixed(2)}`;
+        document.getElementById('tiphead').style.display = 'none';
     } else {
         alert('Please enter a valid tip percentage');
     }
@@ -671,23 +679,28 @@ function updatePrepTime() {
 
 
 function cardFormVisa(){
-        
+    localStorage.setItem('cardType', 'Visa');
     document.getElementById('visa').style.opacity = 0.5;
     document.getElementById('master').style.opacity = 1;
     document.getElementById('cash').style.opacity = 1;
 
+    document.getElementById('payment-form').style.display = "block";
     document.getElementById('cash-input').style.display = "none";
     document.getElementById('cardType').innerText = `Card Used: Visa `;
 }
 function cardFormMaster(){
+    localStorage.setItem('cardType', 'MasterCard');
     document.getElementById('visa').style.opacity = 1;
     document.getElementById('master').style.opacity = 0.5;
     document.getElementById('cash').style.opacity = 1;
+
+    document.getElementById('payment-form').style.display = "block";
     document.getElementById('cash-input').style.display = "none";
     document.getElementById('cardType').innerText = `Card Used: Mastercard `;
 }
 
 function displayCashForm(){
+    localStorage.setItem('cardType', 'N/A');
     document.getElementById('visa').style.opacity = 1;
     document.getElementById('master').style.opacity = 1;
     document.getElementById('cash').style.opacity = 0.5;
@@ -858,4 +871,40 @@ document.getElementById("payment-form").addEventListener("submit", function (eve
     event.preventDefault(); 
     location.replace("receipt.html"); 
   });
+
+  document.getElementById("cash-input").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+    location.replace("receipt.html"); 
+  });
   
+
+
+// Pushes checkout info to local storage to be used on the receipt page-----//
+
+  document.getElementById('payment-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const orderName = document.getElementById('order-name').value.trim();
+    const cardNumber = document.getElementById('card-number').value.trim();
+    const cardName = document.getElementById('card-name').value.trim();
+    const expiryDate = document.getElementById('expiry-date').value.trim();
+    const securityCode = document.getElementById('security-code').value.trim();
+
+    const lastFourDigits = cardNumber.slice(-4);
+
+   
+    localStorage.setItem('orderName', orderName);
+    localStorage.setItem('lastFour', lastFourDigits);
+    localStorage.setItem('expiryDate', expiryDate);
+    localStorage.setItem('securityCode', securityCode);
+
+    location.replace('receipt.html');
+});
+
+
+document.getElementById('cash-input').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const orderName = document.getElementById('order-name').value.trim();
+    localStorage.setItem('orderName', orderName);
+    location.replace('receipt.html');
+});
