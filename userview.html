@@ -60,6 +60,8 @@
                     <div class="cart-items">
                         <div id="emptycart">There are currently no items in your cart</div>
                     </div>
+
+
                     <div class="cart-total">
                         <strong class="cart-total-title">Total</strong>
                         <span class="cart-total-price">$0</span>
@@ -71,7 +73,7 @@
             </div>
             <button class="btn btn-primary btn-scroll" id="prevBtn" onclick="scrollMenu(-1)">&#8592;</button>
             <div class="scrolling-items">
-                <h3>Popular Items:</h3>
+                <h3>Try These:</h3>
                 <div id="scroll">
                     <div class="menu-item" id="1SCR"></div>
                     <div class="menu-item" id="2SCR"></div>
@@ -102,7 +104,7 @@
                             <option value="CC">Carb Classics</option>
                         </optgroup>
                     </select>
-                    <textarea class="ingredients" id="ingredients" placeholder="i.e. rice,pasta,green-onion" required></textarea>
+                    <textarea class="ingredients" id="ingredients" placeholder="Ingredients: i.e. rice,pasta,green-onion" required></textarea>
                 </form>
                 </div>
             </div>
@@ -166,6 +168,12 @@
                     <input type="text" id="security-code" maxlength="3" placeholder="•••" required />
                   </div>
                 </div>
+
+                <div class="giftcard">
+                    <input class="giftcard" type="text" id="giftcard" placeholder="Have a discount code?" />
+                    <button class="giftcard" id="apply-discount">Apply Discount</button>
+                </div>
+
                 <button id="next-button" type="submit">Place Order</button>
               </form>
               
@@ -221,6 +229,8 @@
                 createMenuCards();
                 ManagerBtn();
                 loadSuggestions();
+                
+                scrollMenu(0);
                 document.getElementById('guest').style.display = 'none';
                 document.getElementById('constant').style.display = 'block';
 
@@ -229,12 +239,14 @@
                 localStorage.removeItem('lastFour');
                 localStorage.removeItem('expiryDate');
                 localStorage.removeItem('securityCode');
+                localStorage.removeItem('finaltime')
 
                 // document.getElementById('disabled').disabled = true;
             }
             if(x=="customer"){
                 createMenuCards();
                 loadSuggestions();
+                scrollMenu(0);
                 document.getElementById('guest').style.display = 'none';
                 document.getElementById('constant').style.display = 'none';
 
@@ -243,6 +255,7 @@
                 localStorage.removeItem('lastFour');
                 localStorage.removeItem('expiryDate');
                 localStorage.removeItem('securityCode');
+                localStorage.removeItem('finaltime')
             }
             if(x=="guest"){
                 guestCards();
@@ -251,9 +264,38 @@
                 document.getElementById('sign-up').style.display='block'
                 document.getElementById('log-in').style.display='block'
                 localStorage.removeItem('receiptItems');
+                localStorage.removeItem('finaltime')
             }
         };
     </script>
+
+
+<!-- discount code checker -->
+    <script>
+
+const discountCode10 = "FFSaver10";
+const discountPercentage = 10;
+
+document.getElementById("apply-discount").addEventListener("click", function () {
+    const code = document.getElementById("giftcard").value.trim();
+    let totalprice = document.querySelector("#total-price-Tax").innerHTML;
+
+    totalprice = parseFloat(totalprice.replace('$', ''));
+
+    if (code === discountCode10) {
+        const discountedPrice = totalprice * (1 - discountPercentage / 100);
+
+        document.querySelector("#total-price-Tax").textContent = `$${discountedPrice.toFixed(2)}`;
+        alert(`Discount applied! You saved ${discountPercentage}%`);
+    } else {
+        alert("Invalid discount code. Please try again.");
+    }
+});
+
+
+    </script>
+
+
     <script src="script.js"></script>
 </body>
 </html>
