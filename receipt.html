@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor First</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Resources/FlavorFirstNewlogo.webp" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+Symbols:wght@100..900&family=Ponnala&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <div class="icon">
+                <a href="index.html"><img src="/Resources/FlavorFirstlogo.webp" alt="logo"></a>
+            </div>
+        </div>
+        <div class="right-section">
+            <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
+            <button class="buttons" id="sign-up" onclick="Display_SignUp()">Sign Up</button>
+            <button class="buttons" id="log-in" onclick="Display_Login()">Log In</button>
+            <button onclick="clearStorage()">CLEAR</button>
+        </div>
+    </div>
+    
+
+
+    <div class="bodybox">
+    <div class="receiptBox">
+
+        <div class="receiptHead">
+            
+
+            <div class="orderNumberBox">
+                Order #: &nbsp; <div id="orderNumber"></div>
+            </div><br>
+
+            <div class="orderNameBox">
+                Thank you for your order <span class="orderName"></span>
+            </div><br>
+                <div id="cardType"></div><br>
+                <div id="lastFour"></div>
+        </div>
+
+        <div class="itemsPrinted">
+
+        </div>
+        
+        <div class="receiptEnd">
+            <div class="pricetag">Total: &nbsp;<div id="finalprice"></div></div><br>
+            <div class="timetag">Time to Order Completion: &nbsp; <div id="finaltime"></div></div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="cashMessage">
+    <div class="orderNameBox">
+        Thank you for your order <span class="orderName"></span>
+    </div>
+
+    <div class="orderNumberBox">
+        Order Number: <div id="orderNumber"></div>
+    </div>
+    <div id="conformation">
+        Please bring your order # as well as any viable discount codes and present them to the cashier
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<footer>
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="footercontent" id="emailsection">
+                Contact us: <span class="email">FlavorFirstHR@gmail.com</span>
+            </div>
+            <div class="footercontent">
+                <div class="abouthead">About Us:</div>
+                <div class="abouttext">Lorem Ipsum dolor sit amet</div>
+            </div>
+        </div>
+
+        <div class="center-column">
+            <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+        </div>
+
+        <div class="right-column">
+            <div class="footercontent" id="github"><a href="https://github.com/RWeber-GHub/Flavor-First"><ion-icon name="logo-github"></ion-icon></a></div>
+            <div class="footercontent" id="instagram"><a href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a></div>
+            <div class="footercontent" id="twitter"><a href="https://x.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a></div>
+        </div>
+    </div>
+</footer>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const itemsPrintedDiv = document.querySelector('.itemsPrinted');
+    const orderNumber = document.getElementById('orderNumber');
+    const totalAmountSpan = document.querySelector('#finalprice');
+
+    const receiptItems = JSON.parse(localStorage.getItem('receiptItems')) || [];
+    let total = 0;
+    orderNumber.textContent = Math.floor(Math.random() * 100000); 
+    receiptItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('receipt-item');
+        itemDiv.innerHTML = `
+            <p class="item-title">${item.title}</p>
+            <p class="item-price">${item.price} x ${item.quantity}</p>
+        `;
+        itemsPrintedDiv.appendChild(itemDiv);
+
+       
+        const price = parseFloat(item.price.replace('$', ''));
+        total += price * item.quantity;
+    });
+
+   
+    totalAmountSpan.textContent = `$${total.toFixed(2)}`;
+    
+});
+    </script>
+
+
+
+</body>
+</html>
+
+<!-- grabs checkout info from local storage -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const timebox = document.getElementById('finaltime')
+    const orderNameSpan = document.querySelector('.orderName');
+    const orderNumberDiv = document.getElementById('orderNumber');
+    const cardTypeDiv = document.getElementById('cardType');
+    const lastFourDiv = document.getElementById('lastFour');
+     
+    const preptime = localStorage.getItem('finaltime') || 'N/A';
+    const orderName = localStorage.getItem('orderName') || 'Guest';
+    const cardType = localStorage.getItem('cardType') || 'Other';
+    const lastFour = localStorage.getItem('lastFour') || 'XXXX';
+
+    
+    orderNameSpan.textContent = orderName;
+    orderNumberDiv.textContent = Math.floor(Math.random() * 1000000); 
+    cardTypeDiv.textContent = `Card Type: ${cardType}`;
+    lastFourDiv.textContent = `Last Four Digits: ${lastFour}`;
+    timebox.textContent = `${preptime} Min(s)`;
+    
+});
+</script>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor First</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Resources/FlavorFirstNewlogo.webp" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Lato:wght@100;300;400&family=Metrophobic&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <div class="icon">
+                <a href="index.html"><img src="/Resources/FlavorFirstlogo.webp" alt="logo"></a>
+            </div>
+        </div>
+        <div class="right-section">
+            <button class="buttons" id="guestbutton" onclick="GuestView()">Guest View</button>
+            <button class="buttons" id="sign-up" onclick="Display_SignUp()" style="display: none;">Sign Up</button>
+            <button class="buttons" id="log-in" onclick="Display_Login()" style="display: none;">Log In</button>
+            <button onclick="clearStorage()">CLEAR</button>
+        </div>
+    </div>
+    <div id="menu-container"></div>
+    <section id="customer">
+        <div class="sticky-nav">
+            <div class="nav-left">
+                <div class="dropdown">
+                    <button class="dropbtn">Sort</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="displayAll()">All Items</a>
+                        <a href="#" onclick="displayMeat()">Majority Protein</a>
+                        <a href="#" onclick="displayCarb()">High-Carb Classics</a>
+                        <a href="#" onclick="displayVegan()">Vegan</a>
+                        <a href="#" onclick="displayNoodle()">Pasta/Noodle</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div id="scroll-container"> <div id="scroll-text">||&nbsp;&nbsp;&nbsp;Limited Time Discount Code: FFSaver10&nbsp;&nbsp;&nbsp;||</div> </div>
+            <div class="nav-right">
+                <button id="toggle-cart" class="cart-button">Cart</button>
+            </div>
+        </div>
+        <div id="side-cart" class="side-cart hidden">
+            <button id="close-cart" class="close-cart">X</button>
+            <div class="cart-content">
+                <section class="container content-section">
+                    <h2 class="section-header">Cart</h2>
+                    <div class="cart-row">
+                        <span class="cart-item cart-header cart-column">ITEM</span>
+                        <span class="cart-price cart-header cart-column">PRICE</span>
+                        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                    </div>
+                    <div class="cart-items">
+                        <div id="emptycart">There are currently no items in your cart</div>
+                    </div>
+
+
+                    <div class="cart-total">
+                        <strong class="cart-total-title">Total</strong>
+                        <span class="cart-total-price">$0</span>
+                    </div>
+                    <button class="btn btn-primary btn-purchase" type="button" id="disabled" onclick="displayCheckout()">Checkout</button>
+                </section>
+                <div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-scroll" id="prevBtn" onclick="scrollMenu(-1)">&#8592;</button>
+            <div class="scrolling-items">
+                <h3>Try These:</h3>
+                <div id="scroll">
+                    <div class="menu-item" id="1SCR"></div>
+                    <div class="menu-item" id="2SCR"></div>
+                    <div class="menu-item" id="3SCR"></div>
+                    <div class="menu-item" id="4SCR"></div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-scroll" id="nextBtn" onclick="scrollMenu(1)">&#8594;</button>
+        </div>
+
+        
+
+        <section class="container content-section">
+        <div id="shop-items">
+            <div class="shop-item" id="constant">
+                <div class="edit-form">
+                <form id="menu-form" onsubmit="submitForm(event,this.id)">
+                    <input type="text" id="title" class="title" placeholder="Dish Title" required>
+                    <textarea  id="image-url" class="image-url" placeholder='Image URL' required></textarea>
+                    <input type="number" id="price" class="price" placeholder="Price" required min="0" max="100" step="0.01">
+                    <input type="number" id="cook-time" class="cook-time" placeholder="Time" required>
+                    <button type="submit" class="btn btn-primary submit-btn">Add Item</button>
+                    <select id="tag-options" class="tag" required>
+                        <optgroup label="Select a Tag">
+                            <option value="MP">Majority Protein</option>
+                            <option value="Noodle">Pasta/Noodle</option>
+                            <option value="Vegan">Vegan</option>
+                            <option value="CC">Carb Classics</option>
+                        </optgroup>
+                    </select>
+                    <textarea class="ingredients" id="ingredients" placeholder="Ingredients: i.e. rice,pasta,green-onion" required></textarea>
+                </form>
+                </div>
+            </div>
+        </div>
+        </section>
+    </section>
+    
+    <section id="checkcontainer">
+        <section id="checkout">
+            <div id="checkout-box">
+                <h1 class="checkhead">Checkout</h1><br>
+                <div class="headline"></div>
+                    <div class="row"><div class="pricetime">Price Pre Tax:<div id="total-price-notax">0$</div></div></div><br>
+                <div class="row"><div class="pricetime">Total Price:<div id="total-price-Tax">0$</div></div></div><br>
+                <div class="row"><div class="pricetime">Prep Time:<div id="prep-time-calc"></div></div></div>
+            </div>
+            <div class="Tip-adder">
+                <div id="tiphead">Would you like to add a tip?</div><br>
+                <div class="tipPercents">
+                    <button class="tip" onclick="noTip()" id="notip">No Tip<br><div class="tipbutton">+ 0.00</div></button>
+                    <button class="tip" onclick="tipCalc5()">5%<br><div class="tipbutton" id="tip5"></div></button>
+                    <button class="tip" onclick="tipCalc10()">10%<br><div class="tipbutton" id="tip10"></div></button>
+                    <button class="tip" onclick="tipCalc15()">15%<br><div class="tipbutton" id="tip15"></div></button>
+                </div>
+                <div class="OR">Custom Tip:</div>
+                <div class="tip">
+                    <input type="number" name="tipcustom" oninput="updateCustomTip()" placeholder="Custom %">
+                    <button onclick="addCustomTip()">Apply</button>
+                    <div class="tipbutton custom"></div>
+                </div>
+            </div>
+            <div class="finalprice"></div>
+        </section>
+
+        <section id="payment">
+            <div class="invoice">
+              <h2>Invoice</h2>
+              <div class="card-icons">
+        <button class="cardinput" onclick="cardFormVisa()"><img src="Resources/visalogo.webp" alt="Visa" id="visa" /></button>
+        <button class="cardinput" onclick="cardFormMaster()"><img src="Resources/masterlogo.webp" alt="MasterCard" id="master" /></button>
+        <button class="cardinput" onclick="displayCashForm()"><img src="Resources/cashlogo.webp" alt="Cash" id="cash" /></button>
+              </div>
+              
+              <form id="payment-form">
+                <label for="order-name">Name For Order</label>
+                <input type="text" id="order-name" placeholder="Ex. John Doe" required />
+              
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456" required />
+              
+                <label for="card-name">Name On Card</label>
+                <input type="text" id="card-name" placeholder="Ex. John Doe" required />
+              
+                <div class="card-details">
+                  <div>
+                    <label for="expiry-date">Expiry Date</label>
+                    <input type="text" id="expiry-date" maxlength="5" placeholder="EX: MM/YY" required />
+                  </div>
+                  <div>
+                    <label for="security-code">Security Code</label>
+                    <input type="text" id="security-code" maxlength="3" placeholder="•••" required />
+                  </div>
+                </div>
+
+                <div class="giftcard">
+                    <input class="giftcard" type="text" id="giftcard" placeholder="Have a discount code?" />
+                    <button class="giftcard" id="apply-discount">Apply Discount</button>
+                </div>
+
+                <button id="next-button" type="submit">Place Order</button>
+              </form>
+              
+
+              <form id="cash-input">
+                
+                <label for="order-name">Name For Order</label>
+                <input type="text" id="order-name" placeholder="Ex. John Doe" required />
+                <button id="next-button" type="submit">Place Order</button>
+              </form>
+
+            </div>
+          </section>
+        </section>
+
+    <section id="guest">
+        <div id="guest-shop-items">
+    </div>
+    </section>
+<footer>
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="footercontent" id="emailsection">
+                Contact us: <span class="email">FlavorFirstHR@gmail.com</span>
+            </div>
+            <div class="footercontent">
+                <div class="abouthead">About Us:</div>
+                <div class="abouttext">Lorem Ipsum dolor sit amet</div>
+            </div>
+        </div>
+    
+        <div class="center-column">
+            <div class="footercontent" id="copyright">Copyright &copy; 2024 | Flavor First</div>
+        </div>
+    
+        <div class="right-column">
+            <div class="footercontent" id="github"><a href="https://github.com/RWeber-GHub/Flavor-First"><ion-icon name="logo-github"></ion-icon></a></div>
+            <div class="footercontent" id="instagram"><a href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a></div>
+            <div class="footercontent" id="twitter"><a href="https://x.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a></div>
+        </div>
+    </div>
+</footer>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    
+    <script>
+        let x=localStorage.getItem("Account_Type");
+        window.onload = function() {
+            if(x=="manager") {
+                createMenuCards();
+                ManagerBtn();
+                loadSuggestions();
+                
+                scrollMenu(0);
+                document.getElementById('guest').style.display = 'none';
+                document.getElementById('constant').style.display = 'block';
+
+                localStorage.removeItem('receiptItems');
+                localStorage.removeItem('orderName');
+                localStorage.removeItem('lastFour');
+                localStorage.removeItem('expiryDate');
+                localStorage.removeItem('securityCode');
+                localStorage.removeItem('finaltime')
+
+                // document.getElementById('disabled').disabled = true;
+            }
+            if(x=="customer"){
+                createMenuCards();
+                loadSuggestions();
+                scrollMenu(0);
+                document.getElementById('guest').style.display = 'none';
+                document.getElementById('constant').style.display = 'none';
+
+                localStorage.removeItem('receiptItems');
+                localStorage.removeItem('orderName');
+                localStorage.removeItem('lastFour');
+                localStorage.removeItem('expiryDate');
+                localStorage.removeItem('securityCode');
+                localStorage.removeItem('finaltime')
+            }
+            if(x=="guest"){
+                guestCards();
+                document.getElementById('customer').style.display = 'none';
+                document.getElementById('guest').style.display = 'block';
+                document.getElementById('sign-up').style.display='block'
+                document.getElementById('log-in').style.display='block'
+                localStorage.removeItem('receiptItems');
+                localStorage.removeItem('finaltime')
+            }
+        };
+    </script>
+
+
+<!-- discount code checker -->
+    <script>
+
+const discountCode10 = "FFSaver10";
+const discountPercentage = 10;
+
+document.getElementById("apply-discount").addEventListener("click", function () {
+    const code = document.getElementById("giftcard").value.trim();
+    let totalprice = document.querySelector("#total-price-Tax").innerHTML;
+
+    totalprice = parseFloat(totalprice.replace('$', ''));
+
+    if (code === discountCode10) {
+        const discountedPrice = totalprice * (1 - discountPercentage / 100);
+
+        document.querySelector("#total-price-Tax").textContent = `$${discountedPrice.toFixed(2)}`;
+        alert(`Discount applied! You saved ${discountPercentage}%`);
+    } else {
+        alert("Invalid discount code. Please try again.");
+    }
+});
+
+
+    </script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
