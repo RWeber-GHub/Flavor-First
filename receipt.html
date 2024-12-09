@@ -49,6 +49,8 @@
         </div>
         
         <div class="receiptEnd">
+            <div class="pricetag">Total: &nbsp;<div id="finalprice"></div></div><br>
+            <div class="timetag">Time to Order Completion: &nbsp; <div id="finaltime"></div></div>
 
         </div>
 
@@ -63,7 +65,7 @@
     <div class="orderNumberBox">
         Order Number: <div id="orderNumber"></div>
     </div>
-    <div class="conformation">
+    <div id="conformation">
         Please bring your order # as well as any viable discount codes and present them to the cashier
     </div>
 </div>
@@ -105,7 +107,7 @@
         document.addEventListener('DOMContentLoaded', function () {
     const itemsPrintedDiv = document.querySelector('.itemsPrinted');
     const orderNumber = document.getElementById('orderNumber');
-    const totalAmountSpan = document.querySelector('.totalAmount');
+    const totalAmountSpan = document.querySelector('#finalprice');
 
     const receiptItems = JSON.parse(localStorage.getItem('receiptItems')) || [];
     let total = 0;
@@ -135,15 +137,16 @@
 </body>
 </html>
 
-<!-- grabs checkout info from local storage --> 
+<!-- grabs checkout info from local storage -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+    const timebox = document.getElementById('finaltime')
     const orderNameSpan = document.querySelector('.orderName');
     const orderNumberDiv = document.getElementById('orderNumber');
     const cardTypeDiv = document.getElementById('cardType');
     const lastFourDiv = document.getElementById('lastFour');
-
-    
+     
+    const preptime = localStorage.getItem('finaltime') || 'N/A';
     const orderName = localStorage.getItem('orderName') || 'Guest';
     const cardType = localStorage.getItem('cardType') || 'Other';
     const lastFour = localStorage.getItem('lastFour') || 'XXXX';
@@ -153,6 +156,7 @@
     orderNumberDiv.textContent = Math.floor(Math.random() * 1000000); 
     cardTypeDiv.textContent = `Card Type: ${cardType}`;
     lastFourDiv.textContent = `Last Four Digits: ${lastFour}`;
+    timebox.textContent = `${preptime} Min(s)`;
+    
 });
-
 </script>
