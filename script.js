@@ -1,9 +1,5 @@
 
 // ------------------------ Hardcoded Variables ----------------------------------------
-const giftcard10 = "A9bC3dE4F5gH6iJ7";
-const giftcard20 = "K8lM9nO1P2qR3sT4";
-const giftcard50 = "U5vW6xY7zA1bB3C2";
-
 const discountcode10 = "FlavorFirstSaver10"
 
 const Manager_Email="manager@hotmail.com";
@@ -17,10 +13,6 @@ localStorage.setItem(Guest_Email,Guest_Password);
 
 var currentIndex=0;
 
-function printIngredients(){
-
-}
-
 function scrollMenu(direction){
     let container=document.getElementById('scroll');
     let totalItems=container.children.length;
@@ -32,7 +24,7 @@ function scrollMenu(direction){
 
     container.style.transform=`translateX(-${currentIndex*itemWidth}px)`;
 }
-scrollMenu(0);
+
 
 function Display_Login(){
     if(window.location.pathname=="userview.html"){
@@ -40,9 +32,13 @@ function Display_Login(){
     }
     document.getElementById("signup-page").style.display="none";
     document.getElementById("content").style.display="none";
-    document.getElementById("login-page").style.display="block";
+    document.getElementById("login-page").style.display="flex";
 }
-
+function displayHome(){
+    document.getElementById("signup-page").style.display="none";
+    document.getElementById("content").style.display="block";
+    document.getElementById("login-page").style.display="none";
+}
 function Display_SignUp(){
     if(window.location.pathname=="userview.html"){
         location.replace("index.html");
@@ -156,20 +152,21 @@ function deleteItem(id){
     let y=localStorage.getItem("index");
     y--;
     localStorage.setItem("index",y);
+
 }
 
 function createMenuCard(title, imageUrl, price, cookTime, itemId, idNum, id, ingredients){
     let container=document.getElementById(`${idNum}`);
     let menuContainer=document.getElementById("shop-items")
     if(id=='menu-form'){
-        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`);
+        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div><span id="${idNum}ING" class="list">${ingredients}</span></div>`);
         menuContainer.innerHTML+=localStorage.getItem("Item"+`${idNum}`);
         ManagerBtn();
         // ****
     }else{
         document.getElementById(`${idNum}`+"VIEW").remove();
-        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`);        
-        container.innerHTML=`<span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button><span class="shop-item-ingredients">${ingredients}</span></div></div></div>`;
+        localStorage.setItem(`Item${idNum}`,`<div class="shop-item ${itemId}" id="${idNum}"><div class="edit-view" id="${idNum}VIEW"><span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div><span id="${idNum}ING" class="list">${ingredients}</span></div>`);        
+        container.innerHTML=`<span class="shop-item-title">${title}</span><img class="shop-item-image" src="${imageUrl}"><div class="shop-item-details"><span class="shop-item-price">$${price}</span><span class="shop-item-cooktime">${cookTime} min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="${idNum}DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="${idNum}EDT" onclick="editItem(id)">EDIT</button></div></div><span id="${idNum}ING" class="list">${ingredients}</span></div>`;
         ManagerBtn();
     }
     
@@ -233,35 +230,48 @@ function submitForm(event,id){
 }
 function clearStorage(){
     localStorage.clear();
+    localStorage.setItem("Item1",`<div class="shop-item MP" id="1"><div class="edit-view" id="1VIEW"><span class="shop-item-title">Asian Glazed Chicken Thighs</span><img class="shop-item-image" src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp"><div class="shop-item-details"><span class="shop-item-price">$24.95</span><span class="shop-item-cooktime">23 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="1DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="1EDT" onclick="editItem(id)">EDIT</button></div></div><span id="1ING" class="list" style="display: none">rice-vinegar,soy-sauce,honey,Asian-sesame-oil,Asian-chili-garlic-sauce,garlic,salt,chicken-thigh,green-onion</span></div>`);
+    localStorage.setItem("Item2",`<div class="shop-item MP" id="2"><div class="edit-view" id="2VIEW"><span class="shop-item-title">Baked Denver Omelet</span><img class="shop-item-image" src="Resources/resized_Baked-Denver-Omelet.webp"><div class="shop-item-details"><span class="shop-item-price">$10.45</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button"onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="2DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="2EDT" onclick="editItem(id)">EDIT</button></div></div><span id="2ING" class="list" style="display: none">butter,onion,green-bell-pepper,ham,egg,milk,Cheddar-cheese,salt,black-pepper</span></div>`);
+    localStorage.setItem("Item3",`<div class="shop-item MP" id="3"><div class="edit-view" id="3VIEW"><span class="shop-item-title">Baked Garlic Parmesan Chicken</span><img class="shop-item-image" src="Resources/resized_Baked-Garlic-Parmesan-Chicken.webp"><div class="shop-item-details"><span class="shop-item-price">$19.75</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button"onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="3DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="3EDT" onclick="editItem(id)">EDIT</button></div></div><span id="3ING" class="list" style="display: none">olive-oil,garlic,breadcrumbs,Parmesan-cheese,basil,black-pepper,chicken-breast</span></div>`);
+    localStorage.setItem("Item4",`<div class="shop-item MP" id="4"><div class="edit-view" id="4VIEW"><span class="shop-item-title">Beef Bourguignon</span><img class="shop-item-image" src="Resources/resized_Beef-Bourguigno.webp"><div class="shop-item-details"><span class="shop-item-price">$29.99</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="4DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="4EDT" onclick="editItem(id)">EDIT</button></div></div><span id="4ING" class="list" style="display: none">beef-chuck,kosher-salt,black-pepper,hickory-smoked-bacon,white-onion,garlic,portobello-mushroom,tomato-paste,beef-broth,dry-red-wine,carrots,all-purpose-flour,parsley</span></div>`);
+    localStorage.setItem("Item5",`<div class="shop-item MP" id="5"><div class="edit-view" id="5VIEW"><span class="shop-item-title">Beef Stir-Fry</span><img class="shop-item-image" src="Resources/resized_Beef-Stir-Fry.webp"><div class="shop-item-details"><span class="shop-item-price">$27.50</span><span class="shop-item-cooktime">27 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="5DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="5EDT" onclick="editItem(id)">EDIT</button></div></div><span id="5ING" class="list" style="display: none">vegetable-oil,beef-sirloin,broccoli-florets,red-bell-pepper,carrots,green-onion,garlic,soy-sauce,sesame-seeds</span></div>`);
+    localStorage.setItem("Item6",`<div class="shop-item CC" id="6"><div class="edit-view" id="6VIEW"><span class="shop-item-title">Chicken and Stuffing Bake</span><img class="shop-item-image" src="Resources/resized_Chicken-and-Stuffing-Bake.webp"><div class="shop-item-details"><span class="shop-item-price">$18.99</span><span class="shop-item-cooktime">40 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="6DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="6EDT" onclick="editItem(id)">EDIT</button></div></div><span id="6ING" class="list" style="display: none">chicken-breast,cream-of-chicken,sour-cream,French-onion-soup-mix,black-pepper,dry-stuffing-mix,chicken-broth,butter,parsley</span></div>`);
+    localStorage.setItem("Item7",`<div class="shop-item CC" id="7"><div class="edit-view" id="7VIEW"><span class="shop-item-title">Chicken Pesto Pizza</span><img class="shop-item-image" src="Resources/resized_Chicken-Pesto-Pizza.webp"><div class="shop-item-details"><span class="shop-item-price">$15.50</span><span class="shop-item-cooktime">21 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="7DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="7EDT" onclick="editItem(id)">EDIT</button></div></div><span id="7ING" class="list" style="display: none">pesto-basil-sauce,pizza-crust,chicken-breast-strips,artichoke-hearts,shredded-fontina-cheese</span></div>`);
+    localStorage.setItem("Item8",`<div class="shop-item Noodle" id="8"><div class="edit-view" id="8VIEW"><span class="shop-item-title">Creamy Chicken Ramen</span><img class="shop-item-image" src="Resources/resized_Creamy-Chicken-Ramen.webp"><div class="shop-item-details"><span class="shop-item-price">$15.49</span><span class="shop-item-cooktime">10 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="8DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="8EDT" onclick="editItem(id)">EDIT</button></div></div><span id="8ING" class="list" style="display: none">unsalted-butter,garlic,chicken-broth,whipping-cream,ramen-noodles,soy-sauce,chicken-breast,everything-bagel-seasoning</span></div>`);
+    localStorage.setItem("Item9",`<div class="shop-item Vegan" id="9"><div class="edit-view" id="9VIEW"><span class="shop-item-title">Garden Stuffed Baked Potato</span><img class="shop-item-image" src="Resources/resized_Garden-Stuffed-Baked-Potato.webp"><div class="shop-item-details"><span class="shop-item-price">$9.95</span><span class="shop-item-cooktime">10 min</span><button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="9DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="9EDT" onclick="editItem(id)">EDIT</button></div></div><span id="9ING" class="list" style="display: none">potatoes,butter,onion,broccoli,ranch-style-salad-dressing,vegetable-oil,parsley,salt,pepper</span></div>`);
+    localStorage.setItem("Item10",`<div class="shop-item Vegan" id="10"><div class="edit-view" id="10VIEW"><span class="shop-item-title">Homemade Black Bean Veggie Burger</span><img class="shop-item-image" src="Resources/resized_Homemade-Black-Bean-Veggie-Burger.webp"><div class="shop-item-details"><span class="shop-item-price">$16.50</span><span class="shop-item-cooktime">11 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="10DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="10EDT" onclick="editItem(id)">EDIT</button></div></div><span id="10ING" class="list" style="display: none">black-beans,green-bell-pepper,onion,garlic,egg,chili-powder,cumin,Thai-chili-sauce,breadcrumbs</span></div>`);
+    localStorage.setItem("Item11",`<div class="shop-item CC" id="11"><div class="edit-view" id="11VIEW"><span class="shop-item-title">Mexican Casserole</span><img class="shop-item-image" src="Resources/resized_Mexican-Casserole.webp"><div class="shop-item-details"><span class="shop-item-price">$14.50</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="11DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="11EDT" onclick="editItem(id)">EDIT</button></div></div><span id="11ING" class="list" style="display: none">lean-ground-beef,salsa,chili-beans,tortilla-chips,sour-cream,black-olives,green-onion,tomato,Cheddar-cheese</span></div>`);
+    localStorage.setItem("Item12",`<div class="shop-item CC" id="12"><div class="edit-view" id="12VIEW"><span class="shop-item-title">Pork Fried Rice</span><img class="shop-item-image" src="Resources/resized_Pork-Fried-Rice.webp"><div class="shop-item-details"><span class="shop-item-price">$11.95</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="12DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="12EDT" onclick="editItem(id)">EDIT</button></div></div><span id="12ING" class="list" style="display: none">butter,boneless-pork-loin-chop,green-onion,carrot,broccoli,egg,rice,peas,soy-sauce,garlic-powder,ginger</span></div>`);
+    localStorage.setItem("Item13",`<div class="shop-item MP" id="13"><div class="edit-view" id="13VIEW"><span class="shop-item-title">Pork Tenderloin Diablo</span><img class="shop-item-image" src="Resources/resized_Pork-Tenderloin-Diablo.webp"><div class="shop-item-details"><span class="shop-item-price">$26.50</span><span class="shop-item-cooktime">27 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="13DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="13EDT" onclick="editItem(id)">EDIT</button></div></div><span id="13ING" class="list" style="display: none">pork-tenderloin,salt,black-pepper,vegetable-oil,chicken-broth,heavy-cream,extra-hot-prepared-horseradish,Dijon-mustard,cayenne-pepper,unsalted-butter,chives</span></div>`);
+    localStorage.setItem("Item14",`<div class="shop-item MP" id="14"><div class="edit-view" id="14VIEW"><span class="shop-item-title">Sausage and Peppers</span><img class="shop-item-image" src="Resources/resized_Sausage-and-Peppers.webp"><div class="shop-item-details"><span class="shop-item-price">$21.45</span><span class="shop-item-cooktime">22 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="14DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="14EDT" onclick="editItem(id)">EDIT</button></div></div><span id="14ING" class="list" style="display: none">white-rice,chicken-broth,tomatoes,garlic,Creole-seasoning,black-pepper,cayenne-pepper,green-bell-pepper,white-onion,andouille-sausage,scallions</span></div>`);
+    localStorage.setItem("Item15",`<div class="shop-item Noodle" id="15"><div class="edit-view" id="15VIEW"><span class="shop-item-title">Shrimp Scampi with Pasta</span><img class="shop-item-image" src="Resources/resized_Shrimp-Scampi-with-Pasta.webp"><div class="shop-item-details"><span class="shop-item-price">$20.95</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="15DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="15EDT" onclick="editItem(id)">EDIT</button></div></div><span id="15ING" class="list" style="display: none">linguine-pasta,butter,extra-virgin-olive-oil,shallots,garlic,red-pepper,shrimp,kosher-salt,ground-pepper,dry-white-wine,lemon,parsley</span></div>`);
+    localStorage.setItem("Item16",`<div class="shop-item MP" id="16"><div class="edit-view" id="16VIEW"><span class="shop-item-title">Soy-Honey Glazed Salmon with Asparagus</span><img class="shop-item-image" src="Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp"><div class="shop-item-details"><span class="shop-item-price">$27.45</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="16DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="16EDT" onclick="editItem(id)">EDIT</button></div></div><span id="16ING" class="list" style="display: none">asparagus,soy-sauce,honey,olive-oil,salmon-fillet,sea-salt,black-pepper</span></div>`);
+    localStorage.setItem("Item17",`<div class="shop-item Noodle" id="17"><div class="edit-view" id="17VIEW"><span class="shop-item-title">Spicy Asian Ramen Noodles</span><img class="shop-item-image" src="Resources/resized_Spicy-Asian-Ramen-Noodles.webp"><div class="shop-item-details"><span class="shop-item-price">$17.95</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="17DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="17EDT" onclick="editItem(id)">EDIT</button></div></div><span id="17ING" class="list" style="display: none">soy-sauce,sesame-oil,brown-sugar,rice-vinegar,chili-garlic-sauce,ginger,creamy-peanut-butter,ramen-noodles,peanuts,green-onions</span></div>`);
+    localStorage.setItem("Item18",`<div class="shop-item Noodle" id="18"><div class="edit-view" id="18VIEW"><span class="shop-item-title">Spinach Tomato Tortellini</span><img class="shop-item-image" src="Resources/resized_Spinach-Tomato-Tortellini.webp"><div class="shop-item-details"><span class="shop-item-price">$21.75</span><span class="shop-item-cooktime">22 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="18DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="18EDT" onclick="editItem(id)">EDIT</button></div></div><span id="18ING" class="list" style="display: none">cheese-tortellini,tomatoes,garlic,onion,spinach,basil,garlic,salt,pepper,milk,heavy-cream,all-purpose-flour,Parmesan-cheese</span></div>`);
+    localStorage.setItem("Item19",`<div class="shop-item Vegan" id="19"><div class="edit-view" id="19VIEW"><span class="shop-item-title">Vegan Sweet Potato Chickpea Curry</span><img class="shop-item-image" src="Resources/resized_Vegan-Sweet-Potato-Chickpea-Curry.webp"><div class="shop-item-details"><span class="shop-item-price">$17.45</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="19DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="19EDT" onclick="editItem(id)">EDIT</button></div></div><span id="19ING" class="list" style="display: none">olive-oil,onion,garlic,ginger-root,chickpeas,tomatoes,coconut-milk,sweet-potato,garam-masala,cumin,turmeric,salt,red-Chile-flakes,baby-spinach</span></div>`);
+    localStorage.setItem("Item20",`<div class="shop-item Vegan" id="20"><div class="edit-view" id="20VIEW"><span class="shop-item-title">White Chili</span><img class="shop-item-image" src="Resources/resized_White-Chili.webp"><div class="shop-item-details"><span class="shop-item-price">$13.45</span><span class="shop-item-cooktime">15 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="20DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="20EDT" onclick="editItem(id)">EDIT</button></div></div><span id="20ING" class="list" style="display: none">ground-turkey,medium-salsa,corn-kernels,water,Great-Northern-beans,Pepper-Jack-cheese</span></div>`);
+
     localStorage.setItem("Account_Type", "manager");
     localStorage.setItem("index","20");
-    localStorage.setItem("Item1",`<div class="shop-item MP" id="1"><div class="edit-view" id="1VIEW"><span class="shop-item-title">Asian Glazed Chicken Thighs</span><img class="shop-item-image" src="Resources/resized_Asian-Glazed-Chicken-Thighs.webp"><div class="shop-item-details"><span class="shop-item-price">$24.95</span><span class="shop-item-cooktime">23 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="1DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="1EDT" onclick="editItem(id)">EDIT</button><span>rice-vinegar,soy-sauce,honey,Asian-sesame-oil,Asian-chili-garlic-sauce,garlic,salt,chicken-thigh,green-onion</span></div></div></div>`);
-    localStorage.setItem("Item2",`<div class="shop-item MP" id="2"><div class="edit-view" id="2VIEW"><span class="shop-item-title">Baked Denver Omelet</span><img class="shop-item-image" src="Resources/resized_Baked-Denver-Omelet.webp"><div class="shop-item-details"><span class="shop-item-price">$10.45</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button"onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="2DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="2EDT" onclick="editItem(id)">EDIT</button><span>butter,onion,green-bell-pepper,ham,egg,milk,Cheddar-cheese,salt,black-pepper</span></div></div></div>`);
-    localStorage.setItem("Item3",`<div class="shop-item MP" id="3"><div class="edit-view" id="3VIEW"><span class="shop-item-title">Baked Garlic Parmesan Chicken</span><img class="shop-item-image" src="Resources/resized_Baked-Garlic-Parmesan-Chicken.webp"><div class="shop-item-details"><span class="shop-item-price">$19.75</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button"onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="3DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="3EDT" onclick="editItem(id)">EDIT</button><span>olive-oil,garlic,breadcrumbs,Parmesan-cheese,basil,black-pepper,chicken-breast</span></div></div></div>`);
-    localStorage.setItem("Item4",`<div class="shop-item MP" id="4"><div class="edit-view" id="4VIEW"><span class="shop-item-title">Beef Bourguignon</span><img class="shop-item-image" src="Resources/resized_Beef-Bourguigno.webp"><div class="shop-item-details"><span class="shop-item-price">$29.99</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="4DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="4EDT" onclick="editItem(id)">EDIT</button><span>beef-chuck,kosher-salt,black-pepper,hickory-smoked-bacon,white-onion,garlic,portobello-mushroom,tomato-paste,beef-broth,dry-red-wine,carrots,all-purpose-flour,parsley</span></div></div></div>`);
-    localStorage.setItem("Item5",`<div class="shop-item MP" id="5"><div class="edit-view" id="5VIEW"><span class="shop-item-title">Beef Stir-Fry</span><img class="shop-item-image" src="Resources/resized_Beef-Stir-Fry.webp"><div class="shop-item-details"><span class="shop-item-price">$27.50</span><span class="shop-item-cooktime">27 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="5DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="5EDT" onclick="editItem(id)">EDIT</button><span>vegetable-oil,beef-sirloin,broccoli-florets,red-bell-pepper,carrots,green-onion,garlic,soy-sauce,sesame-seeds</span></div></div></div>`);
-    localStorage.setItem("Item6",`<div class="shop-item CC" id="6"><div class="edit-view" id="6VIEW"><span class="shop-item-title">Chicken and Stuffing Bake</span><img class="shop-item-image" src="Resources/resized_Chicken-and-Stuffing-Bake.webp"><div class="shop-item-details"><span class="shop-item-price">$18.99</span><span class="shop-item-cooktime">40 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="6DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="6EDT" onclick="editItem(id)">EDIT</button><span>chicken-breast,cream-of-chicken,sour-cream,French-onion-soup-mix,black-pepper,dry-stuffing-mix,chicken-broth,butter,parsley</span></div></div></div>`);
-    localStorage.setItem("Item7",`<div class="shop-item CC" id="7"><div class="edit-view" id="7VIEW"><span class="shop-item-title">Chicken Pesto Pizza</span><img class="shop-item-image" src="Resources/resized_Chicken-Pesto-Pizza.webp"><div class="shop-item-details"><span class="shop-item-price">$15.50</span><span class="shop-item-cooktime">21 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="7DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="7EDT" onclick="editItem(id)">EDIT</button><span>pesto-basil-sauce,pizza-crust,chicken-breast-strips,artichoke-hearts,shredded-fontina-cheese</span></div></div></div>`);
-    localStorage.setItem("Item8",`<div class="shop-item Noodle" id="8"><div class="edit-view" id="8VIEW"><span class="shop-item-title">Creamy Chicken Ramen</span><img class="shop-item-image" src="Resources/resized_Creamy-Chicken-Ramen.webp"><div class="shop-item-details"><span class="shop-item-price">$15.49</span><span class="shop-item-cooktime">10 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="8DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="8EDT" onclick="editItem(id)">EDIT</button><span>unsalted-butter,garlic,chicken-broth,whipping-cream,ramen-noodles,soy-sauce,chicken-breast,everything-bagel-seasoning</span></div></div></div>`);
-    localStorage.setItem("Item9",`<div class="shop-item Vegan" id="9"><div class="edit-view" id="9VIEW"><span class="shop-item-title">Garden Stuffed Baked Potato</span><img class="shop-item-image" src="Resources/resized_Garden-Stuffed-Baked-Potato.webp"><div class="shop-item-details"><span class="shop-item-price">$9.95</span><span class="shop-item-cooktime">10 min</span><button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="9DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="9EDT" onclick="editItem(id)">EDIT</button><span>potatoes,butter,onion,broccoli,ranch-style-salad-dressing,vegetable-oil,parsley,salt,pepper</span></div></div></div>`);
-    localStorage.setItem("Item10",`<div class="shop-item Vegan" id="10"><div class="edit-view" id="10VIEW"><span class="shop-item-title">Homemade Black Bean Veggie Burger</span><img class="shop-item-image" src="Resources/resized_Homemade-Black-Bean-Veggie-Burger.webp"><div class="shop-item-details"><span class="shop-item-price">$16.50</span><span class="shop-item-cooktime">11 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="10DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="10EDT" onclick="editItem(id)">EDIT</button><span>lean-ground-beef,salsa,chili-beans,tortilla-chips,sour-cream,black-olives,green-onion,tomato,Cheddar-cheese</span></div></div></div>`);
-    localStorage.setItem("Item11",`<div class="shop-item CC" id="11"><div class="edit-view" id="11VIEW"><span class="shop-item-title">Mexican Casserole</span><img class="shop-item-image" src="Resources/resized_Mexican-Casserole.webp"><div class="shop-item-details"><span class="shop-item-price">$14.50</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="11DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="11EDT" onclick="editItem(id)">EDIT</button><span>butter,boneless-pork-loin-chop,green-onion,carrot,broccoli,egg,rice,peas,soy-sauce,garlic-powder,ginger</span></div></div></div>`);
-    localStorage.setItem("Item12",`<div class="shop-item CC" id="12"><div class="edit-view" id="12VIEW"><span class="shop-item-title">Pork Fried Rice</span><img class="shop-item-image" src="Resources/resized_Pork-Fried-Rice.webp"><div class="shop-item-details"><span class="shop-item-price">$11.95</span><span class="shop-item-cooktime">12 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="12DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="12EDT" onclick="editItem(id)">EDIT</button><span>pork-tenderloin,salt,black-pepper,vegetable-oil,chicken-broth,heavy-cream,extra-hot-prepared-horseradish,Dijon-mustard,cayenne-pepper,unsalted-butter,chives</span></div></div></div>`);
-    localStorage.setItem("Item13",`<div class="shop-item MP" id="13"><div class="edit-view" id="13VIEW"><span class="shop-item-title">Pork Tenderloin Diablo</span><img class="shop-item-image" src="Resources/resized_Pork-Tenderloin-Diablo.webp"><div class="shop-item-details"><span class="shop-item-price">$26.50</span><span class="shop-item-cooktime">27 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="13DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="13EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item14",`<div class="shop-item MP" id="14"><div class="edit-view" id="14VIEW"><span class="shop-item-title">Sausage and Peppers</span><img class="shop-item-image" src="Resources/resized_Sausage-and-Peppers.webp"><div class="shop-item-details"><span class="shop-item-price">$21.45</span><span class="shop-item-cooktime">22 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="14DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="14EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item15",`<div class="shop-item Noodle" id="15"><div class="edit-view" id="15VIEW"><span class="shop-item-title">Shrimp Scampi with Pasta</span><img class="shop-item-image" src="Resources/resized_Shrimp-Scampi-with-Pasta.webp"><div class="shop-item-details"><span class="shop-item-price">$20.95</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="15DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="15EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item16",`<div class="shop-item MP" id="16"><div class="edit-view" id="16VIEW"><span class="shop-item-title">Soy-Honey Glazed Salmon with Asparagus</span><img class="shop-item-image" src="Resources/resized_Soy-Honey-Glazed-Salmon-with-Asparagus.webp"><div class="shop-item-details"><span class="shop-item-price">$27.45</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="16DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="16EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item17",`<div class="shop-item Noodle" id="17"><div class="edit-view" id="17VIEW"><span class="shop-item-title">Spicy Asian Ramen Noodles</span><img class="shop-item-image" src="Resources/resized_Spicy-Asian-Ramen-Noodles.webp"><div class="shop-item-details"><span class="shop-item-price">$17.95</span><span class="shop-item-cooktime">20 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="17DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="17EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item18",`<div class="shop-item Noodle" id="18"><div class="edit-view" id="18VIEW"><span class="shop-item-title">Spinach Tomato Tortellini</span><img class="shop-item-image" src="Resources/resized_Spinach-Tomato-Tortellini.webp"><div class="shop-item-details"><span class="shop-item-price">$21.75</span><span class="shop-item-cooktime">22 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="18DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="18EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item19",`<div class="shop-item Vegan" id="19"><div class="edit-view" id="19VIEW"><span class="shop-item-title">Vegan Sweet Potato Chickpea Curry</span><img class="shop-item-image" src="Resources/resized_Vegan-Sweet-Potato-Chickpea-Curry.webp"><div class="shop-item-details"><span class="shop-item-price">$17.45</span><span class="shop-item-cooktime">25 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="19DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="19EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
-    localStorage.setItem("Item20",`<div class="shop-item Vegan" id="20"><div class="edit-view" id="20VIEW"><span class="shop-item-title">White Chili</span><img class="shop-item-image" src="Resources/resized_White-Chili.webp"><div class="shop-item-details"><span class="shop-item-price">$13.45</span><span class="shop-item-cooktime">15 min</span><button class="btn btn-primary shop-item-button" type="button" onclick="addToCartClicked(event)">ADD TO CART</button></div><div class="manager-btns"><button class="btn btn-primary delete-btn" id="20DEL" onclick="deleteItem(id)">DELETE</button><button class="btn btn-primary edit-btn" id="20EDT" onclick="editItem(id)">EDIT</button></div></div></div>`);
+}
+function hideIngredients(){
+    let index=document.getElementsByClassName("list");
+    for(let i=0;i<index.length;i++){
+        index[i].style.display="none"
+    }
 }
 
 function createMenuCards() {
-    let menuContainer=document.getElementById("shop-items");
-    for(let i=1;i<=menuItemCount();i++){
-        if(localStorage.getItem("Item"+i)!=null){
-            menuContainer.innerHTML+=localStorage.getItem("Item"+i)
+    let menuContainer = document.getElementById("shop-items");
+
+    for (let i=0;i<localStorage.length;i++) {
+        let key=localStorage.key(i);
+        if (key.startsWith(`Item`)) {
+            let item = localStorage.getItem(key);
+            if (item) {
+                menuContainer.innerHTML += item;
+                
+            }
         }
     }
 }
@@ -279,24 +289,64 @@ function extractMenuItems() {
                 let image=temp.querySelector('.shop-item-image').src ;
                 let price=temp.querySelector('.shop-item-price').innerText;
                 let cooktime=temp.querySelector('.shop-item-cooktime').innerText;
+                let ingredient=temp.querySelector('.list').innerText;
+                console.log(ingredient);
                 items.push({
                     title: title,
                     image: image,
                     price: price,
-                    cooktime: cooktime
+                    cooktime: cooktime,
+                    ingredient: ingredient
                 });
             }
         }
     }
-    console.log(items)
     return items;
+}
+function displayMenu(){
+    let parentContainer=document.getElementById('ingredients-list');
+
+        for(let i=0;i<items.length;i++){
+
+            let title = items[i].title;
+            let ingredientList=items[i].ingredient;
+
+            let ingredients = ingredientList.split(',');
+
+            let mealContainer = document.createElement('div');
+            mealContainer.className = 'meal-container';
+
+            let mealImage = document.createElement('img');
+            mealImage.className = 'meal-photo';
+            mealImage.src = items[i].image;
+            mealImage.alt = items[i].title;
+            mealContainer.appendChild(mealImage);
+
+            let ingredientsList=document.createElement('ul');
+            ingredientsList.className='shop-item-ingredients';
+
+            let titleItem=document.createElement('li');
+            titleItem.textContent=title;
+            ingredientsList.appendChild(titleItem);
+
+            let subList=document.createElement('ul');
+            ingredients.forEach(ingredient=>{
+                let ingredientItem = document.createElement('li');
+                ingredientItem.textContent = ingredient;
+                subList.appendChild(ingredientItem);
+            });
+            ingredientsList.appendChild(subList);
+            mealContainer.appendChild(ingredientsList);
+            parentContainer.appendChild(mealContainer);
+
+        }
 }
 
 function loadSuggestions(){
     let menu=document.getElementsByClassName('menu-item');
     let num=Math.round(Math.random()*20);
     let x=num;
-    for (let i=0;i<menu.length;i++) {
+    for (let i = 0; i < menu.length; i++) {
         if (items[i]){
             menu[i].innerHTML=`
                 <span class="scroll-title shop-item-title");">${items[num].title}</span>
@@ -308,7 +358,6 @@ function loadSuggestions(){
             num=Math.round(Math.random()*20);
         if(x==num){
             num=Math.round(Math.random()*20);
-            
         }
         }
     }
@@ -546,6 +595,7 @@ function updateCartTotal() {
 }
 //-----------------------------------------------------------
 
+
 //checkout & tip ----------------------------------------------
 let currentTotalWithTax = 0; 
 
@@ -673,6 +723,7 @@ function updatePrepTime() {
     console.log('Total Cook Time:', totalCookTime);
     console.log('Cook Time Elements Count:', cookTimeElements.length);
     console.log('Cart Items Inner HTML:', cartItems.innerHTML);
+    localStorage.setItem('finaltime' , totalCookTime);
 }
 
 //-------------------------------------------
@@ -707,6 +758,7 @@ function displayCashForm(){
     
     document.getElementById('payment-form').style.display = "none";
     document.getElementById('cash-input').style.display = "block";
+    receiptCashForm();
 }
 
 function displayGiftCardForm(){
@@ -743,12 +795,13 @@ document.addEventListener('DOMContentLoaded', () => {
 //Card number input
 const cardInput = document.getElementById('card-number');
 
-cardInput.addEventListener('input', (e) => {
+{cardInput.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\s+/g, '').replace(/\D/g, ''); 
     if (value.length > 16) value = value.slice(0, 16); 
 
     e.target.value = value.match(/.{1,4}/g)?.join(' ') || ''; 
 });
+}
 
 cardInput.addEventListener('keydown', (e) => {
     if (e.key === 'Backspace') {
@@ -879,6 +932,11 @@ document.getElementById("payment-form").addEventListener("submit", function (eve
   
 
 
+function receiptCashForm(){
+    document.getElementById('')
+  }
+
+
 // Pushes checkout info to local storage to be used on the receipt page-----//
 
   document.getElementById('payment-form').addEventListener('submit', function (event) {
@@ -897,14 +955,19 @@ document.getElementById("payment-form").addEventListener("submit", function (eve
     localStorage.setItem('lastFour', lastFourDigits);
     localStorage.setItem('expiryDate', expiryDate);
     localStorage.setItem('securityCode', securityCode);
+    
 
     location.replace('receipt.html');
 });
 
 
+
 document.getElementById('cash-input').addEventListener('submit', function (event) {
     event.preventDefault();
     const orderName = document.getElementById('order-name').value.trim();
+
     localStorage.setItem('orderName', orderName);
+    localStorage.setItem('finaltime' , totalCookTime);
+
     location.replace('receipt.html');
 });
